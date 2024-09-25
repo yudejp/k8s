@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloudflare-tunnel
+  namespace: cloudflare
+  labels:
+    app: tunnel
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: cloudflare-tunnel
+  template:
+    metadata:
+      labels:
+        app: cloudflare-tunnel
+    spec:
+      containers:
+        - name: cloudflare-tunnel
+          image: cloudflare/cloudflared:2024.9.1
+          args:
+            - tunnel
+            - '--no-autoupdate'
+            - run
+            - '--token'
+            - $(token)
+            - '--protocol'
+            - 'http2'
+          envFrom:
+            - secretRef:
+                name: cloudflare-tunnel
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 1m
+              memory: 10Mi
+          imagePullPolicy: Always
+          securityContext:
+            readOnlyRootFilesystem: true
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      automountServiceAccountToken: false
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 1
+  progressDeadlineSeconds: 600
