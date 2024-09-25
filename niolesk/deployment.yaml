@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: niolesk
+  labels:
+    app: niolesk
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: niolesk
+  template:
+    metadata:
+      labels:
+        app: niolesk
+    spec:
+      containers:
+        - name: niolesk
+          image: ghcr.io/webgiss/niolesk
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              cpu: "0.3"
+              memory: "300Mi"
+          ports:
+            - name: http
+              containerPort: 80
