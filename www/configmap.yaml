@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-html-config
+data:
+  index.html: |
+    <!doctype html>
+    <html lang="ja">
+        <head>
+            <title>yude.jp.eu.org</title>
+            <meta charset="utf-8">
+        </head>
+        <body>
+            <ul>
+                <li>
+                    <a href="https://httpbin.yude.jp.eu.org">
+                        httpbin.yude.jp.eu.org
+                    </a>
+                </li>
+                <li>
+                    <a href="https://whoami.yude.jp.eu.org">
+                        whoami.yude.jp.eu.org
+                    </a>
+                </li>
+                <li>
+                    <a href="https://cyberchef.yude.jp.eu.org">
+                        cyberchef.yude.jp.eu.org
+                    </a>
+                </li>
+                <li>
+                    <a href="https://kroki.yude.jp.eu.org">
+                        kroki.yude.jp.eu.org
+                    </a>
+                </li>
+                <li>
+                    <a href="https://dashboard.yude.jp.eu.org">
+                        dashboard.yude.jp.eu.org
+                    </a>
+                </li>
+                <li>
+                    <a href="https://caddy.yude.jp.eu.org">
+                        caddy.yude.jp.eu.org
+                    </a>
+                </li>
+            </ul>
+        </body>
+    </html>
