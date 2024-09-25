@@ -28,5 +28,5 @@ spec:
     app: httpbin
   ports:
     - protocol: TCP
-      port: 8081
+      port: 8080
       targetPort: 80
