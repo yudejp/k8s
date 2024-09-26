@@ -20,6 +20,7 @@ kind: CrdbCluster
 metadata:
   # this translates to the name of the statefulset that is created
   name: cockroachdb
+  namespace: cockroach-operator-system
 spec:
   dataStore:
     pvc:
@@ -40,12 +41,14 @@ spec:
       memory: 8Gi
   tlsEnabled: true
 # You can set either a version of the db or a specific image name
-# cockroachDBVersion: v23.2.3
+# cockroachDBVersion: v24.2.2
   image:
-    name: cockroachdb/cockroach:v23.2.3
+    name: cockroachdb/cockroach:v24.2.2
   # nodes refers to the number of crdb pods that are created
   # via the statefulset
   nodes: 3
+  additionalArgs:
+    - "--accept-sql-without-tls"
   additionalLabels:
     crdb: is-cool
   # affinity is a new API field that is behind a feature gate that is

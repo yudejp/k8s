@@ -10,16 +10,30 @@
     ```bash
     kubectl apply -f https://raw.githubusercontent.com/cockroachdb/cockroach-operator/v2.14.0/install/operator.yaml
     ```
+* Install the StatefulSet
+    ```bash
+    kubectl create -f example.yaml
+    ```
+* Install the client secure operator
+    ```bash
+    kubectl apply -f client-secure-operator.yaml
+    ```
 
 ## Operation
 
 * Access to SQL shell
     ```bash
-    kubectl exec -it cockroachdb-client-secure \
+    kubectl exec \
+    -n cockroach-operator-system \
+    -it cockroachdb-client-secure \
     -- ./cockroach sql \
     --certs-dir=/cockroach/cockroach-certs \
     --host=cockroachdb-public
     ```
+    * Enable experimental alter column type
+        ```sql
+        ALTER ROLE ALL SET enable_experimental_alter_column_type_general = on;
+        ```
     * Add user
         ```sql
         CREATE USER foo WITH PASSWORD 'bar';
@@ -33,8 +47,12 @@
             ```sql
             GRANT ALL ON DATABASE piyo TO foo;
             ```
+        * change password
+            ```sql
+            ALTER USER foo WITH PASSWORD 'bar';
+            ```
 
 * Access to Web UI
     ```bash
-    kubectl port-forward service/cockroachdb-public 8080
+    kubectl port-forward service/cockroachdb-public :8080
     ```
