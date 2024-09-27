@@ -11,7 +11,26 @@ data:
             <meta charset="utf-8">
         </head>
         <body>
+            <h1>yude.jp.eu.org</h1>
+            <p>
+                yude.jp Kubernetes cluster
+            </p>
             <ul>
+                <li>
+                    <a href="https://vaultwarden.yude.jp.eu.org">
+                        vaultwarden.yude.jp.eu.org
+                    </a>
+                </li>
+                <li>
+                    <a href="https://prometheus.yude.jp.eu.org">
+                        prometheus.yude.jp.eu.org
+                    </a>
+                </li>
+                <li>
+                    <a href="https://grafana.yude.jp.eu.org">
+                        grafana.yude.jp.eu.org
+                    </a>
+                </li>
                 <li>
                     <a href="https://mastodon.yude.jp.eu.org">
                         mastodon.yude.jp.eu.org
