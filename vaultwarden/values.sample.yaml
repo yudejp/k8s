@@ -1,0 +1,34 @@
+domain: "https://vaultwarden.yude.jp.eu.org"
+timeZone: "Asia/Tokyo"
+replicas: 3
+
+ingress:
+  enabled: false
+
+database:
+  type: postgresql
+  host: main-rw.cnpg-system.svc.cluster.local
+  username: vaultwarden
+  password: vaultwarden
+  dbName: vaultwarden
+
+adminToken:
+  # echo -n "R@ndomTokenString" | argon2 "$(openssl rand -base64 32)" -e -id -k 19456 -t 2 -p 1
+  value: ""
+
+smtp:
+  host: yudejp.sakura.ne.jp
+  from: noreply@yude.jp
+  fromName: "Vaultwarden"
+  username:
+    value: piyo
+  password:
+    value: fuga
+  acceptInvalidHostnames: "true"
+  acceptInvalidCerts: "true"
+
+data:
+  name: "vaultwarden-data"
+  size: "15Gi"
+  class: "local-path"
+  accessMode: "ReadWriteOnce"
