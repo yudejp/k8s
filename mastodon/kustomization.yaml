@@ -1,0 +1,13 @@
+namePrefix: mastodon
+commonLabels:
+  app: mastodon
+resources:
+  - ./base
+  - ./nginx-conf.yaml
+  - ./nginx.yaml
+  
+configMapGenerator:
+  - name: config
+    env: env.production
+    files:
+    literals:

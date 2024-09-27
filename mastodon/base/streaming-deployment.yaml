@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+  labels:
+    tier: streaming
+  name: streaming
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        tier: streaming
+    spec:
+      containers:
+        - name: streaming
+          image: tootsuite/mastodon:v4.2.10
+          envFrom:
+            - configMapRef:
+                name: config
+          args:
+            - yarn
+            - start
+          # readinessProbe:
+          #   initialDelaySeconds: 60
+          #   periodSeconds: 30
+          #   httpGet:
+          #     port: 4000
+          #     path: /api/v1/streaming/health
+          #     httpHeaders:
+          #       - name: x-forwarded-proto
+          #         value: https
+            # exec:
+            #   command:
+            #     - wget -q --spider --header ''x-forwarded-proto: https'' --proxy=off localhost:4000/api/v1/streaming/health || exit 1
+          ports:
+            - containerPort: 4000
