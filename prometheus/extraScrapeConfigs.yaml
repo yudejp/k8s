@@ -1,0 +1,49 @@
+- job_name: 'maple_snmp'
+  static_configs:
+    - targets:
+      - 192.168.100.1
+      - 192.168.100.5
+  metrics_path: /snmp
+  relabel_configs:
+    - source_labels: [__address__]
+      target_label: __param_target
+    - source_labels: [__param_target]
+      target_label: instance
+    - target_label: __address__
+      replacement: 100.113.236.37:9116
+- job_name: 'bway_snmp'
+  static_configs:
+    - targets:
+      - 192.168.0.1
+  metrics_path: /snmp
+  relabel_configs:
+    - source_labels: [__address__]
+      target_label: __param_target
+    - source_labels: [__param_target]
+      target_label: instance
+    - target_label: __address__
+      replacement: 100.70.127.76:9116
+- job_name: 'sakyu_snmp'
+  static_configs:
+    - targets:
+      - 100.116.88.49
+  metrics_path: /snmp
+  relabel_configs:
+    - source_labels: [__address__]
+      target_label: __param_target
+    - source_labels: [__param_target]
+      target_label: instance
+    - target_label: __address__
+      replacement: 100.106.37.39:9116
+- job_name: 'hitachi_snmp'
+  static_configs:
+    - targets:
+      - 100.124.193.20
+  metrics_path: /snmp
+  relabel_configs:
+    - source_labels: [__address__]
+      target_label: __param_target
+    - source_labels: [__param_target]
+      target_label: instance
+    - target_label: __address__
+      replacement: 100.96.27.116:9116

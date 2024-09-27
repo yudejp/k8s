@@ -8,5 +8,6 @@
     ```
 * Deploy
     ```bash
-    helm install prometheus prometheus-community/prometheus
+    helm upgrade prometheus prometheus-community/prometheus \
+    --set-file extraScrapeConfigs=extraScrapeConfigs.yaml
     ```
