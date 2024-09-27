@@ -13,6 +13,31 @@ data:
         <body>
             <ul>
                 <li>
+                    <a href="https://mastodon.yude.jp.eu.org">
+                        mastodon.yude.jp.eu.org
+                    </a>
+                </li>
+                <li>
+                    <a href="https://misskey.yude.jp.eu.org">
+                        misskey.yude.jp.eu.org
+                    </a>
+                </li>
+                <li>
+                    <a href="https://minio.yude.jp.eu.org">
+                        minio.yude.jp.eu.org
+                    </a>
+                </li>
+                <li>
+                    <a href="https://headlamp.yude.jp.eu.org">
+                        headlamp.yude.jp.eu.org
+                    </a>
+                </li>
+                <li>
+                    <a href="https://pgadmin.yude.jp.eu.org">
+                        pgadmin.yude.jp.eu.org
+                    </a>
+                </li>
+                <li>
                     <a href="https://niolesk.yude.jp.eu.org">
                         niolesk.yude.jp.eu.org
                     </a>
