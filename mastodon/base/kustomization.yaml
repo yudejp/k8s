@@ -1,7 +1,0 @@
-resources:
-  - web-sidekiq-pvc.yaml
-  - web-service.yaml
-  - web-deployment.yaml
-  - streaming-service.yaml
-  - streaming-deployment.yaml
-  - sidekiq-deployment.yaml
