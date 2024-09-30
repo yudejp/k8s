@@ -105,12 +105,12 @@ data:
     #   ┌─────────────────────────────┐
     #───┘ Elasticsearch configuration └─────────────────────────────
 
-    #elasticsearch:
-    #  host: localhost
-    #  port: 9200
-    #  ssl: false
-    #  user:
-    #  pass:
+    elasticsearch:
+      host: elasticsearch-es-internal-http.elastic-system.svc.cluster.local
+      port: 9200
+      ssl: false
+      user: elastic
+      pass: Fzaju01taG482WEJ7aU89E63
 
     #   ┌───────────────┐
     #───┘ ID generation └───────────────────────────────────────────
