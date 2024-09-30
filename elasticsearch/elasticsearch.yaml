@@ -10,3 +10,7 @@ spec:
     count: 3
     config:
       node.store.allow_mmap: false
+  http:
+    tls:
+      selfSignedCertificate:
+        disabled: true
