@@ -22,6 +22,11 @@ data:
                     </a>
                 </li>
                 <li>
+                    <a href="https://kibana.yude.jp.eu.org">
+                        kibana.yude.jp.eu.org
+                    </a>
+                </li>
+                <li>
                     <a href="https://prometheus.yude.jp.eu.org">
                         prometheus.yude.jp.eu.org
                     </a>
