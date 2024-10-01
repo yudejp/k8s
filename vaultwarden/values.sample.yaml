@@ -20,6 +20,7 @@ smtp:
   host: yudejp.sakura.ne.jp
   from: noreply@yude.jp
   fromName: "Vaultwarden"
+  port: "587"
   username:
     value: piyo
   password:
