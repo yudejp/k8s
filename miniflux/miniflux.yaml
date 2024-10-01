@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: miniflux
+  namespace: miniflux
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: miniflux
+  template:
+    metadata:
+      labels:
+        app: miniflux
+    spec:
+      containers:
+      - name: miniflux
+        image: miniflux/miniflux:latest
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        envFrom:
+          - configMapRef:
+              name: env
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: miniflux
+  namespace: miniflux
+spec:
+  selector:
+    app: miniflux
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+    name: http
