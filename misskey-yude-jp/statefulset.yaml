@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: web-service
-  namespace: misskey
+  namespace: misskey-yude-jp
 spec:
   selector:
     app: web
@@ -17,7 +17,7 @@ kind: StatefulSet
 apiVersion: apps/v1
 metadata:
   name: web-deployment
-  namespace: misskey
+  namespace: misskey-yude-jp
   labels:
     deploy: web
 spec:
@@ -53,7 +53,7 @@ spec:
   volumeClaimTemplates:
   - metadata:
       name: misskey-files
-      namespace: misskey
+      namespace: misskey-yude-jp
     spec:
       accessModes:
       - ReadWriteOnce
