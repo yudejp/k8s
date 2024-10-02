@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: migration
+  namespace: mstdn-soine-site
+spec:
+  template:
+    spec:
+      containers:
+        - name: db-migrate
+          image: plusminusio/mastodon:4.2.10-plusminus.1
+          command: ["bash", "-c", "rm -f /mastodon/tmp/pids/server.pid; bundle exec rails db:migrate"]
+          envFrom:
+            - configMapRef:
+                name: env
+      restartPolicy: OnFailure
