@@ -32,8 +32,9 @@ kind: PersistentVolumeClaim
 metadata:
   name: gotify-pvc
 spec:
+  storageClassName: csi-s3
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 1Gi

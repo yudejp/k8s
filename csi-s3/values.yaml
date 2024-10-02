@@ -1,0 +1,13 @@
+secret:
+  # Specifies whether the secret should be created
+  create: true
+  # Name of the secret
+  name: csi-s3-secret
+  # S3 Access Key
+  accessKey: "dUwiSD6bAeZHniGIVbc2"
+  # S3 Secret Key
+  secretKey: "ISq6ixxdI57CJ5K18chtTQ0d4punusTxeXsbBbZg"
+  # Endpoint
+  endpoint: "http://minio.minio-tenant.svc.cluster.local"
+  # Region
+  region: ""
