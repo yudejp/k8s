@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: addchan
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: addchan
+  template:
+    metadata:
+      labels:
+        app: addchan
+    spec:
+      containers:
+      - name: addchan
+        image: ghcr.io/teamecri/addchan:main
+        envFrom:
+          - configMapRef:
+              name: addchan-env
