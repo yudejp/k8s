@@ -16,5 +16,9 @@
     ```
 * Create user
     ```bash
-    kubectl exec <pod name> --stdin --tty -- /var/www/wallabag/bin/console fos:user:create --env=prod <name> <email> <password>
+    kubectl exec <pod name> --stdin --tty -- /var/www/wallabag/bin/console fos:user:create --env=prod <user> <email> <password>
+    ```
+* Promote as admin
+    ```bash
+    kubectl exec <pod name> --stdin --tty -- /var/www/wallabag/bin/console fos:user:promote --env=prod <user> --super
     ```
