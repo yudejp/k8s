@@ -1,0 +1,10 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: youbine-env
+data:
+  ADMIN_PASSWORD: ""
+  POSTGRES_USER: ""
+  POSTGRES_PASSWORD: ""
+  POSTGRES_DB: ""
+  POSTGRES_HOST: "main-rw.cnpg-system.svc.cluster.local"
