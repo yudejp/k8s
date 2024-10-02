@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: annict-activity-to-mastodon-config
+data:
+  config.toml: |
+    [credentials.annict]
+    key = ""
+    username = "yude"
+
+    [credentials.mastodon]
+    domain = "https://mstdn.soine.site"
+    access_token = ""

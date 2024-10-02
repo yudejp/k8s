@@ -12,9 +12,21 @@ data:
         </head>
         <body>
             <h1>yude.jp.eu.org</h1>
-            <p>
-                yude.jp Kubernetes cluster
-            </p>
+            <h2>
+                Services listing
+            </h2>
+            <ul>
+            <li>
+                <a href="https://mstdn.soine.site">
+                    mstdn.soine.site
+                </a>
+            </li>
+            <li>
+                <a href="https://mi.yude.moe">
+                    mi.yude.moe
+                </a>
+            </li>
+            <li>yude.jp.eu.org</li>
             <ul>
                 <li>
                     <a href="https://vaultwarden.yude.jp.eu.org">

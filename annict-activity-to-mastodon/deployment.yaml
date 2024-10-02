@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: annict-activity-to-mastodon
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: annict-activity-to-mastodon
+  template:
+    metadata:
+      labels:
+        app: annict-activity-to-mastodon
+    spec:
+      containers:
+      - name: annict-activity-to-mastodon
+        image: ghcr.io/yude/annict-activity-to-mastodon:latest
+        volumeMounts:
+        - name: config
+          mountPath: /app/config.toml
+          subPath: config.toml
+      volumes:
+      - name: config
+        configMap:
+          name: annict-activity-to-mastodon-config
