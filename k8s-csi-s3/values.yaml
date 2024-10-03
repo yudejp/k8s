@@ -15,10 +15,11 @@ storageClass:
   # Use a single bucket for all dynamically provisioned persistent volumes
   singleBucket: "csi"
   # mounter to use - either geesefs, s3fs or rclone (default geesefs)
+  # mounter: geesefs
   mounter: s3fs
   # GeeseFS mount options
   # mountOptions: "--memory-limit 1000 --dir-mode 0777 --file-mode 0666"
-  mountOptions: ""
+  mountOptions: "-o umask=0007"
   # Volume reclaim policy
   reclaimPolicy: Delete
   # Annotations for the storage class
@@ -33,14 +34,14 @@ secret:
   # Name of the secret
   name: csi-s3-secret
   # S3 Access Key
-  accessKey: ""
+  accessKey: "PRUA1HmHrFYWJ28glFSI"
   # S3 Secret Key
-  secretKey: ""
+  secretKey: "M59sMvIerY8pKX1gwu9xBDpMhjdiHzSrDiOR69Lu"
   # Endpoint
   endpoint: http://minio.minio-tenant.svc.cluster.local
   # Region
   region: ""
-  insecure: "true"
+  insecure: true
 
 tolerations:
   all: false

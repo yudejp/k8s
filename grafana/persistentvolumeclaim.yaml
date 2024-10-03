@@ -4,7 +4,8 @@ metadata:
   name: grafana-pvc
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 1Gi
+  storageClassName: csi-s3

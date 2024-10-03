@@ -14,9 +14,10 @@ spec:
         app: grafana
     spec:
       securityContext:
-        fsGroup: 472
-        supplementalGroups:
-          - 0
+        runAsUser: 0
+        # fsGroup: 0
+        # supplementalGroups:
+        #   - 0
       containers:
         - name: grafana
           image: grafana/grafana:latest
@@ -50,7 +51,12 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/grafana
               name: grafana-pv
+            - mountPath: /etc/grafana
+              name: grafana-config
       volumes:
         - name: grafana-pv
           persistentVolumeClaim:
             claimName: grafana-pvc
+        - name: grafana-config
+          configMap:
+            name: grafana-config
