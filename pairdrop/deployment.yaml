@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pairdrop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pairdrop
+  template:
+    metadata:
+      labels:
+        app: pairdrop
+    spec:
+      containers:
+      - name: pairdrop
+        image: linuxserver/pairdrop
+        envFrom:
+          - configMapRef:
+              name: pairdrop-env
