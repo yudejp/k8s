@@ -12,9 +12,6 @@ data:
         </head>
         <body>
             <h1>yude.jp.eu.org</h1>
-            <h2>
-                Services listing
-            </h2>
             <ul>
             <li>
                 <a href="https://mstdn.soine.site">
@@ -24,6 +21,11 @@ data:
             <li>
                 <a href="https://mi.yude.moe">
                     mi.yude.moe
+                </a>
+            </li>
+            <li>
+                <a href="https://git.soine.site">
+                    git.soine.site
                 </a>
             </li>
             <li>yude.jp.eu.org</li>
@@ -36,6 +38,11 @@ data:
                 <li>
                     <a href="https://couchdb.yude.jp.eu.org">
                         couchdb.yude.jp.eu.org
+                    </a>
+                </li>
+                <li>
+                    <a href="https://hoarder.yude.jp.eu.org">
+                        hoarder.yude.jp.eu.org
                     </a>
                 </li>
                 <li>
