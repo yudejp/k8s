@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ytnotifier-config
+data:
+  config.toml: |
+    # YouTube チャンネルの RSS 配信 URL を指定します。
+    # 配列として、複数指定できます。
+    channels = [
+        "https://www.youtube.com/feeds/videos.xml?channel_id=UC_T1YqknD5yrpVlupc-ZXzg",
+        "https://www.youtube.com/feeds/videos.xml?channel_id=UCa0UEeTI-ZKejvlLVHPxX7w",
+    ]
+
+    # WWW 上に設置されたテキストファイルから YouTube チャンネルの RSS 配信 URL を取得できます。
+    # 指定した場合、設定項目 `channels` は無視されます。
+    # 例: "https://gist.githubusercontent.com/yude/a4551193786b0f60ee41b9fa6fad636e/raw/gistfile1.txt"
+    channels_url = "https://raw.githubusercontent.com/yude/mstdn-soine-site-asmr/main/target.txt"
+
+    # いずれかの単語に一致するイベントがある場合、通知対象とします。
+    # なにもフィルタが設定されていない場合、exclude_filter のみを適用します。
+    include_filter = ["ASMR", "睡眠導入", "耳かき"]
+
+    # いずれかの単語に一致するイベントがある場合、通知対象から除外します。
+    # この設定は include_filter よりも優先されます。
+    exclude_filter = ["スケジュール"]
+
+    [mastodon]
+    # Mastodon の URL を指定します。(e.g. https://mastodon.social)
+    domain = "https://mstdn.soine.site"
+    # Mastodon のアクセストークンを指定します。
+    token = ""
