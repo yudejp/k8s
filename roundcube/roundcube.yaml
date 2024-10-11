@@ -1,0 +1,169 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: roundcubenginx-config
+data:
+  default.conf: |
+    server {
+        listen 80 default_server;
+        server_name _;
+        root /var/www/html;
+
+        location / {
+            try_files $uri /index.php$is_args$args;
+        }
+
+        location ~ \.php(/|$) {
+            try_files $uri =404;
+            fastcgi_pass roundcubemail:9000;
+            fastcgi_read_timeout 300;
+            proxy_read_timeout 300;
+            fastcgi_split_path_info ^(.+\.php)(/.*)$;
+            include fastcgi_params;
+            fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+            fastcgi_param DOCUMENT_ROOT $realpath_root;
+            internal;
+        }
+
+        client_max_body_size 6m;
+
+        error_log  /var/log/nginx/error.log;
+        access_log /var/log/nginx/access.log;
+    }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: roundcubemail
+  labels:
+    service: roundcubemail
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: roundcubemail
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        service: roundcubemail
+    spec:
+      containers:
+      - name: roundcubemail
+        image: roundcube/roundcubemail:latest-fpm-alpine
+        imagePullPolicy: ""
+        envFrom:
+          - configMapRef:
+              name: roundcube-env
+        ports:
+        - containerPort: 9000
+        volumeMounts:
+        - mountPath: /var/www/html
+          name: www-data
+        - mountPath: /tmp/roundcube-temp
+          name: temp-data
+      restartPolicy: Always
+      volumes:
+      - name: www-data
+        hostPath:
+          path: /mnt/k3s-pvc/roundcube/www
+      - name: temp-data
+        hostPath:
+          path: /mnt/k3s-pvc/roundcube/tmp
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: roundcubenginx
+  labels:
+    service: roundcubenginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: roundcubenginx
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        service: roundcubenginx
+    spec:
+      containers:
+      - name: roundcubenginx
+        image: nginx:alpine
+        imagePullPolicy: ""
+        env:
+        - name: NGINX_HOST
+          value: localhost
+        - name: NGINX_PHP_CGI
+          value: roundcubemail:9000
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: www-data
+          mountPath: /var/www/html
+        - name: nginx-config
+          mountPath: /etc/nginx/conf.d/default.conf
+          subPath: default.conf
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes:
+      - name: www-data
+        hostPath:
+          path: /mnt/k3s-pvc/roundcube/www
+      - name: nginx-config
+        configMap:
+          name: roundcubenginx-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: roundcubemail
+  labels:
+    service: roundcubemail
+spec:
+  ports:
+  - port: 9000
+    protocol: TCP
+  selector:
+    service: roundcubemail
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: roundcubenginx
+  labels:
+    service: roundcubenginx
+spec:
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 80
+  selector:
+    service: roundcubenginx
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cleandb
+spec:
+  schedule: "@daily"
+  concurrencyPolicy: Replace
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          name:  cleandb
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: roundcubemail
+              image: roundcube/roundcubemail:latest-fpm-alpine
+              imagePullPolicy: ""
+              envFrom:
+                - configMapRef:
+                    name: dawarich-env
+              args:
+                - bin/cleandb.sh
