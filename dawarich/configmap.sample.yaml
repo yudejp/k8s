@@ -1,0 +1,16 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: dawarich-env
+data:
+  REDIS_URL: "redis://:@redis.kubedb.svc.cluster.local:6379/4"
+  DATABASE_HOST: "main-rw.cnpg-system.svc.cluster.local:5432"
+  DATABASE_USERNAME: "dawarich"
+  DATABASE_PASSWORD: ""
+  DATABASE_NAME: "dawarich"
+  MIN_MINUTES_SPENT_IN_CITY: "60"
+  APPLICATION_HOST: "localhost"
+  APPLICATION_HOSTS: "localhost,dawarich.yude.jp.eu.org"
+  TIME_ZONE: "Asia/Tokyo"
+  APPLICATION_PROTOCOL: "http"
+  DISTANCE_UNIT: "km"

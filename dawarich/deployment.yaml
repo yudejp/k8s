@@ -1,0 +1,101 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dawarich
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dawarich
+  template:
+    metadata:
+      labels:
+        app: dawarich
+    spec:
+      containers:
+      - name: dawarich
+        image: freikin/dawarich:latest
+        ports:
+        - containerPort: 3000
+        volumeMounts:
+        - name: gem-cache
+          mountPath: /usr/local/bundle/gems
+        - name: public
+          mountPath: /var/app/public
+        - name: watched
+          mountPath: /var/app/tmp/imports/watched
+        stdin: true
+        tty: true
+        command: ['dev-entrypoint.sh']
+        args: ['bin/dev']
+        envFrom:
+          - configMapRef:
+              name: dawarich-env
+      volumes:
+      - name: gem-cache
+        hostPath:
+          path: /mnt/k3s-pvc/dawarich/gem_cache
+      - name: public
+        hostPath:
+          path: /mnt/k3s-pvc/dawarich/public
+      - name: watched
+        hostPath:
+          path: /mnt/k3s-pvc/dawarich/watched
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dawarich-sidekiq
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dawarich-sidekiq
+  template:
+    metadata:
+      labels:
+        app: dawarich-sidekiq
+    spec:
+      containers:
+      - name: dawarich-sidekiq
+        image: freikin/dawarich:latest
+        volumeMounts:
+        - name: gem-cache
+          mountPath: /usr/local/bundle/gems
+        - name: public
+          mountPath: /var/app/public
+        - name: watched
+          mountPath: /var/app/tmp/imports/watched
+        stdin: true
+        tty: true
+        command: ['dev-entrypoint.sh']
+        args: ['sidekiq']
+        envFrom:
+          - configMapRef:
+              name: dawarich-env
+      volumes:
+      - name: gem-cache
+        hostPath:
+          path: /mnt/k3s-pvc/dawarich/gem_cache
+      - name: public
+        hostPath:
+          path: /mnt/k3s-pvc/dawarich/public
+      - name: watched
+        hostPath:
+          path: /mnt/k3s-pvc/dawarich/watched
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: dawarich
+spec:
+  selector:
+    app: dawarich
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
