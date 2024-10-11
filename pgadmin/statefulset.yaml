@@ -45,7 +45,8 @@ spec:
  - metadata:
      name: pgadmin-data
    spec:
-     accessModes: [ "ReadWriteOnce" ]
+     accessModes: [ "ReadWriteMany" ]
+     storageClassName: csi-s3
      resources:
        requests:
          storage: 3Gi
