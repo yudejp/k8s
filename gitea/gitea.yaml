@@ -3,6 +3,18 @@ kind: Namespace
 metadata:
   name: gitea
 ---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: gitea-pvc
+  namespace: gitea
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Gi
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -34,8 +46,8 @@ spec:
               mountPath: /data  
       volumes:
         - name: gitea-data
-          hostPath:
-            path: /mnt/k3s-pvc/gitea
+          persistentVolumeClaim:
+            claimName: gitea-pvc
 ---
 apiVersion: v1
 kind: Service
