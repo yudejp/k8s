@@ -8,10 +8,10 @@ data:
     <html lang="ja">
         <head>
             <title>yude.jp.eu.org</title>
-            <meta charset="utf-8">
+            <meta charset="utf-8" />
         </head>
         <body>
-            <h1>yude.jp.eu.org</h1>
+            <h2>yude.jp.eu.org</h2>
             <ul>
             <li>
                 <a href="https://mstdn.soine.site">
@@ -96,16 +96,6 @@ data:
                     </a>
                 </li>
                 <li>
-                    <a href="https://mastodon.yude.jp.eu.org">
-                        mastodon.yude.jp.eu.org
-                    </a>
-                </li>
-                <li>
-                    <a href="https://misskey.yude.jp.eu.org">
-                        misskey.yude.jp.eu.org
-                    </a>
-                </li>
-                <li>
                     <a href="https://minio.yude.jp.eu.org">
                         minio.yude.jp.eu.org
                     </a>
@@ -118,6 +108,16 @@ data:
                 <li>
                     <a href="https://pgadmin.yude.jp.eu.org">
                         pgadmin.yude.jp.eu.org
+                    </a>
+                </li>
+                <li>
+                    <a href="https://phpmyadmin.yude.jp.eu.org">
+                        phpmyadmin.yude.jp.eu.org
+                    </a>
+                </li>
+                <li>
+                    <a href="https://zalando.yude.jp.eu.org">
+                        zalando.yude.jp.eu.org
                     </a>
                 </li>
                 <li>
@@ -148,11 +148,6 @@ data:
                 <li>
                     <a href="https://dashboard.yude.jp.eu.org">
                         dashboard.yude.jp.eu.org
-                    </a>
-                </li>
-                <li>
-                    <a href="https://caddy.yude.jp.eu.org">
-                        caddy.yude.jp.eu.org
                     </a>
                 </li>
             </ul>
