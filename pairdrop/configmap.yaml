@@ -5,4 +5,20 @@ metadata:
 data:
   TZ: "Asia/Tokyo"
   RATE_LIMIT: "true"
-  WS_FALLBACK: "true"
+  WS_FALLBACK: "false"
+  RTC_CONFIG: "/etc/pairdrop/rtc_config.json"
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: pairdrop-config
+data:
+  rtc_config.json: |
+    {
+      "sdpSemantics": "unified-plan",
+      "iceServers": [
+        {
+          "urls": "stun:stun.l.google.com:19302"
+        }
+      ]
+    }

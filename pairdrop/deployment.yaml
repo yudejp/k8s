@@ -18,3 +18,10 @@ spec:
         envFrom:
           - configMapRef:
               name: pairdrop-env
+        volumeMounts:
+            - name: pairdrop-config
+              mountPath: /etc/pairdrop
+      volumes:
+        - name: pairdrop-config
+          configMap:
+            name: pairdrop-config
