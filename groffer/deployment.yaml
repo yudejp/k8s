@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: groffer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: groffer
+  template:
+    metadata:
+      labels:
+        app: groffer
+    spec:
+      containers:
+      - name: groffer
+        image: ghcr.io/yude/groffer:master
+        imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: groffer
+spec:
+  selector:
+    app: groffer
+  ports:
+  - protocol: TCP
+    port: 3000
+    targetPort: 3000
+    name: http
