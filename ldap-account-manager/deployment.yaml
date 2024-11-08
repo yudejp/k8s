@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ldap-account-manager
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ldap-account-manager
+  template:
+    metadata:
+      labels:
+        app: ldap-account-manager
+    spec:
+      containers:
+      - name: ldap-account-manager
+        image: ghcr.io/ldapaccountmanager/lam:8.9
+        envFrom:
+          - configMapRef:
+              name: lam-env
+        # volumeMounts:
+        # - name: lam-config
+        #   mountPath: /var/lib/ldap-account-manager/config
+      volumes:
+        - name: lam-config
+          hostPath:
+            path: /mnt/k3s-pvc/lam
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ldap-account-manager
+spec:
+  selector:
+    app: ldap-account-manager
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+    name: http
