@@ -1592,11 +1592,17 @@ configMap:
       ## configured has the RS256 algorithm. For RSA keys (RS or PS) the minimum is a 2048 bit key.
       # jwks: []
 
-      # jwks:
-      #   - key_id: 'prod'
-      #     algorithm: 'RS256'
-      #     use: 'sig'
-      #     # key:{{ env "SERVICES_SERVER" }}
+      jwks:
+        - key_id: 'prod'
+          algorithm: 'RS256'
+          use: 'sig'
+          key:
+            value: |
+              -----BEGIN PRIVATE KEY-----
+              ...
+              -----END PRIVATE KEY-----
+
+            # path: '/secrets/oidc.jwk.RS256.pem'
 
       ## Cross-Origin Resource Sharing (CORS) settings.
       cors:
@@ -1625,7 +1631,7 @@ configMap:
         -
           client_id: 'gitea'
           client_name: 'gitea'
-          client_secret: '$pbkdf2-sha512$310000$bKZlFJmWaXMZwyHtOnwNpg$AR5Kcj5MKgBkd9w0tMaI5licsNf6VrdIKO35BzUs5QQ4qyRtiBVXxehm9QlpcJ0eD4H1JjESdTuYlm3u7uvrog'
+          client_secret: ''
           authorization_policy: 'one_factor'
       # clients:
         # -
@@ -1769,10 +1775,10 @@ secret:
   ## specify this.
   ##
   # additionalSecrets: 
-  #   GITEA_CLIENT_SECRET:
+  #   authelia:
   #     items:
-  #       - key: 'GITEA_CLIENT_SECRET'
-  #         path: 'GITEA_CLIENT_SECRET'
+  #       - key: 'oidc.jwk.RS256.pem'
+  #         path: 'OIDC_ISSUER_PRIVATE_KEY'
   # additionalSecrets:
   #   example:
   #     items:
