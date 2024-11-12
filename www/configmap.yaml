@@ -11,7 +11,9 @@ data:
             <meta charset="utf-8" />
         </head>
         <body>
-            <h2>yude.jp.eu.org</h2>
+            <h1>yude.jp.eu.org</h1>
+            <ruby style="font-style: serif;"> 不安定って、恋みたいね。 <rp>(</rp><rt>All you need is love.</rt><rp>)</rp> </ruby>
+            <h2>Services</h2>
             <ul>
             <li>
                 <a href="https://mstdn.soine.site">
@@ -166,5 +168,61 @@ data:
                     </a>
                 </li>
             </ul>
+        </ul>
+            
+        <h2>Hosts</h2>
+        <ul>
+            <li>
+                <a href="https://maple.yude.jp">
+                    maple.yude.jp
+                </a>
+            </li>
+            <li>
+                <a href="https://sakyu.yude.jp">
+                    sakyu.yude.jp
+                </a>
+            </li>
+            <li>
+                <a href="https://bway.yude.jp">
+                    bway.yude.jp
+                </a>
+            </li>
+            <li>
+                <a href="https://hitachi.yude.jp">
+                    hitachi.yude.jp
+                </a>
+            </li>
+            <li>
+                <a href="https://mikan.yude.jp">
+                    mikan.yude.jp
+                </a>
+            </li>
+            <li>
+                <a href="https://ponkan.yude.jp">
+                    ponkan.yude.jp
+                </a>
+            </li>
+            <li>
+                <a href="https://dekopon.yude.jp">
+                    dekopon.yude.jp
+                </a>
+            </li>
+        </ul>
+
+        <h2>Phone extensions</h2>
+        <p>Preferred area code is <code style="font-size: 150%">0039</code>.</p>
+        <dl>
+            <dt>0100</dt>
+            <dd>yude</dd>
+            <dt>0101</dt>
+            <dd>yudemac</dd>
+            <dt>0102</dt>
+            <dd>yudephone</dd>
+            <dt>0200</dt>
+            <dd>Conference room</dd>
+            <dt>0300</dt>
+            <dd>Echo-back service</dd>
+        </dl>
+
         </body>
     </html>
