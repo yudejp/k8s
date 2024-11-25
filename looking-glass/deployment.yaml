@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: looking-glass
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: looking-glass
+  template:
+    metadata:
+      labels:
+        app: looking-glass
+    spec:
+      containers:
+      - name: looking-glass
+        image: ahmetozer/looking-glass
+        env:
+          - name: webserver
+            value: "yes"
+        ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+        - containerPort: 443
+          name: https
+          protocol: TCP
+        volumeMounts:
+        - name: server-config
+          mountPath: /srv/jekyll/.config.yml
+          subPath: .config.yml
+        - name: server-config
+          mountPath: /srv/jekyll/server.json
+          subPath: server.json
+      volumes:
+        - name: config
+          configMap:
+            name: looking-glass
+        - name: server-config
+          configMap:
+            name: looking-glass
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: looking-glass
+spec:
+  selector:
+    app: looking-glass
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+    name: http
+  - protocol: TCP
+    port: 443
+    targetPort: 443
+    name: https

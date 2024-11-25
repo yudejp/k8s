@@ -1,0 +1,144 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: looking-glass
+data:
+  .config.yml: |
+    ######
+    #   Looking Glass Service
+    #
+    #   github.com/ahmetozer/looking-glass
+    #   ahmetozer.org
+    #
+    #   This is your site configuration file
+    ######
+
+    #   Site Main Title
+    title: Looking Glass
+
+    #   Description of your web site
+    # it`s also seen before selecting server.
+    description:
+
+
+    # This is your website url. Please a give right url. Assets are use this URL.
+    # Do not add "/" end of the url. It is automatically added.
+    #url: "https://lg.ahmetozer.org" 
+
+    # Give information about Your company
+    company:
+      url:                  https://www.yude.jp/
+      name:                 Looking Glass
+      #logo:                 https://examlple.com/logo.png
+
+    # This is footer link. You can also just write only text.
+    footer:
+
+    # Navbar Links
+    # At max 7 Item
+    navbarLinks:
+
+
+    #   Server Json URl is your server list url for this system.
+    # /server.json is used by default. You can separate server.json to another website or another directory.
+    server-json-url: /server.json
+
+    # Some Optional Configurations
+    # jekyll bind addr
+    #host:                 0.0.0.0
+
+    # Build settings, Please do not change
+    markdown:               kramdown
+    kramdown:
+      entity_output: numeric
+    plugins:
+      - jekyll-sitemap
+    permalink:               pretty
+  server.json: |
+    {
+        "ServerConfig": {
+            "whois": "disabled",
+            "nslookup": "disabled",
+            "ping": "enabled",
+            "icmp": "enabled",
+            "tracert": "enabled",
+            "webcontrol": "disabled",
+            "tcp": "disabled",
+            "IPv6": "enabled",
+            "IPv4": "enabled",
+            "curl": "disabled",
+            "mtr": "disabled",
+            "referrers": "looking-glass.yude.jp.eu.org"
+        },
+        "Servers": {
+            "Japan": {
+                "Name": "Japan",
+                "Description": "Japan",
+                "ServerConfig": {
+                    "whois": "disabled",
+                    "webcontrol": "disabled",
+                    "tcp": "disabled"
+                },
+                "Servers": {
+                    "bway": {
+                        "Name": "bway",
+                        "Description": "Tokyo, Japan",
+                        "Url": "https://net-tools-bway.yude.jp.eu.org",
+                        "ASN": "AS2516",
+                        "IPV4Address": "N/A",
+                        "IPV6Address": "N/A",
+                        "ServerConfig": {
+                            "whois": "disabled",
+                            "webcontrol": "disabled",
+                            "IPv6": "enabled",
+                            "nslookup": "disabled"
+                        }
+                    },
+                    "sakyu": {
+                        "Name": "sakyu",
+                        "Description": "Tottori, Japan",
+                        "Url": "https://net-tools-sakyu.yude.jp.eu.org",
+                        "ASN": "AS131925",
+                        "IPV4Address": "N/A",
+                        "IPV6Address": "N/A",
+                        "ServerConfig": {
+                            "whois": "disabled",
+                            "webcontrol": "disabled",
+                            "IPv6": "enabled",
+                            "nslookup": "disabled"
+                        }
+                    },
+                    "hitachi": {
+                        "Name": "hitachi",
+                        "Description": "Ibaraki, Japan",
+                        "Url": "https://net-tools-hitachi.yude.jp.eu.org",
+                        "ASN": "AS2518",
+                        "IPV4Address": "N/A",
+                        "IPV6Address": "N/A",
+                        "ServerConfig": {
+                            "whois": "disabled",
+                            "webcontrol": "disabled",
+                            "IPv6": "enabled",
+                            "nslookup": "disabled"
+                        }
+                    },
+                    "maple": {
+                        "Name": "maple",
+                        "Description": "Chiba, Japan",
+                        "Url": "https://net-tools-maple.yude.jp.eu.org",
+                        "ASN": "AS2519",
+                        "IPV4Address": "N/A",
+                        "IPV6Address": "N/A",
+                        "ServerConfig": {
+                            "whois": "disabled",
+                            "webcontrol": "disabled",
+                            "IPv6": "disabled",
+                            "nslookup": "disabled"
+                        }
+                    }
+                }
+            }
+        },
+        "disabledsv": {
+        }
+    }
