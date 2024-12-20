@@ -1,0 +1,523 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-html-config
+data:
+  index.html: |
+    <!doctype html>
+    <html lang="ja">
+        <head>
+            <title>yude.jp.eu.org</title>
+            <meta charset="utf-8" />
+        </head>
+        <body>
+            <h1>yude.jp.eu.org</h1>
+            <ruby style="font-style: serif;"> 不安定って、恋みたいね。 <rp>(</rp><rt>All you need is love.</rt><rp>)</rp> </ruby>
+            <h2 id="toc">Table of contents</h2>
+            <ul>
+                <li>
+                    <a href="#public-services">
+                        Public services
+                    </a>
+                </li>
+                <li>
+                    <a href="#phone-extensions">
+                        Phone extensions
+                    </a>
+                </li>
+                <li>
+                    <a href="#hosts">
+                        Hosts
+                    </a>
+                </li>
+                <li>
+                    <a href="#notes">
+                        Notes
+                    </a>
+                </li>
+                <li>
+                    <a href="#private-services">
+                        Private services
+                    </a>
+                </li>
+                <li>
+                    <a href="#misc">
+                        Misc
+                    </a>
+                </li>
+            </ul>
+
+            <hr />
+
+            <h2 id="public-services">Public services</h2>
+            <ul>
+            <li>
+                <a href="https://www.yude.jp">
+                    www.yude.jp
+                </a>
+            </li>
+            <li>
+                <a href="https://mstdn.soine.site">
+                    mstdn.soine.site
+                </a>
+            </li>
+            <li>
+                <a href="https://mi.yude.moe">
+                    mi.yude.moe
+                </a>
+            </li>
+            <li>
+                <a href="https://git.soine.site">
+                    git.soine.site
+                </a>
+            </li>
+            <li>
+                <a href="https://hd.soine.site">
+                    hd.soine.site
+                </a>
+            </li>
+            <li>
+                <a href="https://nc.soine.site">
+                    nc.soine.site
+                </a>
+            </li>
+            <li>
+                <a href="https://vaultwarden.yude.jp.eu.org">
+                    vaultwarden.yude.jp.eu.org
+                </a>
+            </li>
+            <li>
+                <a href="https://hoarder.yude.jp.eu.org">
+                    hoarder.yude.jp.eu.org
+                </a>
+            </li>
+            <li>
+                <a href="https://p.yude.jp.eu.org">
+                    p.yude.jp.eu.org
+                </a>
+            </li>
+            <li>
+                <a href="https://pairdrop.yude.jp.eu.org">
+                    pairdrop.yude.jp.eu.org
+                </a>
+            </li>
+            <li>
+                <a href="https://wbo.yude.jp.eu.org">
+                    wbo.yude.jp.eu.org
+                </a>
+            </li>
+            <li>
+                <a href="https://authelia.yude.jp.eu.org">
+                    authelia.yude.jp.eu.org
+                </a>
+            </li>
+            <li>
+                <a href="https://gotify.yude.jp.eu.org">
+                    gotify.yude.jp.eu.org
+                </a>
+            </li>
+            <li>
+                <a href="https://prometheus.yude.jp.eu.org">
+                    prometheus.yude.jp.eu.org
+                </a>
+            </li>
+            <li>
+                <a href="https://grafana.yude.jp.eu.org">
+                    grafana.yude.jp.eu.org
+                </a>
+            </li>
+            <li>
+                <a href="https://niolesk.yude.jp.eu.org">
+                    niolesk.yude.jp.eu.org
+                </a>
+            </li>
+            <li>
+                <a href="https://httpbin.yude.jp.eu.org">
+                    httpbin.yude.jp.eu.org
+                </a>
+            </li>
+            <li>
+                <a href="https://whoami.yude.jp.eu.org">
+                    whoami.yude.jp.eu.org
+                </a>
+            </li>
+            <li>
+                <a href="https://cyberchef.yude.jp.eu.org">
+                    cyberchef.yude.jp.eu.org
+                </a>
+            </li>
+            <li>
+                <a href="https://kroki.yude.jp.eu.org">
+                    kroki.yude.jp.eu.org
+                </a>
+            </li>
+            <li>
+                <a href="https://www2.yude.jp">
+                    www2.yude.jp
+                </a>
+            </li>
+            <li>
+                <a href="https://sping.yude.jp">
+                    sping.yude.jp
+                </a>
+            </li>
+            <li>
+                <a href="https://services.yude.jp">
+                    services.yude.jp
+                </a>
+            </li>
+        </ul>
+
+        <h2 id="phone-extensions">Phone extensions</h2>
+        <p>The recommended area code is <code>0039</code>. Our extensions are made up of 4 digits. <br />
+        You may be able to reach our SIP server via <code>yudemiko.tail5b1c5.ts.net</code> (connectivity via Tailscale or MMTNET is required).</p>
+        <dl>
+            <dt>0100</dt>
+            <dd>kuro</dd>
+            <dd>Always available</dd>
+            <dt>0101</dt>
+            <dd>windows</dd>
+            <dd>Rarely available, accepting fax</dd>
+            <dt>0102</dt>
+            <dd>darwin</dd>
+            <dd>Mostly available</dd>
+            <dt>0103</dt>
+            <dd>phone</dd>
+            <dd>Rarely available</dd>
+            <dt>0200</dt>
+            <dd>Conference room</dd>
+            <dd>Always available</dd>
+            <dt>0300</dt>
+            <dd>Echo-back service</dd>
+            <dd>Always available</dd>
+            <dt>0301</dt>
+            <dd>Fax</dd>
+            <dd>Receive only, always available</dd>
+            <dd>All faxes sent to this number will be automatically publicized under <a href="https://www2.yude.jp/fax/">this page</a>.</dd>
+            <dt>0302</dt>
+            <dd>Reads back your extension</dd>
+            <dd>Always available</dd>
+            <dt>0303</dt>
+            <dd>Returns a constant 1000 Hz tone</dd>
+            <dd>Always available</dd>
+            <dt>0304</dt>
+            <dd>Mutually transfer voices between SIP and Discord (WIP)</dd>
+            <dd>Not available</dd>
+            <dt>0305</dt>
+            <dd>Clock</dd>
+            <dd>Always available</dd>
+            <dt>0306</dt>
+            <dd>Random music</dd>
+            <dd>Always available</dd>
+            <dt>9HHMM</dt>
+            <dd>Set the alarm for HH:MM</dd>
+            <dd>Always available</dd>
+        </dl>
+
+        <p>Currently connecting to the following outside lines:</p>
+        <dl>
+            <dt>+0510</dt>
+            <dd>MKNET</dd>
+            <dt>+0530</dd>
+            <dd>SASAKULAB</dd>
+            <dt>+0108</dt>
+            <dd>JIMINY</dd>
+            <dt>+2108</dt>
+            <dd>JIMINY-LOCAL</dd>
+            <dt>+0617</dt>
+            <dd>PEPEPPER</dd>
+            <dt>+0428</dt>
+            <dd>PUHITAKU</dd>
+            <dt>+2048</dt>
+            <dd>SGCH</dd>
+        </dl>
+            
+        <h2 id="hosts">Hosts</h2>
+        <p>We're operating some service hosts.</p>
+        <dl>
+            <dt>
+                <a href="https://maple.yude.jp">
+                    maple.yude.jp
+                </a>
+            </dt>
+            <dd>
+                On-premises <br />
+                NRT (Chiba, Japan)
+            </dd>
+            <dt>
+                <a href="https://hitachi.yude.jp">
+                    hitachi.yude.jp
+                </a>
+            </dt>
+            <dd>
+                On-premises <br />
+                IBR (Ibaraki, Japan)
+            </dd>
+            <dt>
+                <a href="https://bway.yude.jp">
+                    bway.yude.jp
+                </a>
+            </dt>
+            <dd>
+                On-premises <br />
+                HND (Tokyo, Japan)
+            </dd>
+            <dt>
+                <a href="https://sakyu.yude.jp">
+                    sakyu.yude.jp
+                </a>
+            </dt>
+            <dd>
+                On-premises <br />
+                TTJ (Tottori, Japan)
+            </dd>
+            <dt>
+                <a href="https://mikan.yude.jp">
+                    mikan.yude.jp
+                </a>
+            </dt>
+            <dd>
+                Oracle Cloud Infrastructure <br />
+                OCI (Osaka, Japan)
+            </dd>
+            <dt>
+                <a href="https://dekopon.yude.jp">
+                    dekopon.yude.jp
+                </a>
+            </dt>
+            <dd>
+                Oracle Cloud Infrastructure <br />
+                OCI (Osaka, Japan)
+            </dd>
+            <dt>
+                <a href="https://ponkan.yude.jp">
+                    ponkan.yude.jp
+                </a>
+            </dt>
+            <dd>
+                Oracle Cloud Infrastructure <br />
+                OCI (Osaka, Japan)
+            </dd>
+        </dl>
+
+        <h2 id="notes">Notes</h2>
+        <dl>
+            <dt>Tailnet</dt>
+            <dd>tail5b1c5.ts.net</dd>
+        </dl>
+
+        <h2 id="private-services">Private services</h2>
+        <ul>
+            <li>Proxmox Virtual Environment</li>
+            <ul>
+                <li>
+                    <a href="https://maple.tail5b1c5.ts.net:8006">
+                        maple @ NRT (Chiba, Japan)
+                    </a>
+                </li>
+                <li>
+                    <a href="https://bway.tail5b1c5.ts.net:8006">
+                        bway @ HND (Tokyo, Japan)
+                    </a>
+                </li>
+                <li>
+                    <a href="https://sakyu.tail5b1c5.ts.net:8006">
+                        sakyu @ TTJ (Tottori, Japan)
+                    </a>
+                </li>
+                <li>
+                    <a href="https://hitachi.tail5b1c5.ts.net:8006">
+                        hitachi @ IBR (Ibaraki, Japan)
+                    </a>
+                </li>
+            </ul>
+            <li>EPGStation</li>
+            <ul>
+                <li>
+                    <a href="http://maple.tail5b1c5.ts.net:8888">
+                        maple @ NRT (Chiba, Japan)
+                    </a>
+                </li>
+                <li>
+                    <a href="http://s-bway.tail5b1c5.ts.net:8888">
+                        bway @ HND (Tokyo, Japan)
+                    </a>
+                </li>
+                <li>
+                    <a href="http://s-sakyu.tail5b1c5.ts.net:8888">
+                        sakyu @ TTJ (Tottori, Japan)
+                    </a>
+                </li>
+            </ul>
+            <li>KonomiTV</li>
+            <ul>
+                <li>
+                    <a href="https://100-108-27-62.local.konomi.tv:7000">
+                        maple @ NRT (Chiba, Japan)
+                    </a>
+                </li>
+                <li>
+                    <a href="https://100-65-137-93.local.konomi.tv:7000">
+                        bway @ HND (Tokyo, Japan)
+                    </a>
+                </li>
+                <li>
+                    <a href="https://100-116-88-49.local.konomi.tv:7000">
+                        sakyu @ TTJ (Tottori, Japan)
+                    </a>
+                </li>
+            </ul>
+            <li>KVM</li>
+            <ul>
+                <li>
+                    <a href="http://kvm-hitachi.tail5b1c5.ts.net/">
+                        hitachi @ IBR (Ibaraki, Japan)
+                    </a>
+                </li>
+                <li>
+                    <a href="http://kvm-zen.tail5b1c5.ts.net/">
+                        zen @ NRT (Chiba, Japan)
+                    </a>
+                </li>
+            </ul>
+            <li>APC UPS Network Management Card 2</li>
+            <ul>
+                <li>
+                    <a href="http://192.168.100.5/NMC/Po5uQPT6ij1sFSGd5AfErg/home.htm">
+                        apc @ NRT (Chiba, Japan)
+                    </a>
+                </li>
+            </ul>
+            <li>
+                <a href="http://s-maple.tail5b1c5.ts.net:8581">
+                    Homebridge
+                </a>
+            </li>
+            <li>
+                <a href="https://nc.yude.jp">
+                    nc.yude.jp
+                </a>
+            </li>
+            <li>
+                <a href="https://navidrome.yude.jp">
+                    navidrome.yude.jp
+                </a>
+            </li>
+            <li>
+                <a href="https://pgadmin.yude.jp.eu.org">
+                    pgadmin.yude.jp.eu.org
+                </a>
+            </li>
+            <li>
+                <a href="https://phpmyadmin.yude.jp.eu.org">
+                    phpmyadmin.yude.jp.eu.org
+                </a>
+            </li>
+            <li>
+                <a href="https://zalando.yude.jp.eu.org">
+                    zalando.yude.jp.eu.org
+                </a>
+            </li>
+            <li>
+                <a href="https://dashboard.yude.jp.eu.org">
+                    dashboard.yude.jp.eu.org
+                </a>
+            </li>
+            <li>
+                <a href="https://minio.yude.jp.eu.org">
+                    minio.yude.jp.eu.org
+                </a>
+            </li>
+            <li>
+                <a href="https://headlamp.yude.jp.eu.org">
+                    headlamp.yude.jp.eu.org
+                </a>
+            </li>
+            <li>
+                <a href="https://miniflux.yude.jp.eu.org">
+                    miniflux.yude.jp.eu.org
+                </a>
+            </li>
+            <li>
+                <a href="https://adguard.yude.jp.eu.org">
+                    adguard.yude.jp.eu.org
+                </a>
+            </li>
+            <li>
+                <a href="https://kibana.yude.jp.eu.org">
+                    kibana.yude.jp.eu.org
+                </a>
+            </li>
+            <li>
+                <a href="https://lam.yude.jp.eu.org">
+                    lam.yude.jp.eu.org
+                </a>
+            </li>
+            <li>
+                <a href="https://paperless.yude.jp.eu.org">
+                    paperless.yude.jp.eu.org
+                </a>
+            </li>
+            <li>
+                <a href="https://couchdb.yude.jp.eu.org">
+                    couchdb.yude.jp.eu.org
+                </a>
+            </li>
+            <li>
+                <a href="https://roundcube.yude.jp.eu.org">
+                    roundcube.yude.jp.eu.org
+                </a>
+            </li>
+        </ul>
+        <h2 id="misc">Misc</h2>
+        <ul>
+            <li>
+                <a href="https://yude.moe">
+                    yude.moe
+                </a>
+            </li>
+            <li>
+                <a href="https://yude.static.jp">
+                    yude.static.jp
+                </a>
+            </li>
+            <li>
+                <a href="https://yude.github.io">
+                    yude.github.io
+                </a>
+            </li>
+            <li>
+                <a href="https://weird-pronounciation.vercel.app">
+                    weird-pronounciation
+                </a>
+            </li>
+            <li>
+                <a href="https://novel2renpy.vercel.app">
+                    novel2renpy
+                </a>
+            </li>
+            <li>
+                <a href="https://gyutto-face.vercel.app">
+                    gyutto-face
+                </a>
+            </li>
+            <li>
+                <a href="https://stomach-breaker.vercel.app">
+                    stomach-breaker
+                </a>
+            </li>
+            <li>
+                <a href="https://junrenka-randomizer.vercel.app">
+                    junrenka-randomizer
+                </a>
+            </li>
+            <li>
+                <a href="https://yude.github.io/books/">
+                    books
+                </a>
+            </li>
+        </ul>
+        <hr />
+        <p><span style="font-size: 200%">&copy;</span> 2014 - 2024 yude &lt;i@yude.jp&gt;</p>
+        </body>
+    </html>
