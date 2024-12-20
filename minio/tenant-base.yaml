@@ -27,7 +27,7 @@ spec:
   features:
     bucketDNS: false
     domains: {}
-  image: quay.io/minio/minio:RELEASE.2024-08-17T01-24-54Z
+  image: quay.io/minio/minio:RELEASE.2024-12-18T13-15-44Z.fips
   imagePullSecret: {}
   mountPath: /export
   podManagementPolicy: Parallel
