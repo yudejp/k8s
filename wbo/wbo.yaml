@@ -24,19 +24,8 @@ spec:
           mountPath: /opt/app/server-data
       volumes:
         - name: data
-          persistentVolumeClaim:
-            claimName: wbo-pvc
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: wbo-pvc
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
+          hostPath:
+              path: /mnt/k3s-pvc/wbo
 ---
 apiVersion: v1
 kind: Service
