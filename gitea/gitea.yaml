@@ -31,11 +31,23 @@ spec:
               containerPort: 22
           volumeMounts:
             - name: gitea-data
-              mountPath: /data  
+              mountPath: /data
       volumes:
         - name: gitea-data
-          hostPath:
-            path: /mnt/k3s-pvc/gitea
+          persistentVolumeClaim:
+            claimName: gitea-data
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: gitea-data
+  namespace: gitea
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 150Gi
 ---
 apiVersion: v1
 kind: Service

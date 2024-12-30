@@ -19,37 +19,73 @@ spec:
         app: adguard
     spec:
       containers:
-      - name: adguard-home
-        image: adguard/adguardhome:latest
-        ports:
-        - containerPort: 53
-          name: dns
-          protocol: UDP
-        - containerPort: 3000
-          name: http-initial
-        - containerPort: 80
-          name: http
-          protocol: TCP
-        - containerPort: 443
-          name: https
-          protocol: TCP
-        volumeMounts:
-        - name: adguard-work
-          mountPath: /opt/adguardhome/work
-        - name: adguard-conf
-          mountPath: /opt/adguardhome/conf
-        - name: adguard-certs
-          mountPath: /opt/adguardhome/certs
+        - name: adguard-home
+          image: adguard/adguardhome:latest
+          ports:
+            - containerPort: 53
+              name: dns
+              protocol: UDP
+            - containerPort: 3000
+              name: http-initial
+            - containerPort: 80
+              name: http
+              protocol: TCP
+            - containerPort: 443
+              name: https
+              protocol: TCP
+          volumeMounts:
+            - name: adguard-work
+              mountPath: /opt/adguardhome/work
+            - name: adguard-conf
+              mountPath: /opt/adguardhome/conf
+            - name: adguard-certs
+              mountPath: /opt/adguardhome/certs
       volumes:
         - name: adguard-work
-          hostPath:
-            path: /mnt/k3s-pvc/adguard/work
+          persistentVolumeClaim:
+            claimName: adguard-work
         - name: adguard-conf
-          hostPath:
-            path: /mnt/k3s-pvc/adguard/conf
+          persistentVolumeClaim:
+            claimName: adguard-conf
         - name: adguard-certs
-          hostPath:
-            path: /mnt/k3s-pvc/adguard/certs
+          persistentVolumeClaim:
+            claimName: adguard-certs
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: adguard-conf
+  namespace: adguard
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Mi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: adguard-work
+  namespace: adguard
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 500Mi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: adguard-certs
+  namespace: adguard
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 4Mi
 ---
 apiVersion: v1
 kind: Service
@@ -60,19 +96,19 @@ spec:
   selector:
     app: adguard
   ports:
-  - protocol: TCP
-    port: 3000
-    targetPort: 3000
-    name: http-initial
-  - protocol: TCP
-    port: 80
-    targetPort: 80
-    name: http
-  - protocol: TCP
-    port: 443
-    targetPort: 443
-    name: https
-  - protocol: UDP
-    port: 53
-    targetPort: 53
-    name: dns
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+      name: http-initial
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      name: http
+    - protocol: TCP
+      port: 443
+      targetPort: 443
+      name: https
+    - protocol: UDP
+      port: 53
+      targetPort: 53
+      name: dns

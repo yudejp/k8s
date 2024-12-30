@@ -241,7 +241,7 @@ spec:
 
 ---
 
-kind: Service
+
 apiVersion: v1
 metadata:
   labels:

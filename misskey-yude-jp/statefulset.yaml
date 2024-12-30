@@ -7,9 +7,9 @@ spec:
   selector:
     app: web
   ports:
-  - name: http
-    port: 80
-    targetPort: 3000
+    - name: http
+      port: 80
+      targetPort: 3000
 
 ---
 
@@ -31,25 +31,37 @@ spec:
         app: web
     spec:
       containers:
-      - name: web
-        image: misskey/misskey:2024.8
-        imagePullPolicy: IfNotPresent
-        volumeMounts:
-        - mountPath: /misskey/files
-          name: misskey-files
-        - mountPath: /misskey/.config
-          name: misskey-default-conf-file
-        ports:
-        - containerPort: 3000
-        readinessProbe:
-          httpGet:
-            path: /
-            port: 3000
-            scheme: HTTP
+        - name: web
+          image: misskey/misskey:2024.8
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - mountPath: /misskey/files
+              name: misskey-files
+            - mountPath: /misskey/.config
+              name: misskey-default-conf-file
+          ports:
+            - containerPort: 3000
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
+              scheme: HTTP
       volumes:
-      - name: misskey-default-conf-file
-        configMap:
-          name: misskey-default-config
-      - name: misskey-files
-        hostPath:
-          path: /mnt/k3s-pvc/misskey-yude-jp/files
+        - name: misskey-default-conf-file
+          configMap:
+            name: misskey-default-config
+        - name: misskey-files
+          persistentVolumeClaim:
+            claimName: misskey-files
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: misskey-files
+  namespace: misskey-yude-jp
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 20Gi

@@ -7,11 +7,11 @@ data:
    {
        "Servers": {
          "1": {
-           "Name": "main-rw",
+           "Name": "za-pg-16",
            "Group": "Servers",
            "Port": 5432,
            "Username": "postgres",
-           "Host": "main-rw.cnpg-system.svc.cluster.local",
+           "Host": "za-pg-16.default.svc.cluster.local",
            "SSLMode": "prefer",
            "MaintenanceDB": "postgres"
          }

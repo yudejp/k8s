@@ -11,10 +11,10 @@ data:
 
     [database]
     type = postgres
-    host = main-rw.cnpg-system.svc.cluster.local
+    host = za-pg-16.default.svc.cluster.local
     name = grafana
-    user = grafana
-    password = kOdbVACxM4PJIm
+    user = postgres
+    password = cWF6z9DNxDj2XT3K7hCd7OhN7B4MQbYuVooswJcRPFLV9LiSOwtFUm2ECVLEtaiH
     ssl_mode = disable
 
     [auth.anonymous]
