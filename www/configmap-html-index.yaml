@@ -157,11 +157,6 @@ data:
                 </a>
             </li>
             <li>
-                <a href="https://sping.yude.jp">
-                    sping.yude.jp
-                </a>
-            </li>
-            <li>
                 <a href="https://services.yude.jp">
                     services.yude.jp
                 </a>
@@ -256,6 +251,15 @@ data:
             <dt>
                 <a href="https://bway.yude.jp">
                     bway.yude.jp
+                </a>
+            </dt>
+            <dd>
+                On-premises <br />
+                HND (Tokyo, Japan)
+            </dd>
+            <dt>
+                <a href="https://rakka.yude.jp">
+                    rakka.yude.jp
                 </a>
             </dt>
             <dd>
@@ -409,11 +413,6 @@ data:
                 </a>
             </li>
             <li>
-                <a href="https://phpmyadmin.yude.jp.eu.org">
-                    phpmyadmin.yude.jp.eu.org
-                </a>
-            </li>
-            <li>
                 <a href="https://zalando.yude.jp.eu.org">
                     zalando.yude.jp.eu.org
                 </a>
@@ -429,11 +428,6 @@ data:
                 </a>
             </li>
             <li>
-                <a href="https://headlamp.yude.jp.eu.org">
-                    headlamp.yude.jp.eu.org
-                </a>
-            </li>
-            <li>
                 <a href="https://miniflux.yude.jp.eu.org">
                     miniflux.yude.jp.eu.org
                 </a>
@@ -441,11 +435,6 @@ data:
             <li>
                 <a href="https://adguard.yude.jp.eu.org">
                     adguard.yude.jp.eu.org
-                </a>
-            </li>
-            <li>
-                <a href="https://kibana.yude.jp.eu.org">
-                    kibana.yude.jp.eu.org
                 </a>
             </li>
             <li>
@@ -461,11 +450,6 @@ data:
             <li>
                 <a href="https://couchdb.yude.jp.eu.org">
                     couchdb.yude.jp.eu.org
-                </a>
-            </li>
-            <li>
-                <a href="https://roundcube.yude.jp.eu.org">
-                    roundcube.yude.jp.eu.org
                 </a>
             </li>
         </ul>
