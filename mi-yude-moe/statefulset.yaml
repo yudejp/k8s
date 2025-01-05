@@ -30,6 +30,15 @@ spec:
       labels:
         app: web
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: NotIn
+                    values:
+                      - kube-05
       containers:
         - name: web
           image: misskey/misskey:2024.8

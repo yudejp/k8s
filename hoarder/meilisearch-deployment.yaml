@@ -12,6 +12,15 @@ spec:
       labels:
         app: meilisearch
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: NotIn
+                    values:
+                      - kube-05
       containers:
         - name: meilisearch
           image: getmeili/meilisearch:v1.6

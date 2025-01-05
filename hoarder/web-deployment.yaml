@@ -12,6 +12,15 @@ spec:
       labels:
         app: hoarder-web
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: NotIn
+                    values:
+                      - kube-05
       containers:
         - name: web
           image: ghcr.io/hoarder-app/hoarder:HOARDER_VERSION_PLACEHOLDER

@@ -18,6 +18,15 @@ spec:
       labels:
         app: adguard
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: NotIn
+                    values:
+                      - kube-05
       containers:
         - name: adguard-home
           image: adguard/adguardhome:latest
