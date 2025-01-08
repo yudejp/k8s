@@ -246,13 +246,24 @@ data:
                     TTJ (Tottori, Japan)
                 </dd>
                 <dt>
+                    <a href="https://shrimp.yude.jp">
+                        shrimp.yude.jp
+                    </a>
+                </dt>
+                <dd>
+                    On-premises <br />
+                    TOY (Toyama, Japan) <br />
+                    Hosted by <a href="https://moyashim-25.com/">もやしくん (@moyashiM_25)</a>
+                </dd>
+                <dt>
                     <a href="https://mikan.yude.jp">
                         mikan.yude.jp
                     </a>
                 </dt>
                 <dd>
-                    Oracle Cloud Infrastructure <br />
-                    OCI (Osaka, Japan)
+                    IaaS <br />
+                    OCI (Osaka, Japan) <br />
+                    Hosted by <a href="https://www.oracle.com/jp/cloud/">Oracle Cloud Infrastructure</a>
                 </dd>
                 <dt>
                     <a href="https://dekopon.yude.jp">
@@ -260,8 +271,9 @@ data:
                     </a>
                 </dt>
                 <dd>
-                    Oracle Cloud Infrastructure <br />
-                    OCI (Osaka, Japan)
+                    IaaS <br />
+                    OCI (Osaka, Japan) <br />
+                    Hosted by <a href="https://www.oracle.com/jp/cloud/">Oracle Cloud Infrastructure</a>
                 </dd>
                 <dt>
                     <a href="https://ponkan.yude.jp">
@@ -269,8 +281,9 @@ data:
                     </a>
                 </dt>
                 <dd>
-                    Oracle Cloud Infrastructure <br />
-                    OCI (Osaka, Japan)
+                    IaaS <br />
+                    OCI (Osaka, Japan) <br />
+                    Hosted by <a href="https://www.oracle.com/jp/cloud/">Oracle Cloud Infrastructure</a>
                 </dd>
             </dl>
 
