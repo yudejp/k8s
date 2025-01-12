@@ -9,10 +9,15 @@ data:
             <head>
                 <title>yude.jp.eu.org</title>
                 <meta charset="utf-8" />
+                <style>
+                    body {
+                        font-family: sans-serif;
+                    }
+                </style>
             </head>
             <body>
                 <h1>yude.jp.eu.org</h1>
-                <ruby style="font-style: serif;"> 不安定って、恋みたいね。 <rp>(</rp><rt>All you need is love.</rt><rp>)</rp> </ruby>
+                <ruby style="font-style: serif; font-size: 120%;"> 不安定って、恋みたいね。 <rp>(</rp><rt>All you need is love.</rt><rp>)</rp> </ruby>
                 <h2 id="toc">Table of contents</h2>
                 <ul>
                     <li>
@@ -50,6 +55,7 @@ data:
                 <hr />
 
                 <h2 id="public-services">Public services</h2>
+                <h3>Web</h3>
                 <ul>
                 <li>
                     <a href="https://mstdn.soine.site">
@@ -131,7 +137,51 @@ data:
                         Kroki!
                     </a>
                 </li>
+                </ul>
+            
+            <h3>Server software hosting</h3>
+            <ul>
+                <li>Minecraft multiplayer</li>
+                <ul>
+                    <li>Server address: <code>yude.jp</code></li>
+                    <li>Required client version: visit <a href="https://github.com/yudejp/paper-docker">here</a></li>
+                </ul>
+
+                <li>TeamSpeak 3</li>
+                <ul>
+                    <li>Server address: <code>yude.jp</code></li>
+                </ul>
+
+                <li>Internet Relay Chat</li>
+                <ul>
+                    <li>Server address: <code>irc.yude.jp</code></li>
+                </ul>
+
+                <li>OpenTTD</li>
+                <ul>
+                    <li>Server address: <code>openttd.yude.jp</code></li>
+                </ul>
             </ul>
+
+            <h3>Overlay network</h3>
+            <ul>
+                <li>Tor (The Onion Router)</li>
+                <ul>
+                    <li>Hidden service: <a href="http://yudejpwxp2cziclocqjfd55ucw2dh6ncswopluh7exwusjlfkvkwhwqd.onion">yudejpwxp2cziclocqjfd55ucw2dh6ncswopluh7exwusjlfkvkwhwqd.onion</a></li>
+                    <li>Relay: <a href="https://metrics.torproject.org/rs.html#details/CF762EF3C86B104C301511894547C72371F952A4">yudejp (CF762EF3C86B104C301511894547C72371F952A4)</a></li>
+                </ul>
+
+                <li>I2P</li>
+                <ul>
+                    <li>Hidden service: <a href="http://idabfrazqbh7upvo2f5hx3ajpqglrwny66qbvcoatfqoq64ifiaq.b32.i2p">idabfrazqbh7upvo2f5hx3ajpqglrwny66qbvcoatfqoq64ifiaq.b32.i2p</a></li>
+                </ul>
+
+                <li>Gemini</li>
+                <ul>
+                    <li>Hidden service: <a href="gemini://yude.jp">yude.jp</a></li>
+                </ul>
+            </ul>
+
 
             <h2 id="phone-extensions">Phone extensions</h2>
             <p>The recommended area code is <code>0039</code>. Our extensions are made up of 4 digits. <br />
@@ -458,7 +508,7 @@ data:
                 </li>
                 <li>
                     <a href="https://couchdb.yude.jp.eu.org">
-                        couchdb.yude.jp.eu.org
+                        CouchDB
                     </a>
                 </li>
             </ul>
@@ -511,6 +561,6 @@ data:
                 </li>
             </ul>
             <hr />
-            <p><span style="font-size: 200%">&copy;</span> 2014 - 2024 yude &lt;i@yude.jp&gt;</p>
+            <p><span style="font-size: 200%">&copy;</span> 2013 - 2025 yude &lt;i@yude.jp&gt;</p>
             </body>
         </html>
