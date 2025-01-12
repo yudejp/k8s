@@ -215,8 +215,6 @@ data:
                 <dt>0303</dt>
                 <dd>Returns a constant 1000 Hz tone</dd>
                 <dd>Always available</dd>
-                <dt>0304</dt>
-                <dd>Mutually transfer voices between SIP and Discord (WIP)</dd>
                 <dd>Not available</dd>
                 <dt>0305</dt>
                 <dd>Clock</dd>
@@ -246,6 +244,7 @@ data:
                 <dt>+2048</dt>
                 <dd>SGCH</dd>
             </dl>
+            <p>You can take a look our telephony network topology <a href="https://kusaremkn.github.io/mantela-viewer/?first=https%3A%2F%2Fwww.yude.jp.eu.org%2F.well-known%2Fmantela.json">here</a>.</p>
 
             <h2 id="hosts">Hosts</h2>
             <p>We're operating some service hosts.</p>
