@@ -1,122 +1,122 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: nginx-html-well-known-config
-data: 
-  mantela.json: |
-    {
-        "$schema": "https://kusaremkn.github.io/mantela/mantela.schema.json",
-        "version": "0.0.0",
-        "aboutMe": {
-            "identifier": "3be47f94-3185-4198-ac3d-ca5ccb573cc2",
-            "name": "YUDE",
-            "preferredPrefix": "0039"
-        },
-        "extensions": [
-            {
-                "extension": "0100",
-                "name": "kuro",
-                "type": "main"
+    name: nginx-html-well-known-config
+data:
+    mantela.json: |
+        {
+            "$schema": "https://kusaremkn.github.io/mantela/mantela.schema.json",
+            "version": "0.0.0",
+            "aboutMe": {
+                "identifier": "3be47f94-3185-4198-ac3d-ca5ccb573cc2",
+                "name": "YUDE",
+                "preferredPrefix": "0039"
             },
-            {
-                "extension": "0101",
-                "name": "windows",
-                "type": "fax"
-            },
-            {
-                "extension": "0102",
-                "name": "darwin",
-                "type": "computer"
-            },
-            {
-                "extension": "0103",
-                "name": "phone",
-                "type": "phone"
-            },
-            {
-                "extension": "0300",
-                "name": "Echo-back service",
-                "type": "application"
-            },
-            {
-                "extension": "0301",
-                "name": "Fax (Receive only)",
-                "type": "application"
-            },
-            {
-                "extension": "0302",
-                "name": "Reads back your extension",
-                "type": "application"
-            },
-            {
-                "extension": "0303",
-                "name": "Constant 1000 Hz tone",
-                "type": "application"
-            },
-            {
-                "extension": "0304",
-                "name": "Discord",
-                "type": "application"
-            },
-            {
-                "extension": "0305",
-                "name": "Clock",
-                "type": "application"
-            },
-            {
-                "extension": "0306",
-                "name": "Random music",
-                "type": "application"
-            }
-        ],
-        "providers": [
-            {
-                "identifier": "5bbdd9ae-4d41-420c-80df-eba486495b12",
-                "mantela": "https://108jiminy.jp/phone/jiminypublicmantela.json",
-                "name": "JIMINY",
-                "prefix": "0108"
-            },
-            {
-                "identifier": "153048c5-db33-4e00-ad49-694762555d5c",
-                "name": "JIMINY-LOCAL",
-                "prefix": "1108",
-                "mantela": "https://108jiminy.jp/phone/jiminylocalmantela.json"
-            },
-            {
-                "identifier": "93b2d256-39c1-4053-bda1-c0643dd40690",
-                "name": "MKNET",
-                "prefix": "0510",
-                "mantela": "https://unstable.kusaremkn.com/.well-known/mantela.json"
-            },
-            {
-                "identifier": "A50F0FB4-C5C9-4D1E-BDB5-9D73FA2F7EB5",
-                "name": "SASAKULAB",
-                "prefix": "0530",
-                "mantela": "https://sasakulab.com/.well-known/mantela.json"
-            },
-            {
-                "identifier": "f5c44210-8cb8-4e87-85a7-df3d3ff951e6",
-                "name": "PEPEPPER",
-                "prefix": "0617",
-                "mantela": "https://www.pepepper.net/.well-known/mantela.json"
-            },
-            {
-                "identifier": "bfd57259-4c74-48ce-b1b3-7e816808bf27",
-                "name": "PUHITAKU",
-                "prefix": "0428",
-                "mantela": ""
-            },
-            {
-                "identifier": "81c99427-4a30-4364-8b17-fed97f347439",
-                "name": "SGCH",
-                "prefix": "2048",
-                "mantela": ""
-            },
-            {
-                "identifier": "XXX:qqey",
-                "name": "QQEY",
-                "prefix": "0033",
-                "mantela": ""
-            }
-        ]
-    }
+            "extensions": [
+                {
+                    "extension": "0100",
+                    "name": "kuro",
+                    "type": "main"
+                },
+                {
+                    "extension": "0101",
+                    "name": "windows",
+                    "type": "fax"
+                },
+                {
+                    "extension": "0102",
+                    "name": "darwin",
+                    "type": "computer"
+                },
+                {
+                    "extension": "0103",
+                    "name": "phone",
+                    "type": "phone"
+                },
+                {
+                    "extension": "0300",
+                    "name": "Echo-back service",
+                    "type": "application"
+                },
+                {
+                    "extension": "0301",
+                    "name": "Fax (Receive only)",
+                    "type": "application"
+                },
+                {
+                    "extension": "0302",
+                    "name": "Reads back your extension",
+                    "type": "application"
+                },
+                {
+                    "extension": "0303",
+                    "name": "Constant 1000 Hz tone",
+                    "type": "application"
+                },
+                {
+                    "extension": "0304",
+                    "name": "Discord",
+                    "type": "application"
+                },
+                {
+                    "extension": "0305",
+                    "name": "Clock",
+                    "type": "application"
+                },
+                {
+                    "extension": "0306",
+                    "name": "Random music",
+                    "type": "application"
+                }
+            ],
+            "providers": [
+                {
+                    "identifier": "5bbdd9ae-4d41-420c-80df-eba486495b12",
+                    "mantela": "https://108jiminy.jp/phone/jiminypublicmantela.json",
+                    "name": "JIMINY",
+                    "prefix": "108"
+                },
+                {
+                    "identifier": "153048c5-db33-4e00-ad49-694762555d5c",
+                    "name": "JIMINY-LOCAL",
+                    "prefix": "218",
+                    "mantela": "https://108jiminy.jp/phone/jiminylocalmantela.json"
+                },
+                {
+                    "identifier": "93b2d256-39c1-4053-bda1-c0643dd40690",
+                    "name": "MKNET",
+                    "prefix": "510",
+                    "mantela": "https://unstable.kusaremkn.com/.well-known/mantela.json"
+                },
+                {
+                    "identifier": "A50F0FB4-C5C9-4D1E-BDB5-9D73FA2F7EB5",
+                    "name": "SASAKULAB",
+                    "prefix": "530",
+                    "mantela": "https://sasakulab.com/.well-known/mantela.json"
+                },
+                {
+                    "identifier": "f5c44210-8cb8-4e87-85a7-df3d3ff951e6",
+                    "name": "PEPEPPER",
+                    "prefix": "617",
+                    "mantela": "https://www.pepepper.net/.well-known/mantela.json"
+                },
+                {
+                    "identifier": "bfd57259-4c74-48ce-b1b3-7e816808bf27",
+                    "name": "PUHITAKU",
+                    "prefix": "428",
+                    "mantela": ""
+                },
+                {
+                    "identifier": "81c99427-4a30-4364-8b17-fed97f347439",
+                    "name": "SGCH",
+                    "prefix": "248",
+                    "mantela": ""
+                },
+                {
+                    "identifier": "XXX:qqey",
+                    "name": "QQEY",
+                    "prefix": "330",
+                    "mantela": ""
+                }
+            ]
+        }

@@ -138,7 +138,7 @@ data:
                     </a>
                 </li>
                 </ul>
-            
+
             <h3>Server software hosting</h3>
             <ul>
                 <li>Minecraft multiplayer</li>
@@ -184,7 +184,7 @@ data:
 
 
             <h2 id="phone-extensions">Phone extensions</h2>
-            <p>The recommended area code is <code>0039</code>. Our extensions are made up of 4 digits. <br />
+            <p>The recommended area code is <code>390</code>. Our extensions are made up of 4 digits. <br />
             You may be able to reach our SIP server via <code>yudemiko.tail5b1c5.ts.net</code> (connectivity via Tailscale or MMTNET is required).</p>
             <dl>
                 <dt>0100</dt>
@@ -229,20 +229,22 @@ data:
 
             <p>Currently connecting to the following outside lines:</p>
             <dl>
-                <dt>+0510</dt>
+                <dt>+510</dt>
                 <dd>MKNET</dd>
-                <dt>+0530</dd>
+                <dt>+530</dd>
                 <dd>SASAKULAB</dd>
-                <dt>+0108</dt>
+                <dt>+108</dt>
                 <dd>JIMINY</dd>
-                <dt>+2108</dt>
+                <dt>+218</dt>
                 <dd>JIMINY-LOCAL</dd>
-                <dt>+0617</dt>
+                <dt>+617</dt>
                 <dd>PEPEPPER</dd>
-                <dt>+0428</dt>
+                <dt>+428</dt>
                 <dd>PUHITAKU</dd>
-                <dt>+2048</dt>
+                <dt>+248</dt>
                 <dd>SGCH</dd>
+                <dt>+330</dt>
+                <dd>QQEY</dd>
             </dl>
             <p>You can take a look our telephony network topology <a href="https://kusaremkn.github.io/mantela-viewer/?first=https%3A%2F%2Fwww.yude.jp.eu.org%2F.well-known%2Fmantela.json">here</a>.</p>
 
@@ -265,7 +267,8 @@ data:
                 </dt>
                 <dd>
                     On-premises <br />
-                    IBR (Ibaraki, Japan)
+                    IBR (Ibaraki, Japan) <br />
+                    Hosted by <a href="https://www.pepepper.net">百谷涼花 (@pepepper_cpp)</a>
                 </dd>
                 <dt>
                     <a href="https://bway.yude.jp">
