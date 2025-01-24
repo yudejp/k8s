@@ -187,40 +187,39 @@ data:
             <p>The recommended area code is <code>390</code>. Our extensions are made up of 4 digits. <br />
             You may be able to reach our SIP server via <code>yudemiko.tail5b1c5.ts.net</code> (connectivity via Tailscale or MMTNET is required).</p>
             <dl>
-                <dt>0100</dt>
+                <dt>100</dt>
                 <dd>kuro</dd>
                 <dd>Always available</dd>
-                <dt>0101</dt>
+                <dt>101</dt>
                 <dd>windows</dd>
                 <dd>Rarely available, accepting fax</dd>
-                <dt>0102</dt>
+                <dt>102</dt>
                 <dd>darwin</dd>
                 <dd>Mostly available</dd>
-                <dt>0103</dt>
+                <dt>103</dt>
                 <dd>phone</dd>
                 <dd>Rarely available</dd>
-                <dt>0200</dt>
+                <dt>200</dt>
                 <dd>Conference room</dd>
                 <dd>Always available</dd>
-                <dt>0300</dt>
+                <dt>300</dt>
                 <dd>Echo-back service</dd>
                 <dd>Always available</dd>
-                <dt>0301</dt>
+                <dt>301</dt>
                 <dd>Fax</dd>
                 <dd>Receive only, always available</dd>
                 <dd>All faxes sent to this number will be automatically publicized under <a href="https://www2.yude.jp/fax/">this page</a>.</dd>
-                <dt>0302</dt>
+                <dt>302</dt>
                 <dd>Reads back your extension</dd>
                 <dd>Always available</dd>
-                <dt>0303</dt>
+                <dt>303</dt>
                 <dd>Returns a constant 1000 Hz tone</dd>
                 <dd>Always available</dd>
-                <dd>Not available</dd>
-                <dt>0305</dt>
-                <dd>Clock</dd>
-                <dd>Always available</dd>
-                <dt>0306</dt>
+                <dt>304</dt>
                 <dd>Random music</dd>
+                <dd>Always available</dd>
+                <dt>305</dt>
+                <dd>Clock</dd>
                 <dd>Always available</dd>
                 <dt>9HHMM</dt>
                 <dd>Set the alarm for HH:MM</dd>

@@ -10,62 +10,57 @@ data:
             "aboutMe": {
                 "identifier": "3be47f94-3185-4198-ac3d-ca5ccb573cc2",
                 "name": "YUDE",
-                "preferredPrefix": "0039"
+                "preferredPrefix": "390"
             },
             "extensions": [
                 {
-                    "extension": "0100",
+                    "extension": "100",
                     "name": "kuro",
                     "type": "main"
                 },
                 {
-                    "extension": "0101",
+                    "extension": "101",
                     "name": "windows",
                     "type": "fax"
                 },
                 {
-                    "extension": "0102",
+                    "extension": "102",
                     "name": "darwin",
                     "type": "computer"
                 },
                 {
-                    "extension": "0103",
+                    "extension": "103",
                     "name": "phone",
                     "type": "phone"
                 },
                 {
-                    "extension": "0300",
+                    "extension": "300",
                     "name": "Echo-back service",
                     "type": "application"
                 },
                 {
-                    "extension": "0301",
+                    "extension": "301",
                     "name": "Fax (Receive only)",
                     "type": "application"
                 },
                 {
-                    "extension": "0302",
+                    "extension": "302",
                     "name": "Reads back your extension",
                     "type": "application"
                 },
                 {
-                    "extension": "0303",
+                    "extension": "303",
                     "name": "Constant 1000 Hz tone",
                     "type": "application"
                 },
                 {
-                    "extension": "0304",
-                    "name": "Discord",
-                    "type": "application"
-                },
-                {
-                    "extension": "0305",
-                    "name": "Clock",
-                    "type": "application"
-                },
-                {
-                    "extension": "0306",
+                    "extension": "304",
                     "name": "Random music",
+                    "type": "application"
+                },
+                {
+                    "extension": "305",
+                    "name": "Clock",
                     "type": "application"
                 }
             ],
