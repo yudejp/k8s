@@ -322,6 +322,15 @@ data:
                     Hosted by <a href="https://www.h4y4bus4.com/">Hayabusa (@h_ya58)</a>
                 </dd>
                 <dt>
+                    <a href="https://zunda.yude.jp">
+                        zunda.yude.jp
+                    </a>
+                </dt>
+                <dd>
+                    On-premises <br />
+                    MYG (Miyagi, Japan)
+                </dd>
+                <dt>
                     <a href="https://mikan.yude.jp">
                         mikan.yude.jp
                     </a>
@@ -336,6 +345,11 @@ data:
                         dekopon.yude.jp
                     </a>
                 </dt>
+                <dd>
+                    IaaS <br />
+                    OCI (Osaka, Japan) <br />
+                    Hosted by <a href="https://www.oracle.com/jp/cloud/">Oracle Cloud Infrastructure</a>
+                </dd>
             </dl>
 
             <h2 id="grafana">Public Grafana dashboard</h2>
