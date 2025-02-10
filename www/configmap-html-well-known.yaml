@@ -15,23 +15,38 @@ data:
             "extensions": [
                 {
                     "extension": "100",
-                    "name": "kuro",
-                    "type": "main"
+                    "name": "600a2",
+                    "type": "phone",
+                    "model": "NIPPON TELEGRAPH AND TELEPHONE CORPORATION 600-A2"
                 },
                 {
                     "extension": "101",
-                    "name": "windows",
-                    "type": "fax"
+                    "name": "tiger",
+                    "type": "computer",
+                    "model": "Apple Computer, Inc. iBook (Early 2003, Opaque White)"
                 },
                 {
                     "extension": "102",
                     "name": "darwin",
-                    "type": "computer"
+                    "type": "computer",
+                    "model": "Apple Inc. MacBook Air (M1, 2020)"
                 },
                 {
                     "extension": "103",
-                    "name": "phone",
-                    "type": "phone"
+                    "name": "yudephone",
+                    "type": "phone",
+                    "model": "Apple Inc. iPhone 13 mini"
+                },
+                {
+                    "extension": "106",
+                    "name": "yudephone2",
+                    "type": "phone",
+                    "model": "NTT docomo PRIME series N-02B"
+                },
+                {
+                    "extension": "200",
+                    "name": "Conference room",
+                    "type": "conference"
                 },
                 {
                     "extension": "300",
@@ -79,7 +94,7 @@ data:
                 },
                 {
                     "identifier": "93b2d256-39c1-4053-bda1-c0643dd40690",
-                    "name": "MKNET",
+                    "name": "MKNETEL",
                     "prefix": "510",
                     "mantela": "https://unstable.kusaremkn.com/.well-known/mantela.json"
                 },

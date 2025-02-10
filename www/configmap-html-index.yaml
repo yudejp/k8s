@@ -193,16 +193,19 @@ data:
             You may be able to reach our SIP server via <code>yudemiko.tail5b1c5.ts.net</code> (connectivity via Tailscale or MMTNET is required).</p>
             <dl>
                 <dt>100</dt>
-                <dd>kuro</dd>
+                <dd>600a2</dd>
                 <dd>Always available</dd>
                 <dt>101</dt>
-                <dd>windows</dd>
+                <dd>tiger</dd>
                 <dd>Rarely available, accepting fax</dd>
                 <dt>102</dt>
                 <dd>darwin</dd>
                 <dd>Mostly available</dd>
                 <dt>103</dt>
-                <dd>phone</dd>
+                <dd>yudephone</dd>
+                <dd>Rarely available</dd>
+                <dt>106</dt>
+                <dd>yudephone2</dd>
                 <dd>Rarely available</dd>
                 <dt>200</dt>
                 <dd>Conference room</dd>
