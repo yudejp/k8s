@@ -41,6 +41,11 @@ data:
                         </a>
                     </li>
                     <li>
+                        <a href="#grafana">
+                            Public Grafana dashboard
+                        </a>
+                    </li>
+                    <li>
                         <a href="#private-services">
                             Private services
                         </a>
@@ -307,6 +312,16 @@ data:
                     Hosted by <a href="https://moyashim-25.com/">もやしくん (@moyashiM_25)</a>
                 </dd>
                 <dt>
+                    <a href="https://katsu.yude.jp">
+                        katsu.yude.jp
+                    </a>
+                </dt>
+                <dd>
+                    On-premises <br />
+                    TYO (Tokyo, Japan) <br />
+                    Hosted by <a href="https://www.h4y4bus4.com/">Hayabusa (@h_ya58)</a>
+                </dd>
+                <dt>
                     <a href="https://mikan.yude.jp">
                         mikan.yude.jp
                     </a>
@@ -321,22 +336,31 @@ data:
                         dekopon.yude.jp
                     </a>
                 </dt>
-                <dd>
-                    IaaS <br />
-                    OCI (Osaka, Japan) <br />
-                    Hosted by <a href="https://www.oracle.com/jp/cloud/">Oracle Cloud Infrastructure</a>
-                </dd>
-                <dt>
-                    <a href="https://ponkan.yude.jp">
-                        ponkan.yude.jp
-                    </a>
-                </dt>
-                <dd>
-                    IaaS <br />
-                    OCI (Osaka, Japan) <br />
-                    Hosted by <a href="https://www.oracle.com/jp/cloud/">Oracle Cloud Infrastructure</a>
-                </dd>
             </dl>
+
+            <h2 id="grafana">Public Grafana dashboard</h2>
+            <ul>
+                <li>
+                    <a href="https://yudejp.grafana.net/public-dashboards/28fa02a57b454f76970a2364ddecf76f">
+                        Kubernetes
+                    </a>
+                </li>
+                <li>
+                    <a href="https://yudejp.grafana.net/public-dashboards/3c4e699482d84d87b7f218ebd7126a9b">
+                        MinIO
+                    </a>
+                </li>
+                <li>
+                    <a href="https://yudejp.grafana.net/public-dashboards/350f1b47e09849cdb97d700efed6ab33">
+                        Network utilizations
+                    </a>
+                </li>
+                <li>
+                    <a href="https://yudejp.grafana.net/public-dashboards/1ae279b069f94d4e9d534d8e80f78457">
+                        Prober
+                    </a>
+                </li>
+            </ul>
 
             <h2 id="notes">Notes</h2>
             <dl>
