@@ -17,29 +17,29 @@ data:
                     "extension": "100",
                     "name": "600a2",
                     "type": "phone",
-                    "model": "NIPPON TELEGRAPH AND TELEPHONE CORPORATION 600-A2"
+                    "model": "NIPPON TELEGRAPH AND TELEPHONE CORPORATION 600-A2; YAMAHA CORPORATION RT58i"
                 },
                 {
                     "extension": "101",
-                    "name": "tiger",
+                    "name": "g3",
                     "type": "computer",
-                    "model": "Apple Computer, Inc. iBook (Early 2003, Opaque White)"
+                    "model": "Apple Computer, Inc. iBook (Early 2003, Opaque White); YAMAHA CORPORATION RT58i"
                 },
                 {
                     "extension": "102",
-                    "name": "darwin",
+                    "name": "m1",
                     "type": "computer",
                     "model": "Apple Inc. MacBook Air (M1, 2020)"
                 },
                 {
                     "extension": "103",
-                    "name": "yudephone",
+                    "name": "mini",
                     "type": "phone",
                     "model": "Apple Inc. iPhone 13 mini"
                 },
                 {
                     "extension": "106",
-                    "name": "yudephone2",
+                    "name": "n02b",
                     "type": "phone",
                     "model": "NTT docomo PRIME series N-02B"
                 },
