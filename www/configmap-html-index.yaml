@@ -189,7 +189,7 @@ data:
 
 
             <h2 id="phone-extensions">Phone extensions</h2>
-            <p>The recommended area code is <code>390</code>. Our extensions are made up of 4 digits. <br />
+            <p>The recommended area code is <code>390</code>. Our extensions are made up of 3 digits. <br />
             You may be able to reach our SIP server via <code>yudemiko.tail5b1c5.ts.net</code> (connectivity via Tailscale or MMTNET is required).</p>
             <dl>
                 <dt>100</dt>
