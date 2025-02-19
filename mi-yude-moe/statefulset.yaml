@@ -41,7 +41,7 @@ spec:
                       - kube-05
       containers:
         - name: web
-          image: misskey/misskey:2024.8
+          image: misskey/misskey:2025.2.0
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - mountPath: /misskey/files
