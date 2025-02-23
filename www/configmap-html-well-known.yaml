@@ -9,7 +9,7 @@ data:
             "version": "0.0.0",
             "aboutMe": {
                 "identifier": "3be47f94-3185-4198-ac3d-ca5ccb573cc2",
-                "name": "YUDE",
+                "name": "yude",
                 "preferredPrefix": "390"
             },
             "extensions": [
@@ -69,6 +69,12 @@ data:
             ],
             "providers": [
                 {
+                    "identifier": "3be47f94-3185-4198-ac3d-ca5ccb573cc2",
+                    "mantela": "https://www.yude.jp.eu.org/.well-known/mantela.json",
+                    "name": "yude",
+                    "prefix": "0"
+                },
+                {
                     "identifier": "5bbdd9ae-4d41-420c-80df-eba486495b12",
                     "mantela": "https://108jiminy.jp/phone/jiminypublicmantela.json",
                     "name": "jiminy",
@@ -108,6 +114,12 @@ data:
                     "identifier": "81c99427-4a30-4364-8b17-fed97f347439",
                     "name": "sgch",
                     "prefix": "248",
+                    "mantela": ""
+                },
+                {
+                    "identifier": "XXX:hieri",
+                    "name": "hieri",
+                    "prefix": "890",
                     "mantela": ""
                 },
                 {
