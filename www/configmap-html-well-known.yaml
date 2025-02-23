@@ -117,10 +117,10 @@ data:
                     "mantela": ""
                 },
                 {
-                    "identifier": "XXX:hieri",
+                    "identifier": "91c5f34f-c178-4cfe-a488-be6ed00fac3b",
                     "name": "hieri",
                     "prefix": "890",
-                    "mantela": ""
+                    "mantela": "https://hieri1021.github.io/.well-known/mantela.json"
                 },
                 {
                     "identifier": "XXX:qqey",
