@@ -189,8 +189,10 @@ data:
 
 
             <h2 id="phone-extensions">Phone extensions</h2>
-            <p>The recommended area code is <code>390</code>. Our extensions are made up of 3 digits. <br />
-            You may be able to reach our SIP server via <code>yudemiko.tail5b1c5.ts.net</code> (connectivity via Tailscale or MMTNET is required).</p>
+            <p>
+                The recommended area code is <code>390</code>. Our extensions are made up of 3 digits. <br />
+                Please peer with my telephone exchange! For details, visit <a href="https://scrapbox.io/yude/%E6%9D%B1%E4%BA%AC%E5%BA%83%E5%9F%9F%E9%9B%BB%E8%A9%B1%E7%B6%B2:_yude_%E5%B1%80%E3%81%A8%E6%8E%A5%E7%B6%9A%E3%81%99%E3%82%8B">here</a>.<br />
+            </p>
             <dl>
                 <dt>100</dt>
                 <dd>600a2</dd>
@@ -201,12 +203,6 @@ data:
                 <dt>102</dt>
                 <dd>darwin</dd>
                 <dd>Mostly available</dd>
-                <dt>103</dt>
-                <dd>yudephone</dd>
-                <dd>Rarely available</dd>
-                <dt>106</dt>
-                <dd>yudephone2</dd>
-                <dd>Rarely available</dd>
                 <dt>200</dt>
                 <dd>Conference room</dd>
                 <dd>Always available</dd>
@@ -237,21 +233,23 @@ data:
             <p>Currently connecting to the following outside lines:</p>
             <dl>
                 <dt>+510</dt>
-                <dd>MKNET</dd>
+                <dd>mknetel</dd>
                 <dt>+530</dd>
-                <dd>SASAKULAB</dd>
+                <dd>sasakulab</dd>
                 <dt>+108</dt>
-                <dd>JIMINY</dd>
+                <dd>jiminy</dd>
+                <dd></dd>
                 <dt>+218</dt>
-                <dd>JIMINY-LOCAL</dd>
+                <dd>jiminylocal</dd>
+                <dd>You can reach me via this point. Call <code>390</code>
                 <dt>+617</dt>
-                <dd>PEPEPPER</dd>
+                <dd>pepepper</dd>
                 <dt>+428</dt>
-                <dd>PUHITAKU</dd>
+                <dd>puhitaku</dd>
                 <dt>+248</dt>
-                <dd>SGCH</dd>
+                <dd>sgch</dd>
                 <dt>+330</dt>
-                <dd>QQEY</dd>
+                <dd>qqey</dd>
             </dl>
             <p>You can take a look our telephony network topology <a href="https://kusaremkn.github.io/mantela-viewer/?first=https%3A%2F%2Fwww.yude.jp.eu.org%2F.well-known%2Fmantela.json">here</a>.</p>
 

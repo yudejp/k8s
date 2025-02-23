@@ -32,18 +32,6 @@ data:
                     "model": "Apple Inc. MacBook Air (M1, 2020)"
                 },
                 {
-                    "extension": "103",
-                    "name": "mini",
-                    "type": "phone",
-                    "model": "Apple Inc. iPhone 13 mini"
-                },
-                {
-                    "extension": "106",
-                    "name": "n02b",
-                    "type": "phone",
-                    "model": "NTT docomo PRIME series N-02B"
-                },
-                {
                     "extension": "200",
                     "name": "Conference room",
                     "type": "conference"
@@ -83,48 +71,48 @@ data:
                 {
                     "identifier": "5bbdd9ae-4d41-420c-80df-eba486495b12",
                     "mantela": "https://108jiminy.jp/phone/jiminypublicmantela.json",
-                    "name": "JIMINY",
+                    "name": "jiminy",
                     "prefix": "108"
                 },
                 {
                     "identifier": "153048c5-db33-4e00-ad49-694762555d5c",
-                    "name": "JIMINY-LOCAL",
+                    "name": "jiminylocal",
                     "prefix": "218",
                     "mantela": "https://108jiminy.jp/phone/jiminylocalmantela.json"
                 },
                 {
                     "identifier": "93b2d256-39c1-4053-bda1-c0643dd40690",
-                    "name": "MKNETEL",
+                    "name": "mknetel",
                     "prefix": "510",
                     "mantela": "https://unstable.kusaremkn.com/.well-known/mantela.json"
                 },
                 {
                     "identifier": "A50F0FB4-C5C9-4D1E-BDB5-9D73FA2F7EB5",
-                    "name": "SASAKULAB",
+                    "name": "sasakulab",
                     "prefix": "530",
                     "mantela": "https://sasakulab.com/.well-known/mantela.json"
                 },
                 {
                     "identifier": "f5c44210-8cb8-4e87-85a7-df3d3ff951e6",
-                    "name": "PEPEPPER",
+                    "name": "pepepper",
                     "prefix": "617",
                     "mantela": "https://www.pepepper.net/.well-known/mantela.json"
                 },
                 {
                     "identifier": "bfd57259-4c74-48ce-b1b3-7e816808bf27",
-                    "name": "PUHITAKU",
+                    "name": "puhitaku",
                     "prefix": "428",
                     "mantela": ""
                 },
                 {
                     "identifier": "81c99427-4a30-4364-8b17-fed97f347439",
-                    "name": "SGCH",
+                    "name": "sgch",
                     "prefix": "248",
                     "mantela": ""
                 },
                 {
                     "identifier": "XXX:qqey",
-                    "name": "QQEY",
+                    "name": "qqey",
                     "prefix": "330",
                     "mantela": ""
                 }
