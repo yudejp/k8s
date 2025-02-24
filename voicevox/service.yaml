@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: voicevox
+spec:
+  ports:
+    - port: 50021
+      targetPort: 50021
+  selector:
+    app: voicevox

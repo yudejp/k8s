@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: voicevox
+  labels:
+    app: voicevox
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: voicevox
+  template:
+    metadata:
+      labels:
+        app: voicevox
+    spec:
+      containers:
+        - name: engine
+          image: voicevox/voicevox_engine:cpu-latest
+          ports:
+            - containerPort: 50021
