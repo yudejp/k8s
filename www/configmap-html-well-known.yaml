@@ -5,12 +5,15 @@ metadata:
 data:
     mantela.json: |
         {
-            "$schema": "https://kusaremkn.github.io/mantela/mantela.schema.json",
+            "$schema": "https://tkytel.github.io/mantela/mantela.schema.json",
             "version": "0.0.0",
             "aboutMe": {
                 "identifier": "3be47f94-3185-4198-ac3d-ca5ccb573cc2",
                 "name": "yude",
-                "preferredPrefix": "390"
+                "preferredPrefix": [ "390" ],
+                "sipUsername": "SIP-TRUNK-123BA487",
+                "sipPassword": "afb215b09ea806cceda95c0f17cf4eea",
+                "sipServer": "100.75.167.92"
             },
             "extensions": [
                 {
@@ -22,49 +25,49 @@ data:
                 {
                     "extension": "101",
                     "name": "g3",
-                    "type": "computer",
+                    "type": "fax",
                     "model": "Apple Computer, Inc. iBook (Early 2003, Opaque White); YAMAHA CORPORATION RT58i"
                 },
                 {
                     "extension": "102",
                     "name": "m1",
-                    "type": "computer",
+                    "type": "phone",
                     "model": "Apple Inc. MacBook Air (M1, 2020)"
                 },
                 {
                     "extension": "200",
                     "name": "Conference room",
-                    "type": "conference"
+                    "type": "other"
                 },
                 {
                     "extension": "300",
                     "name": "Echo-back service",
-                    "type": "application"
+                    "type": "other"
                 },
                 {
                     "extension": "301",
                     "name": "Fax (Receive only)",
-                    "type": "application"
+                    "type": "fax"
                 },
                 {
                     "extension": "302",
                     "name": "Reads back your extension",
-                    "type": "application"
+                    "type": "other"
                 },
                 {
                     "extension": "303",
                     "name": "Constant 1000 Hz tone",
-                    "type": "application"
+                    "type": "other"
                 },
                 {
                     "extension": "304",
                     "name": "Random music",
-                    "type": "application"
+                    "type": "other"
                 },
                 {
                     "extension": "305",
                     "name": "Clock",
-                    "type": "application"
+                    "type": "other"
                 }
             ],
             "providers": [
