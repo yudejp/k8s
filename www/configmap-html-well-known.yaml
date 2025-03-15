@@ -10,7 +10,7 @@ data:
             "aboutMe": {
                 "identifier": "3be47f94-3185-4198-ac3d-ca5ccb573cc2",
                 "name": "yude",
-                "preferredPrefix": [ "390" ],
+                "preferredPrefix": [ "390", "3900", "3939", "39" ],
                 "sipUsername": "SIP-TRUNK-123BA487",
                 "sipPassword": "afb215b09ea806cceda95c0f17cf4eea",
                 "sipServer": "100.75.167.92"
@@ -20,7 +20,7 @@ data:
                     "extension": "100",
                     "name": "600a2",
                     "type": "phone",
-                    "model": "NIPPON TELEGRAPH AND TELEPHONE CORPORATION 600-A2; YAMAHA CORPORATION RT58i"
+                    "model": "Nippon Telegraph and Telephone Public Corporation 600-A2; YAMAHA CORPORATION RT58i"
                 },
                 {
                     "extension": "101",
@@ -30,9 +30,9 @@ data:
                 },
                 {
                     "extension": "102",
-                    "name": "m1",
+                    "name": "mac",
                     "type": "phone",
-                    "model": "Apple Inc. MacBook Air (M1, 2020)"
+                    "model": "Apple Inc. MacBook Air (M4, 2025)"
                 },
                 {
                     "extension": "200",
@@ -117,7 +117,7 @@ data:
                     "identifier": "81c99427-4a30-4364-8b17-fed97f347439",
                     "name": "sgch",
                     "prefix": "248",
-                    "mantela": ""
+                    "mantela": "https://sgchsgch.net/.well-known/mantela.json"
                 },
                 {
                     "identifier": "91c5f34f-c178-4cfe-a488-be6ed00fac3b",
