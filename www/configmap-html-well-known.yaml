@@ -17,57 +17,77 @@ data:
             },
             "extensions": [
                 {
+                    "name": "main",
+                    "extension": "400",
+                    "type": "main",
+                    "identifier": "1F73OPXZ",
+                    "transferTo": [
+                        "3XZLAP3A",
+                        "QON2AYKE"
+                    ]
+                },
+                {
                     "extension": "100",
                     "name": "600a2",
-                    "type": "phone",
-                    "model": "Nippon Telegraph and Telephone Public Corporation 600-A2; YAMAHA CORPORATION RT58i"
+                    "type": "dialphone",
+                    "model": "Nippon Telegraph and Telephone Public Corporation 600-A2; YAMAHA CORPORATION RT58i",
+                    "identifier": "3XZLAP3A"
                 },
                 {
                     "extension": "101",
-                    "name": "g3",
+                    "name": "windows",
                     "type": "fax",
-                    "model": "Apple Computer, Inc. iBook (Early 2003, Opaque White); YAMAHA CORPORATION RT58i"
+                    "model": "OMRON SOCIAL SOLUTIONS CO., LTD. ME5614U2; YAMAHA CORPORATION RT58i",
+                    "identifier": "Y2MEE6Y8"
                 },
                 {
                     "extension": "102",
                     "name": "mac",
                     "type": "phone",
-                    "model": "Apple Inc. MacBook Air (M4, 2025)"
+                    "model": "Apple Inc. MacBook Air (M4, 2025)",
+                    "identifier": "QON2AYKE"
                 },
                 {
                     "extension": "200",
                     "name": "Conference room",
-                    "type": "other"
+                    "type": "other",
+                    "identifier": "CC3QOT90"
                 },
                 {
                     "extension": "300",
                     "name": "Echo-back service",
-                    "type": "other"
+                    "type": "music",
+                    "identifier": "ZF40LWQH"
                 },
                 {
                     "extension": "301",
                     "name": "Fax (Receive only)",
-                    "type": "fax"
+                    "type": "fax",
+                    "identifier": "9WB4OB8J"
                 },
                 {
                     "extension": "302",
                     "name": "Reads back your extension",
-                    "type": "other"
+                    "type": "information",
+                    "identifier": "M7UZT4MG"
                 },
                 {
                     "extension": "303",
                     "name": "Constant 1000 Hz tone",
-                    "type": "other"
+                    "type": "music",
+                    "identifier": "S3NXM7Y6"
                 },
                 {
                     "extension": "304",
                     "name": "Random music",
-                    "type": "other"
+                    "type": "music",
+                    "identifier": "TMKVWWG5"
                 },
                 {
                     "extension": "305",
                     "name": "Clock",
-                    "type": "other"
+                    "type": "information",
+                    "identifier": "0R7J61UW"
                 }
             ],
             "providers": [
