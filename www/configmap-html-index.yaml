@@ -266,6 +266,15 @@ data:
                     NRT (Chiba, Japan)
                 </dd>
                 <dt>
+                    <a href="https://wheel.yude.jp">
+                        wheel.yude.jp
+                    </a>
+                </dt>
+                <dd>
+                    On-premises <br />
+                    NRT (Chiba, Japan)
+                </dd>
+                <dt>
                     <a href="https://hitachi.yude.jp">
                         hitachi.yude.jp
                     </a>
@@ -294,13 +303,23 @@ data:
                     HND (Tokyo, Japan)
                 </dd>
                 <dt>
-                    <a href="https://sakyu.yude.jp">
-                        sakyu.yude.jp
+                    <a href="https://dune.yude.jp">
+                        dune.yude.jp
                     </a>
                 </dt>
                 <dd>
                     On-premises <br />
                     TTJ (Tottori, Japan)
+                </dd>
+                <dt>
+                    <a href="https://ruby.yude.jp">
+                        ruby.yude.jp
+                    </a>
+                </dt>
+                <dd>
+                    On-premises <br />
+                    MTE (Shimane, Japan) <br />
+                    Hosted by <a href="https://kusaremkn.com/">KusaReMKN (@KusaReMKN)</a>
                 </dd>
                 <dt>
                     <a href="https://shrimp.yude.jp">
