@@ -156,6 +156,18 @@ data:
                     "name": "meishicafei",
                     "prefix": "917",
                     "mantela": ""
+                },
+                {
+                    "identifier": "XXX:macaron",
+                    "name": "macaron",
+                    "prefix": "798",
+                    "mantela": ""
+                },
+                {
+                    "identifier": "XXX:hedgehog-tokyo",
+                    "name": "hedgehog-tokyo",
+                    "prefix": "242",
+                    "mantela": "https://rainyvillage.jp/mantela/mantela.json"
                 }
             ]
         }
