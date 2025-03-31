@@ -19,14 +19,12 @@ spec:
         app: adguard
     spec:
       affinity:
-        nodeAffinity:
+        podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: kubernetes.io/hostname
-                    operator: NotIn
-                    values:
-                      - kube-05
+            - labelSelector:
+                matchLabels:
+                  app: cloudflare-tunnel
+              topologyKey: "kubernetes.io/hostname"
       containers:
         - name: adguard-home
           image: adguard/adguardhome:latest

@@ -12,15 +12,6 @@ spec:
       labels:
         app: annict-activity-to-mastodon
     spec:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: kubernetes.io/hostname
-                    operator: NotIn
-                    values:
-                      - kube-05
       containers:
         - name: annict-activity-to-mastodon
           image: ghcr.io/yude/annict-activity-to-mastodon:latest

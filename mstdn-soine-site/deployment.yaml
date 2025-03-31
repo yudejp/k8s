@@ -16,14 +16,12 @@ spec:
         app: mastodon
     spec:
       affinity:
-        nodeAffinity:
+        podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: kubernetes.io/hostname
-                    operator: NotIn
-                    values:
-                      - kube-05
+            - labelSelector:
+                matchLabels:
+                  app: cloudflare-tunnel
+              topologyKey: "kubernetes.io/hostname"
       containers:
         - name: web
           image: plusminusio/mastodon:4.2.10-plusminus.1
