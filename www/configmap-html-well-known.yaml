@@ -11,8 +11,8 @@ data:
                 "identifier": "3be47f94-3185-4198-ac3d-ca5ccb573cc2",
                 "name": "yude",
                 "preferredPrefix": [ "390", "3900", "3939", "39" ],
-                "sipUsername": "SIP-TRUNK-123BA487",
-                "sipPassword": "afb215b09ea806cceda95c0f17cf4eea",
+                "sipUsername": "SIP-TRUNK-FB264528",
+                "sipPassword": "WG5nQUN3dFJEcTQ9",
                 "sipServer": "100.75.167.92"
             },
             "extensions": [
@@ -100,7 +100,7 @@ data:
                 {
                     "identifier": "5bbdd9ae-4d41-420c-80df-eba486495b12",
                     "mantela": "https://108jiminy.jp/phone/jiminypublicmantela.json",
-                    "name": "jiminy",
+                    "name": "jiminypublic",
                     "prefix": "108"
                 },
                 {
@@ -152,19 +152,19 @@ data:
                     "mantela": ""
                 },
                 {
-                    "identifier": "XXX:meishi",
-                    "name": "meishicafei",
+                    "identifier": "46fb2dc7-ee07-435d-9a27-0a7b4d43d3d7",
+                    "name": "mcetelo",
                     "prefix": "917",
-                    "mantela": ""
+                    "mantela": "https://meishicafei.github.io/.well-known/mantela.json"
                 },
                 {
-                    "identifier": "XXX:macaron",
+                    "identifier": "24e24ec4-746a-4736-920d-47a725201154",
                     "name": "macaron",
                     "prefix": "798",
-                    "mantela": ""
+                    "mantela": "https://telephony.jm8krg.net/.well-known/mantela.json"
                 },
                 {
-                    "identifier": "XXX:hedgehog-tokyo",
+                    "identifier": "47abe85d-fe09-691d-f928-4f75b27a157f",
                     "name": "hedgehog-tokyo",
                     "prefix": "242",
                     "mantela": "https://rainyvillage.jp/mantela/mantela.json"
