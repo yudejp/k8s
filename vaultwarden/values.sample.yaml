@@ -1,6 +1,6 @@
 domain: "https://vaultwarden.yude.jp.eu.org"
 timeZone: "Asia/Tokyo"
-replicas: 3
+replicas: 2
 
 ingress:
   enabled: false
