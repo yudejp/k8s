@@ -24,7 +24,7 @@ spec:
               topologyKey: "kubernetes.io/hostname"
       containers:
         - name: web
-          image: plusminusio/mastodon:4.2.10-plusminus.1
+          image: ghcr.io/mastodon/mastodon:v4.3.8
           command: [
             "bash",
             "-c",
@@ -37,14 +37,14 @@ spec:
             - containerPort: 3000
               name: mastodon
         - name: sidekiq
-          image: plusminusio/mastodon:4.2.10-plusminus.1
+          image: ghcr.io/mastodon/mastodon:v4.3.8
           command: ["bash", "-c", "bundle exec sidekiq -c 25"]
           envFrom:
             - configMapRef:
                 name: env
         - name: streaming
-          image: plusminusio/mastodon:4.2.10-plusminus.1
-          command: ["bash", "-c", "yarn start"]
+          image: ghcr.io/mastodon/mastodon-streaming:v4.3.8
+          command: ["node", "./streaming/index.js"]
           envFrom:
             - configMapRef:
                 name: env
