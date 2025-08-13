@@ -9,7 +9,7 @@ spec:
   selector:
     matchLabels:
       app: mastodon
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
@@ -24,7 +24,7 @@ spec:
               topologyKey: "kubernetes.io/hostname"
       containers:
         - name: web
-          image: ghcr.io/mastodon/mastodon:v4.3.8
+          image: ghcr.io/mastodon/mastodon:v4.3.11
           command: [
             "bash",
             "-c",
@@ -36,14 +36,22 @@ spec:
           ports:
             - containerPort: 3000
               name: mastodon
+          volumeMounts:
+            - mountPath: /utils
+              readOnly: true
+              name: mstdn-utils
         - name: sidekiq
-          image: ghcr.io/mastodon/mastodon:v4.3.8
+          image: ghcr.io/mastodon/mastodon:v4.3.11
           command: ["bash", "-c", "bundle exec sidekiq -c 25"]
           envFrom:
             - configMapRef:
                 name: env
+          volumeMounts:
+            - mountPath: /utils
+              readOnly: true
+              name: mstdn-utils
         - name: streaming
-          image: ghcr.io/mastodon/mastodon-streaming:v4.3.8
+          image: ghcr.io/mastodon/mastodon-streaming:v4.3.11
           command: ["node", "./streaming/index.js"]
           envFrom:
             - configMapRef:
@@ -51,6 +59,10 @@ spec:
           ports:
             - containerPort: 4000
               name: streaming
+          volumeMounts:
+            - mountPath: /utils
+              readOnly: true
+              name: mstdn-utils
         - name: nginx
           image: nginx
           ports:
@@ -69,4 +81,10 @@ spec:
                 path: nginx.conf
               - key: virtualhost.conf
                 path: virtualhost/virtualhost.conf
+        - name: mstdn-utils
+          configMap:
+            name: mstdn-utils
+            items:
+              - key: rename.rb
+                path: rename.rb
       restartPolicy: Always

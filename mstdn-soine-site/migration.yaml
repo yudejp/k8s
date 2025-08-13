@@ -8,9 +8,21 @@ spec:
     spec:
       containers:
         - name: db-migrate
-          image: tootsuite/mastodon:v4.3.8
-          command: ["bash", "-c", "rm -f /mastodon/tmp/pids/server.pid; bundle exec rails db:migrate"]
+          image: tootsuite/mastodon:v4.3.11
+          # command: ["bash", "-c", "rm -f /mastodon/tmp/pids/server.pid; bundle exec rails db:migrate"]
+          command: ["bash", "-c", "rm -f /mastodon/tmp/pids/server.pid; bundle exec rails runner /utils/rename.rb"]
           envFrom:
             - configMapRef:
                 name: env
+          volumeMounts:
+            - mountPath: /utils
+              readOnly: true
+              name: mstdn-utils
+      volumes:
+        - name: mstdn-utils
+          configMap:
+            name: mstdn-utils
+            items:
+              - key: rename.rb
+                path: rename.rb
       restartPolicy: OnFailure
