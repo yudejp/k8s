@@ -24,7 +24,7 @@ spec:
               topologyKey: "kubernetes.io/hostname"
       containers:
         - name: web
-          image: ghcr.io/mastodon/mastodon:v4.4.3
+          image: ghcr.io/mastodon/mastodon:v4.4.5
           command: [
             "bash",
             "-c",
@@ -41,7 +41,7 @@ spec:
               readOnly: true
               name: mstdn-utils
         - name: sidekiq
-          image: ghcr.io/mastodon/mastodon:v4.4.3
+          image: ghcr.io/mastodon/mastodon:v4.4.5
           command: ["bash", "-c", "bundle exec sidekiq -c 25"]
           envFrom:
             - configMapRef:
@@ -51,7 +51,7 @@ spec:
               readOnly: true
               name: mstdn-utils
         - name: streaming
-          image: ghcr.io/mastodon/mastodon-streaming:v4.4.3
+          image: ghcr.io/mastodon/mastodon-streaming:v4.4.5
           command: ["node", "./streaming/index.js"]
           envFrom:
             - configMapRef:
