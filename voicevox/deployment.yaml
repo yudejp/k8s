@@ -14,6 +14,15 @@ spec:
       labels:
         app: voicevox
     spec:
+      dnsConfig:
+        searches:
+          - svc.cluster.local
+          - cluster.local
+        options:
+          - name: single-request-reopen
+          - name: use-vc
+          - name: ndots
+            value: "2"
       containers:
         - name: engine
           image: voicevox/voicevox_engine:cpu-latest

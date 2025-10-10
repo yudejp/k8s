@@ -12,6 +12,15 @@ spec:
       labels:
         app: addchan
     spec:
+      dnsConfig:
+        searches:
+          - svc.cluster.local
+          - cluster.local
+        options:
+          - name: single-request-reopen
+          - name: use-vc
+          - name: ndots
+            value: "2"
       containers:
       - name: addchan
         image: ghcr.io/teamecri/addchan:main

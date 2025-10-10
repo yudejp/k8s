@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: piping-server
+  name: spotiny
   labels:
-    app: piping-server
+    app: spotiny
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: piping-server
+      app: spotiny
   template:
     metadata:
       labels:
-        app: piping-server
+        app: spotiny
     spec:
       dnsConfig:
         searches:
@@ -24,14 +24,17 @@ spec:
           - name: ndots
             value: "2"
       containers:
-        - name: piping-server
-          image: nwtgck/bytenode-piping-server
+        - name: spotiny
+          image: ghcr.io/hayabusa58/spotiny:v1.4.1
           imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: spotiny-env
           resources:
             limits:
-              cpu: "0.3"
-              memory: "300Mi"
+              cpu: "1"
+              memory: "1Gi"
           ports:
             - name: http
-              hostPort: 8080
-              containerPort: 8080
+              hostPort: 3000
+              containerPort: 3000

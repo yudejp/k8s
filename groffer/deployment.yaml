@@ -12,6 +12,15 @@ spec:
       labels:
         app: groffer
     spec:
+      dnsConfig:
+        searches:
+          - svc.cluster.local
+          - cluster.local
+        options:
+          - name: single-request-reopen
+          - name: use-vc
+          - name: ndots
+            value: "2"
       containers:
       - name: groffer
         image: ghcr.io/yude/groffer:master

@@ -30,6 +30,15 @@ spec:
       labels:
         app: web
     spec:
+      dnsConfig:
+        searches:
+          - svc.cluster.local
+          - cluster.local
+        options:
+          - name: single-request-reopen
+          - name: use-vc
+          - name: ndots
+            value: "2"
       containers:
         - name: web
           image: misskey/misskey:2025.5.0

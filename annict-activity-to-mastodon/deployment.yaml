@@ -12,6 +12,15 @@ spec:
       labels:
         app: annict-activity-to-mastodon
     spec:
+      dnsConfig:
+        searches:
+          - svc.cluster.local
+          - cluster.local
+        options:
+          - name: single-request-reopen
+          - name: use-vc
+          - name: ndots
+            value: "2"
       containers:
         - name: annict-activity-to-mastodon
           image: ghcr.io/yude/annict-activity-to-mastodon:latest

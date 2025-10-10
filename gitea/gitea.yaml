@@ -20,6 +20,15 @@ spec:
       labels:
         app: gitea
     spec:
+      dnsConfig:
+        searches:
+          - svc.cluster.local
+          - cluster.local
+        options:
+          - name: single-request-reopen
+          - name: use-vc
+          - name: ndots
+            value: "2"
       containers:
         - name: gitea
           image: gitea/gitea:1.23

@@ -15,6 +15,15 @@ spec:
       labels:
         app: cloudflare-tunnel
     spec:
+      dnsConfig:
+        searches:
+          - svc.cluster.local
+          - cluster.local
+        options:
+          - name: single-request-reopen
+          - name: use-vc
+          - name: ndots
+            value: "2"
       affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:

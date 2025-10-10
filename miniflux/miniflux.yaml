@@ -13,6 +13,15 @@ spec:
       labels:
         app: miniflux
     spec:
+      dnsConfig:
+        searches:
+          - svc.cluster.local
+          - cluster.local
+        options:
+          - name: single-request-reopen
+          - name: use-vc
+          - name: ndots
+            value: "2"
       containers:
       - name: miniflux
         image: miniflux/miniflux:latest
