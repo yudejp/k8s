@@ -7,7 +7,9 @@ spec:
   volume:
     size: 100Gi
     storageClass: longhorn
-  
+  resources:
+    limits:
+      memory: 3Gi
   numberOfInstances: 2
   users:
     zalando:  # database owner
@@ -20,14 +22,17 @@ spec:
     bar: {}
   postgresql:
     version: "16"
-  nodeAffinity:
-    requiredDuringSchedulingIgnoredDuringExecution:
-      nodeSelectorTerms:
-        - matchExpressions:
-            - key: postgres-operator
-              operator: In
-              values:
-                - enabled
+    parameters:
+      shared_buffers: 1GB
+      max_connections: '512'
+  # nodeAffinity:
+  #   requiredDuringSchedulingIgnoredDuringExecution:
+  #     nodeSelectorTerms:
+  #       - matchExpressions:
+  #           - key: postgres-operator
+  #             operator: In
+  #             values:
+  #               - enabled
   patroni:
     pg_hba:
       - local   all             all                                   trust
