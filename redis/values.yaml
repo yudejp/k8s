@@ -674,7 +674,7 @@ master:
 replica:
   ## @param replica.replicaCount Number of KeyDB replicas to deploy
   ##
-  replicaCount: 1
+  replicaCount: 2
   ## @param replica.containerPorts.keydb Container port to open on KeyDB replicas nodes
   ##
   containerPorts:
