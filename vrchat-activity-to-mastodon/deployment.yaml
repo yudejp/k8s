@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vrchat-activity-to-mastodon
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vrchat-activity-to-mastodon
+  template:
+    metadata:
+      labels:
+        app: vrchat-activity-to-mastodon
+    spec:
+      dnsConfig:
+        searches:
+          - svc.cluster.local
+          - cluster.local
+        options:
+          - name: single-request-reopen
+          - name: use-vc
+          - name: ndots
+            value: "2"
+      containers:
+        - name: vrchat-activity-to-mastodon
+          image: ghcr.io/yude/vrchat-activity-to-mastodon:master
+          volumeMounts:
+            - name: config
+              mountPath: /app/config.toml
+              subPath: config.toml
+      volumes:
+        - name: config
+          configMap:
+            name: vrchat-activity-to-mastodon-config

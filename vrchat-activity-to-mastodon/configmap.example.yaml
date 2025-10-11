@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vrchat-activity-to-mastodon-config
+data:
+  config.toml: |
+    [credentials.vrchat]
+    auth_token = ""
+
+    [credentials.mastodon]
+    domain = "https://mstdn.soine.site"
+    access_token = ""
