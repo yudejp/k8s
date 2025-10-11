@@ -21,7 +21,7 @@ metadata:
   labels:
     deploy: web
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: web
@@ -41,7 +41,7 @@ spec:
             value: "2"
       containers:
         - name: web
-          image: misskey/misskey:2025.5.0
+          image: misskey/misskey:2025.10.0
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - mountPath: /misskey/files
