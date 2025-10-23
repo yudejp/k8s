@@ -30,6 +30,7 @@ data:
   AWS_SECRET_ACCESS_KEY: ""
   S3_ALIAS_HOST: "minio.yude.jp.eu.org/mstdn-soine-site"
   S3_REGION: "ap-northeast-1"
+  S3_FORCE_SINGLE_REQUEST: "true"
   S3_PROTOCOL: "https"
   S3_HOSTNAME: "minio.yude.jp.eu.org"
   S3_ENDPOINT: "https://minio.yude.jp.eu.org"
