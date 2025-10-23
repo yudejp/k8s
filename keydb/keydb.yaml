@@ -6,7 +6,7 @@ metadata:
 spec:
   # keydbMode: one of 'standalone', 'multimaster', 'custom'
   # By default 'standalone' is 1 replica and 'multimaster' 3
-  keydbMode: 'multimaster'
+  keydbMode: 'standalone'
 
   # Enable and assign a limit of 1Gi memory
   keydbResourceLimits: false
