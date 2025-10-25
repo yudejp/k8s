@@ -24,7 +24,7 @@ spec:
     version: "16"
     parameters:
       shared_buffers: 1GB
-      max_connections: '512'
+      max_connections: '256'
   # nodeAffinity:
   #   requiredDuringSchedulingIgnoredDuringExecution:
   #     nodeSelectorTerms:
