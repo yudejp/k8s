@@ -21,7 +21,7 @@ metadata:
   labels:
     deploy: web
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: web
@@ -57,11 +57,9 @@ spec:
               scheme: HTTP
           resources:
             requests:
-              memory: "512Mi"
-              cpu: "250m"
+              memory: "3Gi"
             limits:
-              memory: "1Gi"
-              cpu: "500m"
+              memory: "4Gi"
       volumes:
         - name: misskey-default-conf-file
           configMap:
