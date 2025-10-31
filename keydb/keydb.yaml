@@ -7,11 +7,13 @@ spec:
   # keydbMode: one of 'standalone', 'multimaster', 'custom'
   # By default 'standalone' is 1 replica and 'multimaster' 3
   keydbMode: 'standalone'
+  keydbSize: 1
 
   # Enable and assign a limit of 1Gi memory
   keydbResourceLimits: false
   keydbResourceLimitsCpu: 1
   keydbResourceLimitsMemory: 1Gi
+  keydbPvcDataStorageClassName: local-path
 
   # Assign 1Gi for each replica persistent volume
   keydbPvcDataSize: 3Gi
