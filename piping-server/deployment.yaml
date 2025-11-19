@@ -5,7 +5,7 @@ metadata:
   labels:
     app: piping-server
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: piping-server
