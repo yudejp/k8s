@@ -41,7 +41,7 @@ spec:
             value: "2"
       containers:
         - name: web
-          image: misskey/misskey:2025.10.0
+          image: misskey/misskey:2025.11.0
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - mountPath: /misskey/files
@@ -59,7 +59,7 @@ spec:
             requests:
               memory: "3Gi"
             limits:
-              memory: "4Gi"
+              memory: "6Gi"
       volumes:
         - name: misskey-default-conf-file
           configMap:
