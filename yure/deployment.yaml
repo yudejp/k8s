@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yure
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: yure
+  template:
+    metadata:
+      labels:
+        app: yure
+    spec:
+      containers:
+        - name: yure
+          image: ghcr.io/yude/yure-docker:main
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 8080

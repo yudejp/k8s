@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yurecollect
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: yurecollect
+  template:
+    metadata:
+      labels:
+        app: yurecollect
+    spec:
+      containers:
+        - name: yurecollect
+          image: ghcr.io/yude/yurecollect:master@sha256:83e3eec01d7238ea0b2594d4c90123bec767b2eb70670cd9f74623d24254c11e
+          args:
+            - "wss://unstable.kusaremkn.com/yure/"
+          resources:
+            limits:
+              memory: "1560Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 3000
