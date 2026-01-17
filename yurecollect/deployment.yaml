@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: yurecollect
-          image: ghcr.io/yude/yurecollect:master@sha256:83e3eec01d7238ea0b2594d4c90123bec767b2eb70670cd9f74623d24254c11e
+          image: ghcr.io/yude/yurecollect:sha-18483c8
           args:
             - "wss://unstable.kusaremkn.com/yure/"
           resources:
