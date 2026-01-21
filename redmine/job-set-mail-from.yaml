@@ -1,0 +1,157 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: redmine-set-mail-from
+  labels:
+    app: redmine
+spec:
+  backoffLimit: 3
+  ttlSecondsAfterFinished: 300
+  template:
+    metadata:
+      labels:
+        app: redmine
+    spec:
+      restartPolicy: Never
+      initContainers:
+        - name: redmine-config-copy
+          image: busybox:1.36
+          imagePullPolicy: IfNotPresent
+          command:
+            - /bin/sh
+            - -lc
+            - |
+              set -eu
+              cp /config-src/configuration.yml /config-dst/configuration.yml
+              cat > /config-dst/database.yml <<EOF
+              production:
+                adapter: postgresql
+                database: ${REDMINE_DB_DATABASE}
+                host: ${REDMINE_DB_POSTGRES}
+                port: ${REDMINE_DB_PORT:-5432}
+                username: ${REDMINE_DB_USERNAME}
+                password: ${REDMINE_DB_PASSWORD}
+                encoding: utf8
+              EOF
+              chmod 0644 /config-dst/configuration.yml /config-dst/database.yml
+          env:
+            - name: REDMINE_DB_POSTGRES
+              value: za-pg-16.default.svc.cluster.local
+            - name: REDMINE_DB_USERNAME
+              value: redmine
+            - name: REDMINE_DB_PASSWORD
+              value: redmine
+            - name: REDMINE_DB_DATABASE
+              value: redmine
+            - name: REDMINE_DB_PORT
+              value: "5432"
+          volumeMounts:
+            - name: redmine-config-src
+              mountPath: /config-src/configuration.yml
+              subPath: configuration.yml
+              readOnly: true
+            - name: redmine-config-writable
+              mountPath: /config-dst
+      containers:
+        - name: set-mail-from
+          image: redmine:5.1.11-trixie
+          imagePullPolicy: Always
+          env:
+            - name: RAILS_ENV
+              value: production
+            - name: REDMINE_DB_POSTGRES
+              value: za-pg-16.default.svc.cluster.local
+            - name: REDMINE_DB_USERNAME
+              value: redmine
+            - name: REDMINE_DB_PASSWORD
+              value: redmine
+            - name: REDMINE_DB_DATABASE
+              value: redmine
+            - name: SECRET_KEY_BASE
+              valueFrom:
+                secretKeyRef:
+                  name: redmine-secret
+                  key: SECRET_KEY_BASE
+            - name: REDMINE_MAIL_FROM
+              valueFrom:
+                secretKeyRef:
+                  name: redmine-secret
+                  key: REDMINE_MAIL_FROM
+                  optional: true
+            - name: REDMINE_HOST_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: redmine-secret
+                  key: REDMINE_HOST_NAME
+                  optional: true
+            - name: REDMINE_PROTOCOL
+              valueFrom:
+                secretKeyRef:
+                  name: redmine-secret
+                  key: REDMINE_PROTOCOL
+                  optional: true
+          command:
+            - /bin/bash
+            - -lc
+            - |
+              set -eu
+              if [ -z "${REDMINE_MAIL_FROM:-}" ] && [ -z "${REDMINE_HOST_NAME:-}" ] && [ -z "${REDMINE_PROTOCOL:-}" ]; then
+                echo "No REDMINE_* settings provided; skipping" >&2
+                exit 0
+              fi
+
+              echo "Waiting for DB connectivity..." >&2
+              host="${REDMINE_DB_POSTGRES:-}"
+              port="${REDMINE_DB_PORT:-5432}"
+              tries=60
+              while [ "$tries" -gt 0 ]; do
+                if timeout 2s bash -lc "cat </dev/null >/dev/tcp/${host}/${port}" >/dev/null 2>&1; then
+                  echo "DB TCP is reachable." >&2
+                  break
+                fi
+                tries=$((tries - 1))
+                sleep 5
+              done
+
+              if [ "$tries" -le 0 ]; then
+                echo "DB not ready; giving up" >&2
+                exit 1
+              fi
+
+              echo "Applying Redmine settings..." >&2
+              timeout 180s bundle exec rails runner "
+                updates = {}
+                mf = ENV['REDMINE_MAIL_FROM'].to_s
+                hn = ENV['REDMINE_HOST_NAME'].to_s
+                pr = ENV['REDMINE_PROTOCOL'].to_s
+                updates[:mail_from] = mf unless mf.empty?
+                updates[:host_name] = hn unless hn.empty?
+                updates[:protocol]  = pr unless pr.empty?
+
+                updates.each do |k, v|
+                  setter = \"#{k}=\"
+                  if Setting.respond_to?(setter)
+                    Setting.public_send(setter, v)
+                  else
+                    warn \"Setting does not support #{setter}\"
+                  end
+                end
+
+                puts \"updated=#{updates.inspect}\"
+                puts \"current_host_name=#{Setting.respond_to?(:host_name) ? Setting.host_name : 'n/a'}\"
+                puts \"current_protocol=#{Setting.respond_to?(:protocol) ? Setting.protocol : 'n/a'}\"
+                puts \"current_mail_from=#{Setting.respond_to?(:mail_from) ? Setting.mail_from : 'n/a'}\"
+              "
+          volumeMounts:
+            - name: redmine-config-writable
+              mountPath: /usr/src/redmine/config/configuration.yml
+              subPath: configuration.yml
+            - name: redmine-config-writable
+              mountPath: /usr/src/redmine/config/database.yml
+              subPath: database.yml
+      volumes:
+        - name: redmine-config-src
+          configMap:
+            name: redmine-config
+        - name: redmine-config-writable
+          emptyDir: {}

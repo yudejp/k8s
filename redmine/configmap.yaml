@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: redmine-config
+  labels:
+    app: redmine
+data:
+  configuration.yml: |
+    production:
+      email_delivery:
+        delivery_method: :smtp
+        smtp_settings:
+          address: <%= ENV["SMTP_ADDRESS"] %>
+          port: <%= (ENV["SMTP_PORT"] || "587").to_i %>
+          domain: <%= ENV["SMTP_DOMAIN"] %>
+          authentication: <%= (ENV["SMTP_AUTHENTICATION"] || "plain").to_sym %>
+          user_name: <%= ENV["SMTP_USERNAME"] %>
+          password: <%= ENV["SMTP_PASSWORD"] %>
+          enable_starttls_auto: <%= (ENV["SMTP_ENABLE_STARTTLS_AUTO"] || "true") == "true" %>
+          openssl_verify_mode: <%= ENV["SMTP_OPENSSL_VERIFY_MODE"] || "none" %>

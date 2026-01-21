@@ -1,0 +1,124 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redmine
+  labels:
+    app: redmine
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redmine
+  template:
+    metadata:
+      labels:
+        app: redmine
+    spec:
+      initContainers:
+        - name: redmine-config-copy
+          image: busybox:1.36
+          imagePullPolicy: IfNotPresent
+          command:
+            - /bin/sh
+            - -lc
+            - |
+              set -eu
+              cp /config-src/configuration.yml /config-dst/configuration.yml
+              chmod 0644 /config-dst/configuration.yml
+          volumeMounts:
+            - name: redmine-config-src
+              mountPath: /config-src/configuration.yml
+              subPath: configuration.yml
+              readOnly: true
+            - name: redmine-config-writable
+              mountPath: /config-dst
+      containers:
+        - name: redmine
+          image: redmine:5.1.11-trixie
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 3000
+          env:
+            - name: REDMINE_DB_POSTGRES
+              value: za-pg-16.default.svc.cluster.local
+            - name: REDMINE_DB_USERNAME
+              value: redmine
+            - name: REDMINE_DB_PASSWORD
+              value: redmine
+            - name: REDMINE_DB_DATABASE
+              value: redmine
+            - name: SECRET_KEY_BASE
+              valueFrom:
+                secretKeyRef:
+                  name: redmine-secret
+                  key: SECRET_KEY_BASE
+            - name: SMTP_ADDRESS
+              valueFrom:
+                secretKeyRef:
+                  name: redmine-secret
+                  key: SMTP_ADDRESS
+                  optional: true
+            - name: SMTP_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: redmine-secret
+                  key: SMTP_PORT
+                  optional: true
+            - name: SMTP_DOMAIN
+              valueFrom:
+                secretKeyRef:
+                  name: redmine-secret
+                  key: SMTP_DOMAIN
+                  optional: true
+            - name: SMTP_AUTHENTICATION
+              valueFrom:
+                secretKeyRef:
+                  name: redmine-secret
+                  key: SMTP_AUTHENTICATION
+                  optional: true
+            - name: SMTP_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: redmine-secret
+                  key: SMTP_USERNAME
+                  optional: true
+            - name: SMTP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: redmine-secret
+                  key: SMTP_PASSWORD
+                  optional: true
+            - name: SMTP_ENABLE_STARTTLS_AUTO
+              valueFrom:
+                secretKeyRef:
+                  name: redmine-secret
+                  key: SMTP_ENABLE_STARTTLS_AUTO
+                  optional: true
+            - name: SMTP_OPENSSL_VERIFY_MODE
+              valueFrom:
+                secretKeyRef:
+                  name: redmine-secret
+                  key: SMTP_OPENSSL_VERIFY_MODE
+                  optional: true
+            - name: REDMINE_MAIL_FROM
+              valueFrom:
+                secretKeyRef:
+                  name: redmine-secret
+                  key: REDMINE_MAIL_FROM
+                  optional: true
+          volumeMounts:
+            - name: redmine
+              mountPath: /usr/src/redmine/files
+            - name: redmine-config-writable
+              mountPath: /usr/src/redmine/config/configuration.yml
+              subPath: configuration.yml
+      volumes:
+        - name: redmine
+          persistentVolumeClaim:
+            claimName: redmine
+        - name: redmine-config-src
+          configMap:
+            name: redmine-config
+        - name: redmine-config-writable
+          emptyDir: {}
