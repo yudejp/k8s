@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: web-service
-  namespace: mi-yude-moe
+  namespace: misskey-y2e-org
 spec:
   selector:
     app: web
@@ -17,7 +17,7 @@ kind: StatefulSet
 apiVersion: apps/v1
 metadata:
   name: web-deployment
-  namespace: mi-yude-moe
+  namespace: misskey-y2e-org
   labels:
     deploy: web
 spec:
@@ -41,7 +41,7 @@ spec:
             value: "2"
       containers:
         - name: web
-          image: misskey/misskey:2025.11.0
+          image: misskey/misskey:2025.12.2
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - mountPath: /misskey/files
@@ -59,7 +59,7 @@ spec:
             requests:
               memory: "3Gi"
             limits:
-              memory: "6Gi"
+              memory: "4Gi"
       volumes:
         - name: misskey-default-conf-file
           configMap:
@@ -72,10 +72,10 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: misskey-files
-  namespace: mi-yude-moe
+  namespace: misskey-y2e-org
 spec:
   accessModes:
     - ReadWriteMany
   resources:
     requests:
-      storage: 50Gi
+      storage: 25Gi

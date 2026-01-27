@@ -1,4 +1,4 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: mi-yude-moe
+  name: misskey-y2e-org
