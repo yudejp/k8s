@@ -21,7 +21,7 @@ metadata:
   labels:
     deploy: web
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: web
