@@ -24,6 +24,7 @@ spec:
       containers:
         - name: annict-activity-to-mastodon
           image: ghcr.io/yude/annict-activity-to-mastodon:latest
+          imagePullPolicy: Always
           volumeMounts:
             - name: config
               mountPath: /app/config.toml
