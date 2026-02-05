@@ -1,0 +1,15 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMScrapeConfig
+metadata:
+  name: longhorn
+  namespace: vm
+spec:
+  scheme: https
+  path: /metrics
+  staticConfigs:
+    - targets:
+        - longhorn-backend.yude.jp.eu.org
+  metricRelabelConfigs:
+    - action: drop
+      regex: "go_.*|process_.*|promhttp_.*"
+      sourceLabels: [__name__]

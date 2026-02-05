@@ -1,0 +1,24 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMScrapeConfig
+metadata:
+  name: prober
+  namespace: vm
+spec:
+  staticConfigs:
+    - targets:
+        - 100.71.26.108:9374 # sdj1sh1.tun.y2e.org (vdsl)
+        # - 100.73.70.3:9374 # sdj2sh1.tun.y2e.org (starlink)
+        - 100.107.186.84:9374 # toy1sh1.tun.y2e.org
+        - 100.113.236.37:9374 # nrt1sh1.tun.y2e.org
+        - 100.109.169.61:9374 # ruby.tun.y2e.org (mte1)
+        - 100.76.111.80:9374 # hnd2sh1.tun.y2e.org
+        - 100.70.127.76:9374 # hnd1sh1.tun.y2e.org
+        - 100.93.170.11:9374 # ibr1sh1.tun.y2e.org
+        - 100.86.190.92:9374 # ukb1sh1.tun.y2e.org
+  metricRelabelConfigs:
+    - action: drop
+      regex: "go_.*|process_.*|promhttp_.*"
+      sourceLabels: [__name__]
+    - action: drop
+      regex: "smokeping_response_duration_seconds_bucket"
+      sourceLabels: [__name__]

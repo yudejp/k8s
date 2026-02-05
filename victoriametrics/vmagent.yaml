@@ -1,0 +1,17 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMAgent
+metadata:
+  name: agent
+  namespace: vm
+spec:
+  selectAllByDefault: true
+  remoteWrite:
+    - url: https://prometheus-prod-49-prod-ap-northeast-0.grafana.net/api/prom/push
+      basicAuth:
+        username:
+          name: grafana-cloud
+          key: username
+        password:
+          name: grafana-cloud
+          key: apiKey
+  replicaCount: 1

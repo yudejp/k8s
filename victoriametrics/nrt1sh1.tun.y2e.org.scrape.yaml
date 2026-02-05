@@ -1,0 +1,21 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMScrapeConfig
+metadata:
+  name: nrt1sh1
+  namespace: vm
+spec:
+  staticConfigs:
+    - targets:
+        - 192.168.100.1
+  path: /snmp
+  relabelConfigs:
+    - sourceLabels: [__address__]
+      targetLabel: __param_target
+    - sourceLabels: [__param_target]
+      targetLabel: instance
+    - targetLabel: __address__
+      replacement: 100.113.236.37:9116
+  metricRelabelConfigs:
+    - action: keep
+      sourceLabels: [__name__]
+      regex: "ifHC(In|Out)Octets"
