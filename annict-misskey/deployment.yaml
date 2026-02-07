@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: annict-activity-to-mastodon
+  name: annict-misskey
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: annict-activity-to-mastodon
+      app: annict-misskey
   template:
     metadata:
       labels:
-        app: annict-activity-to-mastodon
+        app: annict-misskey
     spec:
       dnsConfig:
         searches:
@@ -32,4 +32,4 @@ spec:
       volumes:
         - name: config
           configMap:
-            name: annict-activity-to-mastodon-config
+            name: annict-misskey-config

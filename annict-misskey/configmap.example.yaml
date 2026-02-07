@@ -8,6 +8,6 @@ data:
     key = ""
     username = "yude"
 
-    [credentials.mastodon]
-    domain = "https://mstdn.soine.site"
+    [credentials.misskey]
+    domain = "https://misskey.y2e.org"
     access_token = ""
