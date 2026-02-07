@@ -15,6 +15,7 @@ spec:
         - 100.70.127.76:9374 # hnd1sh1.tun.y2e.org
         - 100.93.170.11:9374 # ibr1sh1.tun.y2e.org
         - 100.86.190.92:9374 # ukb1sh1.tun.y2e.org
+        - 100.94.34.58:9374 # hnd3sh1.tun.y2e.org
   metricRelabelConfigs:
     - action: drop
       regex: "go_.*|process_.*|promhttp_.*"

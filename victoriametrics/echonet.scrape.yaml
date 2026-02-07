@@ -12,7 +12,7 @@ spec:
   staticConfigs:
     - targets:
       - 192.168.100.8 # nrt1wat1.tun.y2e.org
-  # metricRelabelConfigs:
-  #   - action: keep
-  #     sourceLabels: [__name__]
-  #     regex: "echonet_measured"
+  metricRelabelConfigs:
+    - action: keep
+      sourceLabels: [__name__]
+      regex: "echonet_measured"
