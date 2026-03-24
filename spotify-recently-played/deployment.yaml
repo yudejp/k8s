@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spotify-nowplaying
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spotify-nowplaying
+  template:
+    metadata:
+      labels:
+        app: spotify-nowplaying
+    spec:
+      initContainers:
+        - name: init-spotify-cache
+          image: busybox:1.36
+          command:
+            - sh
+            - -c
+            - touch /cache/.spotifycache
+          volumeMounts:
+            - name: spotify-cache
+              mountPath: /cache
+      containers:
+        - name: spotify-nowplaying
+          image: ghcr.io/ao-ba/spotify_nowplaying:latest
+          stdin: true
+          tty: true
+          ports:
+            - containerPort: 5000
+          envFrom:
+            - secretRef:
+                name: spotify-secrets
+          volumeMounts:
+            - name: spotify-cache
+              mountPath: /app/.spotifycache
+              subPath: .spotifycache
+      volumes:
+        - name: spotify-cache
+          persistentVolumeClaim:
+            claimName: spotify-cache
