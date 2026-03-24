@@ -36,7 +36,7 @@ spec:
               topologyKey: "kubernetes.io/hostname"
       containers:
         - name: adguard-home
-          image: adguard/adguardhome:latest
+          image: adguard/adguardhome:v0.107.73
           ports:
             - containerPort: 53
               name: dns
