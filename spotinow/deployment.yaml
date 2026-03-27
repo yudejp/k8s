@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: spotify-nowplaying
+  name: spotinow
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: spotify-nowplaying
+      app: spotinow
   template:
     metadata:
       labels:
-        app: spotify-nowplaying
+        app: spotinow
     spec:
       initContainers:
         - name: init-spotify-cache
@@ -23,8 +23,8 @@ spec:
             - name: spotify-cache
               mountPath: /cache
       containers:
-        - name: spotify-nowplaying
-          image: ghcr.io/ao-ba/spotify_nowplaying:latest
+        - name: spotinow
+          image: ghcr.io/yude/spotify_nowplaying:latest
           stdin: true
           tty: true
           ports:
