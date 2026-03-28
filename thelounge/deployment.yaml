@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: thelounge
+  labels:
+    app: thelounge
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: thelounge
+  template:
+    metadata:
+      labels:
+        app: thelounge
+    spec:
+      dnsConfig:
+        searches:
+          - svc.cluster.local
+          - cluster.local
+        options:
+          - name: single-request-reopen
+          - name: use-vc
+          - name: ndots
+            value: "2"
+      containers:
+        - name: thelounge
+          image: thelounge/thelounge:4.4.3
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              hostPort: 9000
+              containerPort: 9000
+          volumeMounts:
+            - mountPath: /var/opt/thelounge
+              name: thelounge-files
+          resources:
+            requests:
+              memory: "1Gi"
+      volumes:
+        - name: thelounge-files
+          persistentVolumeClaim:
+            claimName: thelounge-files-pvc
