@@ -23,7 +23,7 @@ spec:
             value: "2"
       containers:
         - name: annict-activity-to-mastodon
-          image: ghcr.io/yude/annict-activity-to-mastodon:latest
+          image: ghcr.io/yude/annict-activity-to-mastodon:v1.2.2
           imagePullPolicy: Always
           volumeMounts:
             - name: config
