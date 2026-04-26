@@ -6,8 +6,8 @@ ingress:
   enabled: false
 
 database:
-  type: postgresql
-  host: main-rw.cnpg-system.svc.cluster.local
+  dbName: vaultwarden
+  host: za-pg-16-pooler.default.svc.cluster.local
   username: vaultwarden
   password: vaultwarden
   dbName: vaultwarden
