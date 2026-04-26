@@ -1,0 +1,15 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nrt1-zalando-operator
+  namespace: default
+spec:
+  defaultBackend:
+    service:
+      name: postgres-operator-ui
+      port:
+        number: 80
+  ingressClassName: tailscale
+  tls:
+    - hosts:
+        - nrt1-zalando-operator

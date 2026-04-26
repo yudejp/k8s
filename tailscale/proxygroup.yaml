@@ -4,7 +4,7 @@ metadata:
   name: nrt1-kwo
 spec:
   type: kube-apiserver
-  replicas: 2
+  replicas: 1
   tags: ["tag:k8s"]
   kubeAPIServer:
     mode: auth
