@@ -252,4 +252,4 @@ postgresql:
     annotations: {}
 
 externalPostgresql:
-  databaseURL: postgresql://wikijs:wikijs@za-pg-16.default.svc.cluster.local:5432/wikijs
+  databaseURL: postgresql://wikijs:wikijs@za-pg-16.default.svc.cluster.local:5432/wikijs?sslmode=require
