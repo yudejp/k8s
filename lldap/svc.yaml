@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: lldap
+  namespace: lldap
+  annotations:
+    tailscale.com/expose: "true"
+spec:
+  type: ClusterIP
+  selector:
+    app: lldap
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+    - name: ldap
+      port: 389
+      targetPort: ldap
