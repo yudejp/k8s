@@ -1,0 +1,16 @@
+[Unit]
+Description=
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/socat UDP4-LISTEN:11610,fork,reuseaddr UDP4-DATAGRAM:10.0.0.1:161
+Restart=always
+RestartSec=2
+User=root
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

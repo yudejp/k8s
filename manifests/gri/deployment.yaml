@@ -1,0 +1,138 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gri
+  labels:
+    app.kubernetes.io/name: gri
+    app.kubernetes.io/part-of: gri
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: gri
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: gri
+        app.kubernetes.io/part-of: gri
+    spec:
+      securityContext:
+        fsGroup: 1000
+      hostAliases:
+        - ip: 192.168.100.1
+          hostnames:
+            - nrt1gw1.tun.y2e.org
+        - ip: 100.93.170.11
+          hostnames:
+            - router1.pepepper.net
+            - router2.pepepper.net
+            - mf720c.pepepper.net
+        - ip: 100.109.169.61
+          hostnames:
+            - gateway.local.kusaremkn.com
+            - printer.local.kusaremkn.com
+        - ip: 100.86.190.92
+          hostnames:
+            - shintranet-ix2215.shinanomai.xyz
+        - ip: 100.113.233.68
+          hostnames:
+            - wabi1750ps.internal.sgchsgch.net
+            - raritan.internal.sgchsgch.net
+        - ip: 100.104.62.51
+          hostnames:
+            - dcpj925n.ttj1.yude.jp
+        - ip: 100.71.26.108
+          hostnames:
+            - sdj1gw1.sdj1.yude.jp
+      initContainers:
+        - name: init-volume-permissions
+          image: busybox:1.36
+          command:
+            - sh
+            - -c
+            - |
+              set -eu
+              mkdir -p /work/gra/.sysdb /work/tra
+              chown -R 1000:1000 /work/gra /work/tra
+          securityContext:
+            runAsUser: 0
+          volumeMounts:
+            - name: tra
+              mountPath: /work/tra
+            - name: gra
+              mountPath: /work/gra
+      containers:
+        - name: gri
+          image: ghcr.io/yudejp/gri:master
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            runAsNonRoot: true
+          command:
+            - sh
+            - -lc
+          args:
+            - |
+              set -eu
+              /usr/local/bundle/bin/grapher -h 0.0.0.0 -p 9292 &
+              web_pid=$!
+              trap 'kill "$web_pid" 2>/dev/null || true; exit 0' INT TERM
+              while true; do
+                if ! kill -0 "$web_pid" 2>/dev/null; then
+                  echo "grapher exited" >&2
+                  exit 1
+                fi
+                /usr/local/bundle/bin/gri
+                sleep "${GRI_INTERVAL:-300}"
+              done
+          env:
+            - name: TZ
+              value: Asia/Tokyo
+          ports:
+            - name: http
+              containerPort: 9292
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 3
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 12
+          volumeMounts:
+            - name: gritab
+              mountPath: /usr/local/gri/gritab
+              subPath: gritab
+              readOnly: true
+            - name: tra
+              mountPath: /usr/local/gri/tra
+            - name: gra
+              mountPath: /usr/local/gri/gra
+      volumes:
+        - name: gritab
+          configMap:
+            name: gri-gritab
+        - name: tra
+          persistentVolumeClaim:
+            claimName: gri-tra
+        - name: gra
+          persistentVolumeClaim:
+            claimName: gri-gra
