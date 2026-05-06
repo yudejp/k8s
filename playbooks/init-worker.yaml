@@ -8,6 +8,7 @@
       - non-free
       - non-free-firmware
     worker_packages:
+      - keepalived
       - open-iscsi
       - nfs-common
       - util-linux
@@ -28,6 +29,11 @@
     - name: sysctl 設定を反映する
       ansible.builtin.command: sysctl --system
       changed_when: true
+
+    - name: keepalived を再起動する
+      ansible.builtin.systemd_service:
+        name: keepalived.service
+        state: restarted
 
   tasks:
     - name: 対応する OS であることを確認する
@@ -82,6 +88,71 @@
         name: "{{ worker_packages }}"
         state: latest
         update_cache: true
+
+    - name: keepalived 用のインターフェース候補を検出する
+      ansible.builtin.shell: |
+        ip -o -4 addr show scope global | awk '$4 ~ /^192\.168\.30\.[0-9]+\/24$/ { print $2 ":" $4 }'
+      register: keepalived_interface_probe
+      changed_when: false
+
+    - name: keepalived 用のインターフェース候補を整理する
+      ansible.builtin.set_fact:
+        keepalived_interface_candidates: "{{ keepalived_interface_probe.stdout_lines | map('regex_replace', ':.*$', '') | unique | list }}"
+
+    - name: keepalived 用インターフェースが一意に決まることを確認する
+      ansible.builtin.assert:
+        that:
+          - keepalived_interface_candidates | length == 1
+        fail_msg: Expected exactly one interface with an address in 192.168.30.0/24.
+
+    - name: keepalived 用の実効設定値を決定する
+      ansible.builtin.set_fact:
+        keepalived_interface: "{{ keepalived_interface_candidates[0] }}"
+        keepalived_interface_ipv4_cidr: "{{ keepalived_interface_probe.stdout_lines[0] | regex_replace('^[^:]+:', '') }}"
+        keepalived_interface_ipv4: "{{ (keepalived_interface_probe.stdout_lines[0] | regex_replace('^[^:]+:', '')) | regex_replace('/.*$', '') }}"
+
+    - name: keepalived の優先度を決定する
+      ansible.builtin.set_fact:
+        keepalived_effective_priority: "{{ keepalived_priority | default(keepalived_interface_ipv4.split('.')[-1] | int) }}"
+
+    - name: keepalived 認証パスワードの長さを確認する
+      ansible.builtin.assert:
+        that:
+          - (keepalived_auth_pass | default('k8svip51')) | length <= 8
+        fail_msg: keepalived_auth_pass must be 8 characters or fewer when using auth_type PASS.
+
+    - name: keepalived 設定を配置する
+      ansible.builtin.copy:
+        dest: /etc/keepalived/keepalived.conf
+        owner: root
+        group: root
+        mode: '0644'
+        content: |
+          global_defs {
+              enable_script_security
+          }
+
+          vrrp_instance VI_1 {
+              state {{ keepalived_state | default('BACKUP') }}
+              interface {{ keepalived_interface }}
+              virtual_router_id {{ keepalived_virtual_router_id | default(51) }}
+              priority {{ keepalived_effective_priority }}
+              advert_int {{ keepalived_advert_int | default(1) }}
+              authentication {
+                  auth_type PASS
+                  auth_pass {{ keepalived_auth_pass | default('k8svip51') }}
+              }
+              virtual_ipaddress {
+                  {{ keepalived_virtual_ip | default('192.168.30.233/24') }} dev {{ keepalived_interface }}
+              }
+          }
+      notify: keepalived を再起動する
+
+    - name: keepalived サービスを有効化して起動する
+      ansible.builtin.systemd_service:
+        name: keepalived.service
+        enabled: true
+        state: started
 
     - name: K3s worker 向け sysctl 設定を永続化する
       ansible.builtin.copy:
