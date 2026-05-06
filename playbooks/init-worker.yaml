@@ -1,0 +1,153 @@
+- name: k3s worker を構築する
+  hosts: all
+  become: true
+  gather_facts: true
+
+  vars:
+    debian_extra_components:
+      - non-free
+      - non-free-firmware
+    worker_packages:
+      - open-iscsi
+      - nfs-common
+      - util-linux
+      - cryptsetup
+      - ipset
+      - conntrack
+      - curl
+      - btop
+      - wget
+      - aria2
+      - neowofetch
+
+  handlers:
+    - name: systemd を再読み込みする
+      ansible.builtin.systemd_service:
+        daemon_reload: true
+
+    - name: sysctl 設定を反映する
+      ansible.builtin.command: sysctl --system
+      changed_when: true
+
+  tasks:
+    - name: 対応する OS であることを確認する
+      ansible.builtin.assert:
+        that:
+          - ansible_distribution == 'Debian'
+          - ansible_distribution_major_version | int == 13
+        fail_msg: This playbook supports Debian 13 only.
+
+    - name: deb822 形式の apt ソースファイルを探す
+      ansible.builtin.find:
+        paths: /etc/apt/sources.list.d
+        patterns: '*.sources'
+        file_type: file
+      register: deb822_sources
+
+    - name: 従来形式の apt sources.list が存在するか確認する
+      ansible.builtin.stat:
+        path: /etc/apt/sources.list
+      register: classic_sources_list
+
+    - name: deb822 ソースで Debian リポジトリの追加コンポーネントを有効化する
+      ansible.builtin.replace:
+        path: "{{ item.0.path }}"
+        regexp: "^(Components:\\s+(?:(?!\\b{{ item.1 }}\\b).)*)$"
+        replace: "\\1 {{ item.1 }}"
+      loop: "{{ deb822_sources.files | product(debian_extra_components) | list }}"
+      when: deb822_sources.matched | int > 0
+
+    - name: 従来形式の sources.list で Debian リポジトリの追加コンポーネントを有効化する
+      ansible.builtin.replace:
+        path: /etc/apt/sources.list
+        regexp: "^(deb(?:-src)?\\s+\\S+\\s+\\S+\\s+(?:(?!\\b{{ item }}\\b).)*)$"
+        replace: "\\1 {{ item }}"
+      loop: "{{ debian_extra_components }}"
+      when:
+        - deb822_sources.matched | int == 0
+        - classic_sources_list.stat.exists
+
+    - name: リポジトリ変更後に apt キャッシュを更新する
+      ansible.builtin.apt:
+        update_cache: true
+        cache_valid_time: 0
+
+    - name: インストール済みパッケージを最新化する
+      ansible.builtin.apt:
+        upgrade: dist
+        update_cache: true
+
+    - name: 必要な K3s worker 向けパッケージをインストールする
+      ansible.builtin.apt:
+        name: "{{ worker_packages }}"
+        state: latest
+        update_cache: true
+
+    - name: K3s worker 向け sysctl 設定を永続化する
+      ansible.builtin.copy:
+        dest: /etc/sysctl.d/99-k8s-worker.conf
+        owner: root
+        group: root
+        mode: '0644'
+        content: |
+          vm.max_map_count = 262144
+          vm.overcommit_memory = 1
+          net.ipv4.ip_forward = 1
+          net.ipv6.conf.all.forwarding = 1
+          fs.inotify.max_user_watches = 524288
+          fs.inotify.max_user_instances = 8192
+          net.core.somaxconn = 65535
+          net.ipv4.tcp_max_syn_backlog = 8192
+          net.core.netdev_max_backlog = 16384
+      notify: sysctl 設定を反映する
+
+    - name: THP を無効化する systemd ユニットを配置する
+      ansible.builtin.copy:
+        dest: /etc/systemd/system/disable-thp.service
+        owner: root
+        group: root
+        mode: '0644'
+        content: |
+          [Unit]
+          Description=Disable Transparent Huge Pages (THP)
+          DefaultDependencies=no
+          After=sysinit.target local-fs.target
+          Before=k3s-agent.service
+
+          [Service]
+          Type=oneshot
+          ExecStart=/bin/sh -c 'echo madvise > /sys/kernel/mm/transparent_hugepage/enabled || true'
+          ExecStart=/bin/sh -c 'echo madvise > /sys/kernel/mm/transparent_hugepage/defrag || true'
+
+          [Install]
+          WantedBy=multi-user.target
+      notify: systemd を再読み込みする
+
+    - name: THP 無効化サービスを有効化して即時適用する
+      ansible.builtin.systemd_service:
+        name: disable-thp.service
+        enabled: true
+        state: started
+        daemon_reload: true
+
+    - name: サービス情報を収集する
+      ansible.builtin.service_facts:
+
+    - name: multipathd サービスを停止して無効化する
+      ansible.builtin.systemd_service:
+        name: multipathd.service
+        state: stopped
+        enabled: false
+        masked: true
+      when: "'multipathd.service' in ansible_facts.services"
+
+    - name: multipathd socket を停止して無効化する
+      ansible.builtin.systemd_service:
+        name: multipathd.socket
+        state: stopped
+        enabled: false
+        masked: true
+      when: "'multipathd.socket' in ansible_facts.services"
+
+    - name: 同じ実行内で sysctl を反映するために handler を即時実行する
+      ansible.builtin.meta: flush_handlers
