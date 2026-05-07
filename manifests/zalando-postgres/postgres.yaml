@@ -12,12 +12,10 @@ spec:
       memory: 3Gi
   numberOfInstances: 2
   users:
-    zalando:  # database owner
-    - superuser
-    - createdb
-    foo_user: []  # role for application foo
-  databases:
-    test: zalando
+    zalando:
+      - superuser
+      - createdb
+  databases: {}
   preparedDatabases:
     bar: {}
   postgresql:
@@ -25,14 +23,6 @@ spec:
     parameters:
       shared_buffers: 1GB
       max_connections: '256'
-  # nodeAffinity:
-  #   requiredDuringSchedulingIgnoredDuringExecution:
-  #     nodeSelectorTerms:
-  #       - matchExpressions:
-  #           - key: postgres-operator
-  #             operator: In
-  #             values:
-  #               - enabled
   patroni:
     pg_hba:
       - local   all             all                                   trust
