@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: logical-backup-env
+  namespace: default
+stringData:
+  AWS_DEFAULT_REGION: garage
+  AWS_REGION: garage
+  AWS_S3_FORCE_PATH_STYLE: "true"
+  AWS_MAX_CONCURRENT_REQUESTS: "1"
+  AWS_RETRY_MODE: standard
