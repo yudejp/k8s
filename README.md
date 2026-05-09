@@ -1,6 +1,6 @@
 # k8s
 
-🐙 Kubernetes manifests 
+🐙 Kubernetes manifests [worker status](https://gri.yude.jp.eu.org/?h=kwo&sysdescr=&n=&d=&sort=a&ly=0&start=nil&search=1)
 
 ## Initalizing the cluster
 
