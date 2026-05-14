@@ -41,7 +41,7 @@ spec:
             value: "2"
       containers:
         - name: web
-          image: misskey/misskey:2025.12.2
+          image: misskey/misskey:2026.5.1
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - mountPath: /misskey/files
