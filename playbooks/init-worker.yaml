@@ -117,6 +117,22 @@
         enabled: true
         state: started
 
+    - name: 現在ロードされている swap unit を列挙する
+      ansible.builtin.command: systemctl list-units --type=swap --all --full --plain --no-legend --no-pager
+      register: swap_unit_list
+      changed_when: false
+
+    - name: mask 対象の swap unit 名を抽出する
+      ansible.builtin.set_fact:
+        swap_unit_names: '{{ swap_unit_list.stdout_lines | map("regex_replace", "^([^\\s]+).*$", "\\1") | select("match", ".+\\.swap$") | list }}'
+
+    - name: 現在ロードされている swap unit を mask する
+      ansible.builtin.systemd_service:
+        name: "{{ item }}"
+        masked: true
+      loop: "{{ swap_unit_names }}"
+      when: swap_unit_names | length > 0
+
     - name: アクティブな swap を無効化する
       ansible.builtin.command: swapoff -a
       when: ansible_swaptotal_mb | int > 0
