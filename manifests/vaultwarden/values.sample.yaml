@@ -28,8 +28,9 @@ smtp:
   acceptInvalidHostnames: "true"
   acceptInvalidCerts: "true"
 
-data:
-  name: "vaultwarden-data"
-  size: "15Gi"
-  class: "local-path"
-  accessMode: "ReadWriteOnce"
+storage:
+  data:
+    name: "vaultwarden-data"
+    size: "15Gi"
+    class: "local-path"
+    accessMode: "ReadWriteOnce"
