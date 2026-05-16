@@ -21,8 +21,9 @@ $ ansible-playbook -i "nrt1kwoX.tun.y2e.org," playbooks/init-worker.yaml
 
 * [クイックスタートガイド | K3s](https://docs.k3s.io/ja/quick-start)
     ```
-    $ curl -sfL https://get.k3s.io | sh -s - server --server https://192.168.30.X:6443 --token <redacted> --node-name nrt1kwoN --node-ip 192.168.30.Y --flannel-iface <nic name> --tls-san 192.168.30.233 --tls-san nrt1kwo0.tun.y2e.org --tls-san nrt1-kwo.tail5b1c5.ts.net
+    $ curl -sfL https://get.k3s.io | sh -s - server --server https://192.168.30.X:6443 --token <redacted> --node-name nrt1kwoN --node-ip 192.168.30.Y --flannel-iface <nic name> --tls-san 192.168.30.X --tls-san 192.168.30.233 --tls-san nrt1kwo0.tun.y2e.org --tls-san nrt1-kwo.tail5b1c5.ts.net --tls-san tailscale-operator.tail5b1c5.ts.net
     ```
+    * `token`: 他の worker で `cat /var/lib/rancher/k3s/server/token`
     * `X`: other k3s worker node
     * `Y`: set up target node
     * `N`: set up target node
