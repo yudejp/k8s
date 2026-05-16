@@ -7,12 +7,18 @@
     debian_extra_components:
       - non-free
       - non-free-firmware
+    worker_kernel_modules:
+      - overlay
+      - br_netfilter
+      - iscsi_tcp
+      - dm_crypt
     worker_packages:
       - keepalived
       - open-iscsi
       - nfs-common
       - util-linux
       - cryptsetup
+      - dmsetup
       - ipset
       - conntrack
       - curl
@@ -88,6 +94,39 @@
         name: "{{ worker_packages }}"
         state: latest
         update_cache: true
+
+    - name: K3s worker 向けカーネルモジュールを永続化する
+      ansible.builtin.copy:
+        dest: /etc/modules-load.d/k8s-worker.conf
+        owner: root
+        group: root
+        mode: '0644'
+        content: |
+          {% for module in worker_kernel_modules %}
+          {{ module }}
+          {% endfor %}
+
+    - name: K3s worker 向けカーネルモジュールを即時読み込みする
+      ansible.builtin.command: modprobe {{ item }}
+      loop: "{{ worker_kernel_modules }}"
+      changed_when: false
+
+    - name: iscsid サービスを有効化して起動する
+      ansible.builtin.systemd_service:
+        name: iscsid.service
+        enabled: true
+        state: started
+
+    - name: アクティブな swap を無効化する
+      ansible.builtin.command: swapoff -a
+      when: ansible_swaptotal_mb | int > 0
+      changed_when: ansible_swaptotal_mb | int > 0
+
+    - name: /etc/fstab の swap エントリをコメントアウトする
+      ansible.builtin.replace:
+        path: /etc/fstab
+        regexp: '^(?!#)(\S+\s+\S+\s+swap\s+\S+.*)$'
+        replace: '# \1'
 
     - name: keepalived 用のインターフェース候補を検出する
       ansible.builtin.shell: |
@@ -165,6 +204,8 @@
           vm.overcommit_memory = 1
           net.ipv4.ip_forward = 1
           net.ipv6.conf.all.forwarding = 1
+          net.bridge.bridge-nf-call-iptables = 1
+          net.bridge.bridge-nf-call-ip6tables = 1
           fs.inotify.max_user_watches = 524288
           fs.inotify.max_user_instances = 8192
           net.core.somaxconn = 65535
