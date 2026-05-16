@@ -26,6 +26,7 @@
       - wget
       - aria2
       - neowofetch
+      - snmpd
 
   handlers:
     - name: systemd を再読み込みする
@@ -35,6 +36,11 @@
     - name: sysctl 設定を反映する
       ansible.builtin.command: sysctl --system
       changed_when: true
+
+    - name: snmpd を再起動する
+      ansible.builtin.systemd_service:
+        name: snmpd.service
+        state: restarted
 
     - name: keepalived を再起動する
       ansible.builtin.systemd_service:
@@ -94,6 +100,15 @@
         name: "{{ worker_packages }}"
         state: latest
         update_cache: true
+
+    - name: snmpd 設定を配置する
+      ansible.builtin.copy:
+        src: snmpd.conf
+        dest: /etc/snmp/snmpd.conf
+        owner: root
+        group: root
+        mode: '0644'
+      notify: snmpd を再起動する
 
     - name: K3s worker 向けカーネルモジュールを永続化する
       ansible.builtin.copy:
