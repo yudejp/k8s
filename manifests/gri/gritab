@@ -12,7 +12,7 @@ nrt1wbr1.tun.y2e.org ver=2c  community=public
 nrt1wat1.tun.y2e.org ver=2c  community=public
 router1.pepepper.net ver=2c  community=public   port=11613
 ttj3cam1.tail5b1c5.ts.net ver=2c  community=public
-nrt1kwo4.tail5b1c5.ts.net ver=2c  community=public
+nrt1kwo3.tail5b1c5.ts.net ver=2c  community=public
 ukb1sh1.tail5b1c5.ts.net ver=2c  community=public
 ibr1ws1.tail5b1c5.ts.net ver=2c  community=public
 sdj1sh1.tun.y2e.org ver=2c  community=public
@@ -29,7 +29,7 @@ hnd1pve2.tail5b1c5.ts.net ver=2c  community=public
 ttj1pve1.tail5b1c5.ts.net ver=2c  community=public
 ttj1pve2.tail5b1c5.ts.net ver=2c  community=public
 hnd3pve1.tail5b1c5.ts.net ver=2c  community=public
-maple.tail5b1c5.ts.net ver=2c  community=public
+nrt1pve1.tail5b1c5.ts.net ver=2c  community=public
 nrt1pdm1.tail5b1c5.ts.net ver=2c  community=public
 nja1sh1.tail5b1c5.ts.net ver=2c  community=public
 gateway.local.kusaremkn.com ver=2c  community=public   port=11610
