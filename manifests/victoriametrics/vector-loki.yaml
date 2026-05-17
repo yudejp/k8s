@@ -33,6 +33,8 @@ data:
           .alert_namespace = "unknown"
           if exists(.kubernetes.pod_namespace) {
             .alert_namespace = to_string(.kubernetes.pod_namespace) ?? "unknown"
+          } else if exists(."kubernetes.pod_namespace") {
+            .alert_namespace = to_string(."kubernetes.pod_namespace") ?? "unknown"
           } else if exists(.namespace) {
             .alert_namespace = to_string(.namespace) ?? "unknown"
           }
@@ -40,6 +42,8 @@ data:
           .alert_pod = "unknown"
           if exists(.kubernetes.pod_name) {
             .alert_pod = to_string(.kubernetes.pod_name) ?? "unknown"
+          } else if exists(."kubernetes.pod_name") {
+            .alert_pod = to_string(."kubernetes.pod_name") ?? "unknown"
           } else if exists(.pod_name) {
             .alert_pod = to_string(.pod_name) ?? "unknown"
           } else if exists(.pod) {
@@ -49,6 +53,8 @@ data:
           .alert_container = "unknown"
           if exists(.kubernetes.container_name) {
             .alert_container = to_string(.kubernetes.container_name) ?? "unknown"
+          } else if exists(."kubernetes.container_name") {
+            .alert_container = to_string(."kubernetes.container_name") ?? "unknown"
           } else if exists(.container_name) {
             .alert_container = to_string(.container_name) ?? "unknown"
           } else if exists(.container) {
