@@ -14,26 +14,174 @@ data:
         framing:
           method: newline_delimited
 
-    sinks:
-      grafana_cloud_loki:
-        type: loki
+    transforms:
+      discord_alert_context:
+        type: remap
         inputs:
           - vlagent
-        endpoint: "${GRAFANA_CLOUD_LOKI_URL:?GRAFANA_CLOUD_LOKI_URL must be set}"
-        auth:
-          strategy: basic
-          user: "${GRAFANA_CLOUD_LOKI_USERNAME:?GRAFANA_CLOUD_LOKI_USERNAME must be set}"
-          password: "${GRAFANA_CLOUD_LOKI_API_KEY:?GRAFANA_CLOUD_LOKI_API_KEY must be set}"
-        labels:
-          cluster: k8s
+        source: |
+          .alert_raw = encode_json(.)
+          .alert_level = ""
+          if exists(.level) {
+            .alert_level = downcase(to_string(.level) ?? "")
+          } else if exists(.severity) {
+            .alert_level = downcase(to_string(.severity) ?? "")
+          } else if exists(.log.level) {
+            .alert_level = downcase(to_string(.log.level) ?? "")
+          }
+
+          .alert_namespace = "unknown"
+          if exists(.kubernetes.pod_namespace) {
+            .alert_namespace = to_string(.kubernetes.pod_namespace) ?? "unknown"
+          } else if exists(.namespace) {
+            .alert_namespace = to_string(.namespace) ?? "unknown"
+          }
+
+          .alert_pod = "unknown"
+          if exists(.kubernetes.pod_name) {
+            .alert_pod = to_string(.kubernetes.pod_name) ?? "unknown"
+          } else if exists(.pod_name) {
+            .alert_pod = to_string(.pod_name) ?? "unknown"
+          } else if exists(.pod) {
+            .alert_pod = to_string(.pod) ?? "unknown"
+          }
+
+          .alert_container = "unknown"
+          if exists(.kubernetes.container_name) {
+            .alert_container = to_string(.kubernetes.container_name) ?? "unknown"
+          } else if exists(.container_name) {
+            .alert_container = to_string(.container_name) ?? "unknown"
+          } else if exists(.container) {
+            .alert_container = to_string(.container) ?? "unknown"
+          }
+
+          .alert_message = .alert_raw
+          if exists(.message) {
+            .alert_message = to_string(.message) ?? .alert_raw
+          } else if exists(._msg) {
+            .alert_message = to_string(._msg) ?? .alert_raw
+          } else if exists(.msg) {
+            .alert_message = to_string(.msg) ?? .alert_raw
+          }
+
+          .alert_timestamp = ""
+          if exists(.timestamp) {
+            .alert_timestamp = to_string(.timestamp) ?? ""
+          } else if exists(._time) {
+            .alert_timestamp = to_string(._time) ?? ""
+          }
+
+      discord_error_events:
+        type: filter
+        inputs:
+          - discord_alert_context
+        condition: |
+          !match(to_string(.alert_pod) ?? "", r'^vector-loki-') && !match(to_string(.alert_message) ?? "", r'component_id=discord_webhook|vector_common::internal_event::(service|component_events_dropped)|vector::sinks::util::retries|vector::|(?i)(websocket read error|connection reset without closing handshake|failed to list backups from backup target|reqwest::error)') && (includes(["error", "fatal", "panic", "critical", "alert", "emerg", "emergency"], to_string(.alert_level) ?? "") || match(to_string(.alert_message) ?? "", r'(?i)(^|[^a-z])(error|exception|fatal|panic|traceback|segfault)([^a-z]|$)'))
+
+      discord_payload:
+        type: remap
+        inputs:
+          - discord_error_events
+        source: |
+          alert_level = downcase(to_string(.alert_level) ?? "")
+          if alert_level == "" {
+            alert_level = "error"
+          }
+          alert_namespace = to_string(.alert_namespace) ?? "unknown"
+          alert_pod = to_string(.alert_pod) ?? "unknown"
+          alert_container = to_string(.alert_container) ?? "unknown"
+          alert_timestamp = to_string(.alert_timestamp) ?? ""
+          alert_message = to_string(.alert_message) ?? ""
+
+          alert_color = 15158332
+          if includes(["fatal", "panic", "emerg", "emergency"], alert_level) {
+            alert_color = 10038562
+          } else if includes(["alert", "critical"], alert_level) {
+            alert_color = 15105570
+          }
+
+          embed = {
+            "title": "[k8s][" + alert_level + "] " + alert_namespace + "/" + alert_pod,
+            "description": truncate(alert_message, 3800, "..."),
+            "color": alert_color,
+            "fields": [
+              {
+                "name": "Namespace",
+                "value": alert_namespace,
+                "inline": true
+              },
+              {
+                "name": "Pod",
+                "value": alert_pod,
+                "inline": true
+              },
+              {
+                "name": "Container",
+                "value": alert_container,
+                "inline": true
+              }
+            ]
+          }
+          if alert_timestamp != "" {
+            embed.timestamp = alert_timestamp
+          }
+
+          . = {
+            "username": "k8s log alert",
+            "allowed_mentions": {
+              "parse": []
+            },
+            "embeds": [embed]
+          }
+
+    sinks:
+      # grafana_cloud_loki:
+      #   type: loki
+      #   inputs:
+      #     - vlagent
+      #   endpoint: "${GRAFANA_CLOUD_LOKI_URL:?GRAFANA_CLOUD_LOKI_URL must be set}"
+      #   auth:
+      #     strategy: basic
+      #     user: "${GRAFANA_CLOUD_LOKI_USERNAME:?GRAFANA_CLOUD_LOKI_USERNAME must be set}"
+      #     password: "${GRAFANA_CLOUD_LOKI_API_KEY:?GRAFANA_CLOUD_LOKI_API_KEY must be set}"
+      #   labels:
+      #     cluster: k8s
+      #   encoding:
+      #     codec: json
+
+      discord_webhook:
+        type: http
+        inputs:
+          - discord_payload
+        uri: "${DISCORD_WEBHOOK_URL:?DISCORD_WEBHOOK_URL must be set}"
+        method: post
+        framing:
+          method: bytes
         encoding:
           codec: json
+          only_fields:
+            - username
+            - allowed_mentions
+            - embeds
+        batch:
+          max_events: 1
+          timeout_secs: 1
+        request:
+          concurrency: none
+          rate_limit_num: 5
+          rate_limit_duration_secs: 2
+          headers:
+            Content-Type: application/json
+        healthcheck:
+          enabled: false
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: vector-loki
   namespace: vm
+  annotations:
+    tailscale.com/expose: "true"
 spec:
   selector:
     app: vector-loki
@@ -82,6 +230,11 @@ spec:
                 secretKeyRef:
                   name: grafana-cloud-logs
                   key: apiKey
+            - name: DISCORD_WEBHOOK_URL
+              valueFrom:
+                secretKeyRef:
+                  name: discord-log-alerts
+                  key: webhookUrl
           resources:
             requests:
               cpu: 100m
