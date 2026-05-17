@@ -127,7 +127,7 @@ data:
           }
 
           . = {
-            "username": "k8s log alert",
+            "username": "nrt1-kwo-vector",
             "allowed_mentions": {
               "parse": []
             },
