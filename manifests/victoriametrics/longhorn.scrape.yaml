@@ -4,11 +4,11 @@ metadata:
   name: longhorn
   namespace: vm
 spec:
-  scheme: https
+  scheme: http
   path: /metrics
   staticConfigs:
     - targets:
-        - longhorn-backend.yude.jp.eu.org
+      - longhorn-backend.longhorn-system.svc.cluster.local:9500
   metricRelabelConfigs:
     - action: drop
       regex: "go_.*|process_.*|promhttp_.*"

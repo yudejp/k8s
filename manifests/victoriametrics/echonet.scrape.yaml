@@ -6,12 +6,9 @@ metadata:
 spec:
   staticConfigs:
     - targets:
-      - 192.168.100.1
+        - 192.168.30.241
   path: /metrics
   scheme: http
-  staticConfigs:
-    - targets:
-      - 192.168.100.8 # nrt1wat1.tun.y2e.org
   metricRelabelConfigs:
     - action: keep
       sourceLabels: [__name__]

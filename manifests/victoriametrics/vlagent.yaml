@@ -1,0 +1,25 @@
+apiVersion: operator.victoriametrics.com/v1
+kind: VLAgent
+metadata:
+  name: logs
+  namespace: vm
+spec:
+  image:
+    repository: victoriametrics/vlagent
+    tag: v1.50.0
+  k8sCollector:
+    enabled: true
+  extraArgs:
+    remoteWrite.format: jsonline
+  remoteWrite:
+    - url: http://vector-loki.vm.svc:8080/
+      headers:
+        - "Content-Type: application/json"
+  remoteWriteSettings:
+    maxDiskUsagePerURL: 1GiB
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      memory: 512Mi

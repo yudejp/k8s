@@ -1,0 +1,97 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vector-loki-config
+  namespace: vm
+data:
+  vector.yaml: |
+    sources:
+      vlagent:
+        type: http_server
+        address: 0.0.0.0:8080
+        decoding:
+          codec: json
+        framing:
+          method: newline_delimited
+
+    sinks:
+      grafana_cloud_loki:
+        type: loki
+        inputs:
+          - vlagent
+        endpoint: "${GRAFANA_CLOUD_LOKI_URL:?GRAFANA_CLOUD_LOKI_URL must be set}"
+        auth:
+          strategy: basic
+          user: "${GRAFANA_CLOUD_LOKI_USERNAME:?GRAFANA_CLOUD_LOKI_USERNAME must be set}"
+          password: "${GRAFANA_CLOUD_LOKI_API_KEY:?GRAFANA_CLOUD_LOKI_API_KEY must be set}"
+        labels:
+          cluster: k8s
+        encoding:
+          codec: json
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vector-loki
+  namespace: vm
+spec:
+  selector:
+    app: vector-loki
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vector-loki
+  namespace: vm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vector-loki
+  template:
+    metadata:
+      labels:
+        app: vector-loki
+    spec:
+      containers:
+        - name: vector
+          image: timberio/vector:0.47.0-alpine
+          args:
+            - --config
+            - /etc/vector/vector.yaml
+          ports:
+            - containerPort: 8080
+              name: http
+          env:
+            - name: GRAFANA_CLOUD_LOKI_URL
+              valueFrom:
+                secretKeyRef:
+                  name: grafana-cloud-logs
+                  key: url
+            - name: GRAFANA_CLOUD_LOKI_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: grafana-cloud-logs
+                  key: username
+            - name: GRAFANA_CLOUD_LOKI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: grafana-cloud-logs
+                  key: apiKey
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              memory: 512Mi
+          volumeMounts:
+            - name: config
+              mountPath: /etc/vector
+      volumes:
+        - name: config
+          configMap:
+            name: vector-loki-config
