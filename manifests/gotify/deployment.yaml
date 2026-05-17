@@ -35,29 +35,3 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: gotify-pvc
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: gotify-pvc
-  namespace: default
-spec:
-  accessModes:
-    - ReadWriteMany
-  resources:
-    requests:
-      storage: 300Mi
-  storageClassName: longhorn
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: gotify
-spec:
-  selector:
-    app: gotify
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 80
-      name: http

@@ -1,0 +1,15 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nrt1-elasticsearch-kb
+  namespace: default
+spec:
+  defaultBackend:
+    service:
+      name: elasticsearch-kb-http
+      port:
+        number: 5601
+  ingressClassName: tailscale
+  tls:
+    - hosts:
+        - nrt1-elasticsearch-kb

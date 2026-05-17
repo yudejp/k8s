@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dawarich-sidekiq
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dawarich-sidekiq
+  template:
+    metadata:
+      labels:
+        app: dawarich-sidekiq
+    spec:
+      containers:
+        - name: dawarich-sidekiq
+          image: freikin/dawarich:latest
+          volumeMounts:
+            - name: gem-cache
+              mountPath: /usr/local/bundle/gems
+            - name: public
+              mountPath: /var/app/public
+            - name: watched
+              mountPath: /var/app/tmp/imports/watched
+          stdin: true
+          tty: true
+          command: ['dev-entrypoint.sh']
+          args: ['sidekiq']
+          envFrom:
+            - configMapRef:
+                name: dawarich-env
+      volumes:
+        - name: gem-cache
+          hostPath:
+            path: /mnt/k3s-pvc/dawarich/gem_cache
+        - name: public
+          hostPath:
+            path: /mnt/k3s-pvc/dawarich/public
+        - name: watched
+          hostPath:
+            path: /mnt/k3s-pvc/dawarich/watched

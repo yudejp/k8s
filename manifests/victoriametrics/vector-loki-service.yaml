@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: vector-loki
+  namespace: vm
+  annotations:
+    tailscale.com/expose: "true"
+spec:
+  selector:
+    app: vector-loki
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080

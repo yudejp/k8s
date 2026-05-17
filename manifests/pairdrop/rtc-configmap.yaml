@@ -1,0 +1,14 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: pairdrop-config
+data:
+  rtc_config.json: |
+    {
+      "sdpSemantics": "unified-plan",
+      "iceServers": [
+        {
+          "urls": "stun:stun.l.google.com:19302"
+        }
+      ]
+    }

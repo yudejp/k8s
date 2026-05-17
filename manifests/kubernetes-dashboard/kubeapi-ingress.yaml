@@ -1,0 +1,15 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nrt1-kubeapi
+  namespace: default
+spec:
+  defaultBackend:
+    service:
+      name: kubernetes
+      port:
+        number: 443
+  ingressClassName: tailscale
+  tls:
+    - hosts:
+        - nrt1-kubeapi

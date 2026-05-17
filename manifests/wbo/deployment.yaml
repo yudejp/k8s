@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wbo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wbo
+  template:
+    metadata:
+      labels:
+        app: wbo
+    spec:
+      containers:
+        - name: wbo
+          image: lovasoa/wbo
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsUser: 0
+          ports:
+            - containerPort: 80
+              name: http
+              protocol: TCP
+          volumeMounts:
+            - name: data
+              mountPath: /opt/app/server-data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: wbo-pvc

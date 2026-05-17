@@ -37,14 +37,3 @@ spec:
         - name: ytnotifier-config
           configMap:
             name: ytnotifier-config
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: ytnotifier-data
-spec:
-  accessModes:
-    - ReadWriteMany
-  resources:
-    requests:
-      storage: 5Mi

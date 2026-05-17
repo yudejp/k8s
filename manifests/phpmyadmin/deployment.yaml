@@ -35,16 +35,3 @@ spec:
             secretKeyRef:
               name: galera-mariadb-galera
               key: mariadb-root-password
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: pma-service
-spec:
-  type: ClusterIP
-  selector:
-    app: pma
-  ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 80

@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - kroki-deployment.yaml
+  - kroki-service.yaml
+  - mermaid-deployment.yaml
+  - mermaid-service.yaml
+  - bpmn-deployment.yaml
+  - bpmn-service.yaml
+  - excalidraw-deployment.yaml
+  - excalidraw-service.yaml

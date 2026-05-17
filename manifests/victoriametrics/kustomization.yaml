@@ -4,7 +4,9 @@ resources:
   - operator-and-crds.yaml
   - vmagent.yaml
   - vlagent.yaml
-  - vector-loki.yaml
+  - vector-loki-configmap.yaml
+  - vector-loki-service.yaml
+  - vector-loki-deployment.yaml
   - echonet.scrape.yaml
   - longhorn.scrape.yaml
   - prober.scrape.yaml
