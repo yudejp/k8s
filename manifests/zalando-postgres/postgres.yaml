@@ -16,8 +16,7 @@ spec:
       - superuser
       - createdb
   databases: {}
-  preparedDatabases:
-    bar: {}
+  preparedDatabases: {}
   postgresql:
     version: "16"
     parameters:
