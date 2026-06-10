@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: redmine-login-template
+data:
+  login.html.erb: |
+    <%= call_hook :view_account_login_top %>
+
+    <div class="flash warning" id="flash_notice" style="text-align: center; margin-bottom: 1em;">
+      <p>ticket.y2e.org の認証は LDAP に移行しました</p>
+      <p>ログインできませんか? <a href="https://my.y2e.org/reset-password/step1">y2e-ldap</a> からパスワードをリセットしてください。(Gmail へのリセットメールへの送付が失敗します。この場合は管理者にお問い合わせください)</p>
+    </div>
+
+    <div id="login-form">
+      <%= form_tag(signin_path, onsubmit: 'return keepAnchorOnSignIn(this);') do %>
+      <%= back_url_hidden_field_tag %>
+
+      <label for="username"><%=l(:field_login)%></label>
+      <%= text_field_tag 'username', params[:username], :tabindex => '1', :autocomplete => 'username', :autofocus => params[:username].blank? %>
+
+      <label for="password">
+        <%=l(:field_password)%>
+        <%= link_to l(:label_password_lost), lost_password_path, :class => "lost_password" if Setting.lost_password? %>
+      </label>
+      <%= password_field_tag 'password', nil, :tabindex => '2', :autocomplete => 'current-password', :autofocus => params[:username].present? %>
+
+      <% if Setting.autologin? %>
+        <label for="autologin"><%= check_box_tag 'autologin', 1, false, :tabindex => 4 %> <%= l(:label_stay_logged_in) %></label>
+      <% end %>
+
+      <input type="submit" name="login" value="<%=l(:button_login)%>" tabindex="5" id="login-submit" />
+      <% end %>
+    </div>
+
+    <%= call_hook :view_account_login_bottom %>

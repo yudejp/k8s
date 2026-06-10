@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - pvc.yaml
   - configmap.yaml
+  - configmap-login.yaml
   - deployment.yaml
   - service.yaml
   - cronjob-mail-receive.yaml

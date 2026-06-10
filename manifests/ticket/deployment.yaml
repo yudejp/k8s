@@ -6,6 +6,8 @@ metadata:
     app: redmine
 spec:
   replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: redmine
@@ -113,6 +115,9 @@ spec:
             - name: redmine-config-writable
               mountPath: /usr/src/redmine/config/configuration.yml
               subPath: configuration.yml
+            - name: redmine-login-template
+              mountPath: /usr/src/redmine/app/views/account/login.html.erb
+              subPath: login.html.erb
       volumes:
         - name: redmine
           persistentVolumeClaim:
@@ -122,3 +127,6 @@ spec:
             name: redmine-config
         - name: redmine-config-writable
           emptyDir: {}
+        - name: redmine-login-template
+          configMap:
+            name: redmine-login-template
