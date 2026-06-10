@@ -1,0 +1,96 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: growi
+  namespace: growi
+  labels:
+    app: growi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: growi
+  template:
+    metadata:
+      labels:
+        app: growi
+    spec:
+      serviceAccountName: growi
+      dnsConfig:
+        searches:
+          - svc.cluster.local
+          - cluster.local
+        options:
+          - name: single-request-reopen
+          - name: use-vc
+          - name: ndots
+            value: "2"
+      initContainers:
+        - name: fetch-mongo-uri
+          image: docker.io/alpine/kubectl:1.36.1
+          command:
+            - /bin/sh
+            - -c
+            - |
+              USER=$(kubectl get secret mongodb-rs-admin-admin-user -n mongodb \
+                -o jsonpath='{.data.username}' | base64 -d)
+              PASS=$(kubectl get secret mongodb-rs-admin-admin-user -n mongodb \
+                -o jsonpath='{.data.password}' | base64 -d)
+              echo "mongodb://${USER}:${PASS}@mongodb-rs-svc.mongodb.svc.cluster.local:27017/growi?authSource=admin&authMechanism=SCRAM-SHA-256&replicaSet=mongodb-rs" > /shared/mongo-uri
+          volumeMounts:
+            - name: mongo-uri
+              mountPath: /shared
+      containers:
+        - name: growi
+          image: ghcr.io/weseek/growi:4.2.2
+          imagePullPolicy: IfNotPresent
+          command:
+            - /bin/sh
+            - -c
+            - |
+              export MONGO_URI=$(cat /shared/mongo-uri)
+              exec /docker-entrypoint.sh yarn server:prod
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /_api/v3/healthcheck
+              port: http
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            failureThreshold: 5
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /_api/v3/healthcheck?connectToMiddlewares
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            failureThreshold: 3
+            timeoutSeconds: 5
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 1000m
+              memory: 1Gi
+          envFrom:
+            - configMapRef:
+                name: growi
+            - secretRef:
+                name: growi
+          volumeMounts:
+            - name: uploads
+              mountPath: /data/uploads
+            - name: mongo-uri
+              mountPath: /shared
+              readOnly: true
+      volumes:
+        - name: uploads
+          persistentVolumeClaim:
+            claimName: growi-uploads
+        - name: mongo-uri
+          emptyDir: {}
