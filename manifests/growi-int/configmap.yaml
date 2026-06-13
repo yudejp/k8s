@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: growi
+  namespace: growi-int
+data:
+  # FILE_UPLOAD: "local"
+  FILE_UPLOAD: "aws"
+  #S3_BUCKET: ""
+  #S3_REGION: ""
+  #S3_ENDPOINT: ""
+  APP_SITE_URL: "https://w-int.y2e.org"

@@ -1,0 +1,12 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: growi-mongodb-secret-reader
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: growi-mongodb-secret-reader
+subjects:
+  - kind: ServiceAccount
+    name: growi
+    namespace: growi-int
