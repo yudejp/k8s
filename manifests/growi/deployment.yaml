@@ -7,6 +7,8 @@ metadata:
     app: growi
 spec:
   replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: growi
@@ -42,14 +44,14 @@ spec:
               mountPath: /shared
       containers:
         - name: growi
-          image: ghcr.io/weseek/growi:4.2.2
+          image: docker.io/growilabs/growi:7.4.2
           imagePullPolicy: IfNotPresent
           command:
             - /bin/sh
             - -c
             - |
               export MONGO_URI=$(cat /shared/mongo-uri)
-              exec /docker-entrypoint.sh yarn server:prod
+              exec /docker-entrypoint.sh "npm run migrate && node -r dotenv-flow/config --expose_gc dist/server/app.js"
           ports:
             - name: http
               containerPort: 3000
@@ -58,7 +60,7 @@ spec:
             httpGet:
               path: /_api/v3/healthcheck
               port: http
-            initialDelaySeconds: 60
+            initialDelaySeconds: 300
             periodSeconds: 10
             failureThreshold: 5
             timeoutSeconds: 5
@@ -73,7 +75,7 @@ spec:
           resources:
             requests:
               cpu: 100m
-              memory: 256Mi
+              memory: 512Mi
             limits:
               cpu: 1000m
               memory: 1Gi
