@@ -122,7 +122,7 @@ data:
     ## This can be any random string, the recommendation is that it's at least 12
     ## characters long.
     ## Env variable: LLDAP_KEY_SEED
-    key_seed = "RanD0m STR1ng"
+    #key_seed = "RanD0m STR1ng"
 
     ## Ignored attributes.
     ## Some services will request attributes that are not present in LLDAP. When it
