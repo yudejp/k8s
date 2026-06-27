@@ -24,5 +24,20 @@ spec:
       containers:
       - name: cyberchef
         image: mpepping/cyberchef:latest
+        resources:
+          requests:
+            cpu: "10m"
+            memory: "32Mi"
+          limits:
+            cpu: "200m"
+            memory: "128Mi"
         ports:
         - containerPort: 8000
+        volumeMounts:
+        - name: robots
+          mountPath: /usr/share/nginx/html/robots.txt
+          subPath: robots.txt
+      volumes:
+      - name: robots
+        configMap:
+          name: cyberchef-robots
