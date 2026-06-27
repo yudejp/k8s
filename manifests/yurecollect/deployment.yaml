@@ -18,8 +18,11 @@ spec:
           args:
             - "wss://unstable.kusaremkn.com/yure/"
           resources:
+            requests:
+              memory: "512Mi"
+              cpu: "10m"
             limits:
-              memory: "1560Mi"
-              cpu: "500m"
+              memory: "1280Mi"
+              cpu: "100m"
           ports:
             - containerPort: 3000

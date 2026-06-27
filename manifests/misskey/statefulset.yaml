@@ -42,7 +42,7 @@ spec:
               scheme: HTTP
           resources:
             requests:
-              memory: "3Gi"
+              memory: "2Gi"
             limits:
               memory: "4Gi"
       volumes:

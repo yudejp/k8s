@@ -19,9 +19,12 @@ spec:
           image: ghcr.io/webgiss/niolesk
           imagePullPolicy: IfNotPresent
           resources:
+            requests:
+              cpu: "10m"
+              memory: "16Mi"
             limits:
-              cpu: "0.3"
-              memory: "300Mi"
+              cpu: "100m"
+              memory: "64Mi"
           ports:
             - name: http
               containerPort: 80

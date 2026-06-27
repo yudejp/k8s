@@ -31,9 +31,12 @@ spec:
             - configMapRef:
                 name: spotiny-env
           resources:
+            requests:
+              cpu: "10m"
+              memory: "64Mi"
             limits:
-              cpu: "1"
-              memory: "1Gi"
+              cpu: "100m"
+              memory: "256Mi"
           ports:
             - name: http
               hostPort: 3000

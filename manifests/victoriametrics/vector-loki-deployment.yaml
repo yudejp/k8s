@@ -45,10 +45,10 @@ spec:
                   key: webhookUrl
           resources:
             requests:
-              cpu: 100m
-              memory: 128Mi
+              cpu: 25m
+              memory: 64Mi
             limits:
-              memory: 512Mi
+              memory: 256Mi
           volumeMounts:
             - name: config
               mountPath: /etc/vector

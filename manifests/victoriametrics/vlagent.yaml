@@ -19,7 +19,7 @@ spec:
     maxDiskUsagePerURL: 1GiB
   resources:
     requests:
-      cpu: 100m
-      memory: 256Mi
+      cpu: 25m
+      memory: 64Mi
     limits:
-      memory: 512Mi
+      memory: 256Mi

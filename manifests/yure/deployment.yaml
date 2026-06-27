@@ -16,8 +16,11 @@ spec:
         - name: yure
           image: ghcr.io/yude/yure-docker:main
           resources:
+            requests:
+              memory: "16Mi"
+              cpu: "10m"
             limits:
-              memory: "512Mi"
-              cpu: "500m"
+              memory: "64Mi"
+              cpu: "100m"
           ports:
             - containerPort: 8080
