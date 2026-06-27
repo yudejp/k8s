@@ -10,3 +10,6 @@ subjects:
   - kind: ServiceAccount
     name: growi
     namespace: growi
+  - kind: ServiceAccount
+    name: growi
+    namespace: growi-int
