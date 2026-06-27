@@ -9,7 +9,7 @@ spec:
         - 100.107.186.84:9374 # toy1sh1.tun.y2e.org
         - 100.113.236.37:9374 # nrt1sh1.tun.y2e.org
         - 100.109.169.61:9374 # izo1sh1.tun.y2e.org
-        - 100.93.170.11:9374 # ibr1sh1.tun.y2e.org
+        # - 100.93.170.11:9374 # ibr1sh1.tun.y2e.org
         - 100.86.190.92:9374 # ukb1sh1.tun.y2e.org
         - 100.94.34.58:9374 # hnd3sh1.tun.y2e.org
   metricRelabelConfigs:
