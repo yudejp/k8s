@@ -24,6 +24,13 @@ spec:
       containers:
       - name: addchan
         image: ghcr.io/teamecri/addchan:main
+        resources:
+          requests:
+            cpu: "10m"
+            memory: "32Mi"
+          limits:
+            cpu: "100m"
+            memory: "128Mi"
         envFrom:
           - configMapRef:
               name: addchan-env

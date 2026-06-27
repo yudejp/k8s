@@ -15,6 +15,8 @@ spec:
       labels:
         app: gitea
     spec:
+      securityContext:
+        fsGroup: 1000
       dnsConfig:
         searches:
           - svc.cluster.local
@@ -28,6 +30,13 @@ spec:
         - name: gitea
           image: gitea/gitea:1.26.0
           imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "256Mi"
+            limits:
+              cpu: "1000m"
+              memory: "1Gi"
           ports:
             - name: gitea
               containerPort: 3000

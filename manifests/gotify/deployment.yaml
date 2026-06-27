@@ -24,6 +24,13 @@ spec:
       containers:
         - name: gotify
           image: ghcr.io/gotify/server
+          resources:
+            requests:
+              cpu: "10m"
+              memory: "64Mi"
+            limits:
+              cpu: "200m"
+              memory: "256Mi"
           ports:
             - containerPort: 80
               name: http

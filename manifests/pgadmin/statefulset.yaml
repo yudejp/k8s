@@ -17,6 +17,8 @@ spec:
         app: pgadmin
     spec:
       terminationGracePeriodSeconds: 10
+      securityContext:
+        fsGroup: 5050
       containers:
         - name: pgadmin
           image: dpage/pgadmin4:9.14.0
@@ -37,6 +39,13 @@ spec:
               readOnly: true
             - name: pgadmin-data
               mountPath: /var/lib/pgadmin
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "512Mi"
+            limits:
+              cpu: "500m"
+              memory: "1Gi"
       volumes:
         - name: pgadmin-config
           configMap:

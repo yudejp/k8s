@@ -25,6 +25,13 @@ spec:
         - name: annict-activity-to-mastodon
           image: ghcr.io/yude/annict-activity-to-mastodon:v1.2.2
           imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: "10m"
+              memory: "32Mi"
+            limits:
+              cpu: "100m"
+              memory: "128Mi"
           volumeMounts:
             - name: config
               mountPath: /app/config.toml

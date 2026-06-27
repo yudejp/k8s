@@ -56,17 +56,21 @@ spec:
             - name: http
               containerPort: 3000
               protocol: TCP
+          startupProbe:
+            tcpSocket:
+              port: http
+            periodSeconds: 10
+            failureThreshold: 60
+            timeoutSeconds: 5
           livenessProbe:
             tcpSocket:
               port: http
-            initialDelaySeconds: 300
             periodSeconds: 10
             failureThreshold: 5
             timeoutSeconds: 5
           readinessProbe:
             tcpSocket:
               port: http
-            initialDelaySeconds: 10
             periodSeconds: 5
             failureThreshold: 3
             timeoutSeconds: 5

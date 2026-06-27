@@ -19,6 +19,13 @@ spec:
       containers:
         - name: lldap
           image: docker.io/lldap/lldap:latest-debian-rootless
+          resources:
+            requests:
+              cpu: "10m"
+              memory: "32Mi"
+            limits:
+              cpu: "100m"
+              memory: "128Mi"
           envFrom:
             - configMapRef:
                 name: lldap-config

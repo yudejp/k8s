@@ -38,6 +38,13 @@ spec:
         - name: redmine
           image: redmine:5.1.11-trixie
           imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "384Mi"
+            limits:
+              cpu: "1000m"
+              memory: "1Gi"
           ports:
             - name: http
               containerPort: 3000

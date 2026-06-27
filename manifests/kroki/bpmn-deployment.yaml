@@ -18,6 +18,13 @@ spec:
       containers:
       - image: yuzutech/kroki-bpmn
         name: bpmn
+        resources:
+          requests:
+            cpu: "50m"
+            memory: "256Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
         ports:
         - containerPort: 8003
       restartPolicy: Always

@@ -18,6 +18,13 @@ spec:
       containers:
       - image: yuzutech/kroki-mermaid
         name: mermaid
+        resources:
+          requests:
+            cpu: "10m"
+            memory: "64Mi"
+          limits:
+            cpu: "200m"
+            memory: "256Mi"
         ports:
         - containerPort: 8002
       restartPolicy: Always

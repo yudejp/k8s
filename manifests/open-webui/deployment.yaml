@@ -17,6 +17,13 @@ spec:
       containers:
         - name: open-webui
           image: ghcr.io/open-webui/open-webui:main
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "1280Mi"
+            limits:
+              cpu: "1000m"
+              memory: "2Gi"
           ports:
             - name: http
               containerPort: 8080

@@ -26,5 +26,12 @@ spec:
       containers:
         - name: engine
           image: voicevox/voicevox_engine:cpu-latest
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "512Mi"
+            limits:
+              cpu: "2000m"
+              memory: "4Gi"
           ports:
             - containerPort: 50021

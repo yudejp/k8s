@@ -26,6 +26,13 @@ spec:
         image: freikin/dawarich:latest
         ports:
         - containerPort: 3000
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "256Mi"
+          limits:
+            cpu: "2000m"
+            memory: "1Gi"
         volumeMounts:
         - name: gem-cache
           mountPath: /usr/local/bundle/gems

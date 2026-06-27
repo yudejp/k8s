@@ -25,6 +25,13 @@ spec:
           value: mermaid
         image: yuzutech/kroki
         name: kroki
+        resources:
+          requests:
+            cpu: "50m"
+            memory: "256Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
         ports:
         - containerPort: 8000
       restartPolicy: Always

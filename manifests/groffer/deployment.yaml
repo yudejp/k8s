@@ -25,3 +25,10 @@ spec:
       - name: groffer
         image: ghcr.io/yude/groffer:master
         imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: "10m"
+            memory: "32Mi"
+          limits:
+            cpu: "100m"
+            memory: "128Mi"

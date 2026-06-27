@@ -24,6 +24,13 @@ spec:
       containers:
       - name: pairdrop
         image: linuxserver/pairdrop
+        resources:
+          requests:
+            cpu: "10m"
+            memory: "128Mi"
+          limits:
+            cpu: "200m"
+            memory: "512Mi"
         envFrom:
           - configMapRef:
               name: pairdrop-env

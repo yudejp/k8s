@@ -6,9 +6,9 @@ metadata:
 spec:
   defaultBackend:
     service:
-      name: kubernetes-dashboard
+      name: kubernetes-dashboard-kong-proxy
       port:
-        number: 8080
+        number: 80
   ingressClassName: tailscale
   tls:
     - hosts:
