@@ -3,6 +3,7 @@ kind: postgresql
 metadata:
   name: za-pg-16
 spec:
+  enableLogicalBackup: false
   teamId: "acid"
   volume:
     size: 100Gi
