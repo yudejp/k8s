@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: keikenchi-map
+  labels:
+    app: keikenchi-map
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: keikenchi-map
+  template:
+    metadata:
+      labels:
+        app: keikenchi-map
+    spec:
+      containers:
+        - name: keikenchi-map
+          image: ghcr.io/yude/swarm-keikenchi:b51f711
+          ports:
+            - containerPort: 80
+          env:
+            - name: VITE_FOURSQUARE_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: foursquare-credentials
+                  key: client-id
+            - name: VITE_FOURSQUARE_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: foursquare-credentials
+                  key: client-secret
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
