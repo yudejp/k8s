@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: keikenchi-map
-          image: ghcr.io/yude/swarm-keikenchi:b51f711
+          image: ghcr.io/yude/swarm-keikenchi:main
           ports:
             - containerPort: 80
           env:
