@@ -1,0 +1,15 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nrt1-meilisearch
+  namespace: default
+spec:
+  defaultBackend:
+    service:
+      name: meilisearch
+      port:
+        number: 7700
+  ingressClassName: tailscale
+  tls:
+    - hosts:
+        - nrt1-meilisearch
