@@ -1,1 +1,2 @@
 configmap.yaml
+*.secret

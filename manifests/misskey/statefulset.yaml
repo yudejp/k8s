@@ -24,6 +24,33 @@ spec:
           - name: use-vc
           - name: ndots
             value: "2"
+      initContainers:
+        - name: render-config
+          image: busybox:1.36
+          imagePullPolicy: IfNotPresent
+          command:
+            - sh
+            - -c
+            - |
+              set -eu
+              DB_PASS=$(cat /tmp/secret/db-pass/db-pass.secret)
+              DB_SLAVES_PASS=$(cat /tmp/secret/db-slaves-pass/db-slaves-pass.secret)
+              MEILISEARCH_API_KEY=$(cat /tmp/secret/meilisearch-api-key/meilisearch-api-key.secret)
+              cp /tmp/config-template/default.yml /misskey/.config/default.yml
+              sed -i "s|DB_PASS_PLACEHOLDER|$DB_PASS|g" /misskey/.config/default.yml
+              sed -i "s|DB_SLAVES_PASS_PLACEHOLDER|$DB_SLAVES_PASS|g" /misskey/.config/default.yml
+              sed -i "s|MEILISEARCH_API_KEY_PLACEHOLDER|$MEILISEARCH_API_KEY|g" /misskey/.config/default.yml
+          volumeMounts:
+            - mountPath: /tmp/config-template
+              name: misskey-default-config
+            - mountPath: /tmp/secret/db-pass
+              name: misskey-db-pass
+            - mountPath: /tmp/secret/db-slaves-pass
+              name: misskey-db-slaves-pass
+            - mountPath: /tmp/secret/meilisearch-api-key
+              name: misskey-meilisearch-api-key
+            - mountPath: /misskey/.config
+              name: misskey-config-rendered
       containers:
         - name: web
           image: misskey/misskey:2026.5.1
@@ -32,7 +59,7 @@ spec:
             - mountPath: /misskey/files
               name: misskey-files
             - mountPath: /misskey/.config
-              name: misskey-default-conf-file
+              name: misskey-config-rendered
           ports:
             - containerPort: 3000
           readinessProbe:
@@ -48,9 +75,20 @@ spec:
               cpu: "2000m"
               memory: "4Gi"
       volumes:
-        - name: misskey-default-conf-file
+        - name: misskey-default-config
           configMap:
             name: misskey-default-config
+        - name: misskey-db-pass
+          secret:
+            secretName: misskey-db-pass
+        - name: misskey-db-slaves-pass
+          secret:
+            secretName: misskey-db-slaves-pass
+        - name: misskey-meilisearch-api-key
+          secret:
+            secretName: misskey-meilisearch-api-key
+        - name: misskey-config-rendered
+          emptyDir: {}
         - name: misskey-files
           persistentVolumeClaim:
             claimName: misskey-files

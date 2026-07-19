@@ -2,7 +2,34 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - namespace.yaml
-  - configmap.yaml
   - service.yaml
   - statefulset.yaml
   - pvc.yaml
+
+configMapGenerator:
+  - name: misskey-default-config
+    namespace: misskey-y2e-org
+    files:
+      - default.yml=./default.yml
+    options:
+      disableNameSuffixHash: true
+
+secretGenerator:
+  - name: misskey-db-pass
+    namespace: misskey-y2e-org
+    files:
+      - db-pass.secret
+    options:
+      disableNameSuffixHash: true
+  - name: misskey-db-slaves-pass
+    namespace: misskey-y2e-org
+    files:
+      - db-slaves-pass.secret
+    options:
+      disableNameSuffixHash: true
+  - name: misskey-meilisearch-api-key
+    namespace: misskey-y2e-org
+    files:
+      - meilisearch-api-key.secret
+    options:
+      disableNameSuffixHash: true
