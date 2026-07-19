@@ -34,6 +34,18 @@ spec:
               readOnly: true
             - name: redmine-config-writable
               mountPath: /config-dst
+        - name: redmine-plugin-oidc
+          image: alpine/git:2.47.2
+          imagePullPolicy: IfNotPresent
+          command:
+            - /bin/sh
+            - -lc
+            - |
+              set -eu
+              git clone https://github.com/yude/redmine_oidc.git /plugins/redmine_oidc
+          volumeMounts:
+            - name: redmine-plugins
+              mountPath: /plugins
       containers:
         - name: redmine
           image: redmine:5.1.11-trixie
@@ -122,6 +134,8 @@ spec:
             - name: redmine-config-writable
               mountPath: /usr/src/redmine/config/configuration.yml
               subPath: configuration.yml
+            - name: redmine-plugins
+              mountPath: /usr/src/redmine/plugins
             - name: redmine-login-template
               mountPath: /usr/src/redmine/app/views/account/login.html.erb
               subPath: login.html.erb
@@ -137,3 +151,5 @@ spec:
         - name: redmine-login-template
           configMap:
             name: redmine-login-template
+        - name: redmine-plugins
+          emptyDir: {}

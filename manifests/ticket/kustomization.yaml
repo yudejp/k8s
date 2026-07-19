@@ -8,4 +8,5 @@ resources:
   - service.yaml
   - cronjob-mail-receive.yaml
   - job-set-mail-from.yaml
+  - job-plugin-migrate.yaml
   - secret.yaml

@@ -7,8 +7,8 @@ data:
     <%= call_hook :view_account_login_top %>
 
     <div class="flash warning" id="flash_notice" style="text-align: center; margin-bottom: 1em;">
-      <p>ticket.y2e.org の認証は LDAP に移行しました</p>
-      <p>ログインできませんか? <a href="https://my.y2e.org/reset-password/step1">y2e-ldap</a> からパスワードをリセットしてください。</p>
+      <p>Sign in with OpenID Connect を押下してサインインしてください。</p>
+      <p>初めてログインしますか? Auth0 に遷移してから Reset password を実行してください。</p>
     </div>
 
     <div id="login-form">
