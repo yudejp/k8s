@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kusaremkn-showt-discord-alert
+  labels:
+    app.kubernetes.io/name: kusaremkn-showt-discord-alert
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: kusaremkn-showt-discord-alert
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: kusaremkn-showt-discord-alert
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65532
+        runAsGroup: 65532
+        fsGroup: 65532
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+      - name: kusaremkn-showt-discord-alert
+        image: ghcr.io/yude/kusaremkn-showt-discord-alert:latest
+        imagePullPolicy: IfNotPresent
+        args:
+        - -config
+        - /config/config.yaml
+        ports:
+        - name: http
+          containerPort: 8080
+          protocol: TCP
+        env:
+        - name: CORETEMP_DISCORD_WEBHOOK_URL
+          valueFrom:
+            secretKeyRef:
+              name: kusaremkn-showt-discord-alert-secret
+              key: discord-webhook-url
+        volumeMounts:
+        - name: config
+          mountPath: /config
+          readOnly: true
+        - name: tmp
+          mountPath: /tmp
+        resources:
+          requests:
+            cpu: 10m
+            memory: 32Mi
+          limits:
+            cpu: 200m
+            memory: 128Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop: ["ALL"]
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: http
+          initialDelaySeconds: 10
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: http
+          initialDelaySeconds: 5
+          periodSeconds: 10
+      volumes:
+      - name: config
+        configMap:
+          name: kusaremkn-showt-discord-alert-config
+          items:
+          - key: config.yaml
+            path: config.yaml
+      - name: tmp
+        emptyDir:
+          sizeLimit: 64Mi

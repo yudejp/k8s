@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kusaremkn-showt-discord-alert-config
+  labels:
+    app.kubernetes.io/name: kusaremkn-showt-discord-alert
+data:
+  config.yaml: |
+    source_url: "https://unstable.kusaremkn.com/showt/nvme.sh"
+    threshold_celsius: 45.0
+    check_interval: 60s
+    cooldown: 10m
+    alert_mode: max
+    http_addr: ":8080"
+    graph_name: dekopon.local.kusaremkn.com/nvme
