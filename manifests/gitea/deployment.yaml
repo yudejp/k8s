@@ -28,7 +28,7 @@ spec:
             value: "2"
       containers:
         - name: gitea
-          image: gitea/gitea:1.26.0
+          image: gitea/gitea:1.26.4
           imagePullPolicy: Always
           resources:
             requests:
