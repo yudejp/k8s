@@ -7,8 +7,8 @@ metadata:
 data:
   config.yaml: |
     source_url: "https://unstable.kusaremkn.com/showt/nvme.sh"
-    threshold_celsius: 45.0
-    check_interval: 60s
+    threshold_celsius: 60.0
+    check_interval: 120s
     cooldown: 10m
     alert_mode: max
     http_addr: ":8080"
