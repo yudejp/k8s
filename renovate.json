@@ -1,0 +1,78 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    "schedule:daily"
+  ],
+  "labels": ["dependencies", "renovate"],
+  "kubernetes": {
+    "fileMatch": ["manifests/[^/]+/.+\\.yaml$"]
+  },
+  "kustomize": {
+    "enabled": true
+  },
+  "helm-values": {
+    "fileMatch": [
+      "(^|/)values\\.yaml$",
+      "manifests/victoriametrics/vlagent\\.yaml$"
+    ]
+  },
+  "packageRules": [
+    {
+      "matchPackageNames": [
+        "ghcr.io/yude/groffer",
+        "ghcr.io/yude/ytnotifier",
+        "ghcr.io/yudejp/gri",
+        "ghcr.io/yude/yure-docker",
+        "ghcr.io/open-webui/open-webui",
+        "ghcr.io/teamecri/addchan"
+      ],
+      "enabled": false
+    },
+    {
+      "matchPackageNames": [
+        "miniflux/miniflux",
+        "mpepping/cyberchef",
+        "kennethreitz/httpbin",
+        "voicevox/voicevox_engine",
+        "ghcr.io/yude/kusaremkn-showt-discord-alert",
+        "ghcr.io/ao-ba/spotify_nowplaying",
+        "docker.io/lldap/lldap"
+      ],
+      "enabled": false
+    },
+    {
+      "matchPackageNames": [
+        "nwtgck/bytenode-piping-server",
+        "ghcr.io/gotify/server",
+        "lovasoa/wbo",
+        "yuzutech/kroki",
+        "yuzutech/kroki-bpmn",
+        "yuzutech/kroki-mermaid",
+        "yuzutech/kroki-excalidraw",
+        "linuxserver/pairdrop",
+        "ghcr.io/webgiss/niolesk",
+        "traefik/whoami"
+      ],
+      "enabled": false
+    },
+    {
+      "matchPackagePrefixes": [
+        "docker.io/kubernetesui/",
+        "kong"
+      ],
+      "enabled": false
+    },
+    {
+      "matchPackageNames": [
+        "ghcr.io/yude/yurecollect",
+        "ghcr.io/yude/swarm-keikenchi"
+      ],
+      "enabled": false
+    }
+  ],
+  "vulnerabilityAlerts": {
+    "enabled": true
+  },
+  "branchConcurrentLimit": 5
+}
