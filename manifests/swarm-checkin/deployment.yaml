@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: swarm-checkin
+  labels:
+    app: swarm-checkin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: swarm-checkin
+  template:
+    metadata:
+      labels:
+        app: swarm-checkin
+    spec:
+      containers:
+        - name: swarm-checkin
+          image: ghcr.io/yude/swarm-checkin:d7fc116
+          ports:
+            - containerPort: 80
+          env:
+            - name: VITE_FOURSQUARE_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: foursquare-credentials
+                  key: client-id
+            - name: VITE_FOURSQUARE_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: foursquare-credentials
+                  key: client-secret
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
