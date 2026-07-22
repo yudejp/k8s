@@ -47747,7 +47747,7 @@ spec:
         env:
         - name: WATCH_NAMESPACE
           value: ""
-        image: docker.io/victoriametrics/operator:v0.67.0
+        image: docker.io/victoriametrics/operator:v0.73.1
         livenessProbe:
           httpGet:
             path: /health
