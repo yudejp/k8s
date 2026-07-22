@@ -6,15 +6,17 @@
   ],
   "labels": ["dependencies", "renovate"],
   "kubernetes": {
-    "fileMatch": ["manifests/[^/]+/.+\\.yaml$"]
+    "managerFilePatterns": [
+      "/manifests/[^/]+/.+\\.yaml$/"
+    ]
   },
   "kustomize": {
     "enabled": true
   },
   "helm-values": {
-    "fileMatch": [
-      "(^|/)values\\.yaml$",
-      "manifests/victoriametrics/vlagent\\.yaml$"
+    "managerFilePatterns": [
+      "/(^|/)values\\.yaml$/",
+      "/manifests/victoriametrics/vlagent\\.yaml$/"
     ]
   },
   "packageRules": [
@@ -57,11 +59,11 @@
       "enabled": false
     },
     {
-      "matchPackagePrefixes": [
-        "docker.io/kubernetesui/",
-        "kong"
-      ],
-      "enabled": false
+      "enabled": false,
+      "matchPackageNames": [
+        "docker.io/kubernetesui/{/,}**",
+        "kong{/,}**"
+      ]
     },
     {
       "matchPackageNames": [
