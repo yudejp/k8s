@@ -6,3 +6,8 @@ resources:
   - service.yaml
   - secret.yaml
   - ingress.yaml
+
+configMapGenerator:
+  - name: meilisearch-migration
+    files:
+      - migration.sh

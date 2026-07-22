@@ -29,6 +29,9 @@ spec:
         - name: meilisearch
           image: getmeili/meilisearch:v1.50.0
           imagePullPolicy: IfNotPresent
+          command:
+            - /bin/sh
+            - /scripts/migration.sh
           ports:
             - name: http
               containerPort: 7700
@@ -47,6 +50,9 @@ spec:
           volumeMounts:
             - name: meilisearch
               mountPath: /meili-data
+            - name: migration
+              mountPath: /scripts/migration.sh
+              subPath: migration.sh
           resources:
             requests:
               cpu: "100m"
@@ -58,3 +64,7 @@ spec:
         - name: meilisearch
           persistentVolumeClaim:
             claimName: meilisearch
+        - name: migration
+          configMap:
+            name: meilisearch-migration
+            defaultMode: 0755
