@@ -54,7 +54,7 @@ spec:
               mountPath: /config-dst
       containers:
         - name: set-mail-from
-          image: redmine:5.1.11-trixie
+          image: redmine:5.1.12-trixie
           imagePullPolicy: Always
           env:
             - name: RAILS_ENV
