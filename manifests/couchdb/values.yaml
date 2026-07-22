@@ -1,5 +1,0 @@
-adminUsername: admin
-
-couchdbConfig:
-  chttpd:
-    require_valid_user: true
