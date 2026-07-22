@@ -47,11 +47,17 @@ spec:
           image: docker.io/growilabs/growi:7.5.7
           imagePullPolicy: IfNotPresent
           command:
-            - /bin/sh
-            - -c
+            - node
+            - -e
             - |
-              export MONGO_URI=$(cat /shared/mongo-uri)
-              exec /docker-entrypoint.sh "npm run migrate && node -r dotenv-flow/config --expose_gc dist/server/app.js"
+              const fs = require('fs');
+              const { spawn } = require('child_process');
+              const uri = fs.readFileSync('/shared/mongo-uri', 'utf8').trim();
+              if (!uri) { console.error('MONGO_URI is empty'); process.exit(1); }
+              process.env.MONGO_URI = uri;
+              const child = spawn('node', ['/docker-entrypoint.ts'], { stdio: 'inherit', env: process.env });
+              ['SIGTERM', 'SIGINT', 'SIGHUP'].forEach(sig => process.on(sig, () => child.kill(sig)));
+              child.on('exit', (c, s) => process.exit(c ?? (s === 'SIGTERM' ? 0 : 1)));
           ports:
             - name: http
               containerPort: 3000
