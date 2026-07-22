@@ -48,7 +48,7 @@ spec:
             - sdj1gw1.sdj1.yude.jp
       initContainers:
         - name: init-volume-permissions
-          image: busybox:1.36
+          image: busybox:1.38
           command:
             - sh
             - -c
