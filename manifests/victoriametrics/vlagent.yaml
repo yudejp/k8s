@@ -6,7 +6,7 @@ metadata:
 spec:
   image:
     repository: victoriametrics/vlagent
-    tag: v1.50.0
+    tag: v1.52.0
   k8sCollector:
     enabled: true
   extraArgs:
