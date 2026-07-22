@@ -1,0 +1,106 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: home-assistant
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: home-assistant
+  template:
+    metadata:
+      labels:
+        app: home-assistant
+    spec:
+      # hostNetwork: true でノードのネットワークスタックを直接利用する。
+      # Home Assistant は mDNS/SSDP/UPnP/Matter 等の LAN discovery プロトコルに
+      # 依存しており、hostNetwork により Pod が通常の LAN ホストと同等に通信できる。
+      # また、Multus + macvlan の複雑な構成を避け、運用を単純化できる。
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
+      serviceAccountName: home-assistant
+      automountServiceAccountToken: false
+      terminationGracePeriodSeconds: 120
+
+      dnsConfig:
+        searches:
+          - svc.cluster.local
+          - cluster.local
+        options:
+          - name: single-request-reopen
+          - name: use-vc
+          - name: ndots
+            value: "2"
+
+      securityContext:
+        runAsUser: 0
+        runAsGroup: 0
+        fsGroup: 0
+
+      containers:
+        - name: home-assistant
+          image: ghcr.io/home-assistant/home-assistant:stable
+          imagePullPolicy: IfNotPresent
+
+          ports:
+            - containerPort: 8123
+              name: http
+              protocol: TCP
+
+          env:
+            - name: TZ
+              value: "Asia/Tokyo"
+
+          volumeMounts:
+            - name: config
+              mountPath: /config
+
+          resources:
+            requests:
+              cpu: 500m
+              memory: 512Mi
+            limits:
+              memory: 1Gi
+
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: false
+            capabilities:
+              drop:
+                - ALL
+              add:
+                - NET_RAW
+                - NET_ADMIN
+            seccompProfile:
+              type: RuntimeDefault
+
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            failureThreshold: 30
+
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 60
+            periodSeconds: 30
+
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            failureThreshold: 5
+
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: home-assistant-config

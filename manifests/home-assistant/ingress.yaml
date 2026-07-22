@@ -1,0 +1,15 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nrt1-home-assistant
+  namespace: default
+spec:
+  defaultBackend:
+    service:
+      name: home-assistant
+      port:
+        number: 8123
+  ingressClassName: tailscale
+  tls:
+    - hosts:
+        - nrt1-home-assistant
