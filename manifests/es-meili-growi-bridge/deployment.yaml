@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: bridge
-        image: ghcr.io/yude/es-meili-growi-bridge:f6b0147
+        image: ghcr.io/yude/es-meili-growi-bridge:dfa4f05
         imagePullPolicy: Always
         ports:
         - containerPort: 9200
