@@ -10,3 +10,4 @@ data:
   #S3_REGION: ""
   #S3_ENDPOINT: ""
   APP_SITE_URL: "https://w.y2e.org"
+  ELASTICSEARCH_URI: "http://es-meili-growi-bridge.default.svc.cluster.local:9200/growi"

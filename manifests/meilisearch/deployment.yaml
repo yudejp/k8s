@@ -42,7 +42,7 @@ spec:
                   name: meilisearch-secret
                   key: MEILI_MASTER_KEY
             - name: MEILI_ENV
-              value: production
+              value: development
             - name: MEILI_NO_ANALYTICS
               value: "true"
             - name: MEILI_DB_PATH
