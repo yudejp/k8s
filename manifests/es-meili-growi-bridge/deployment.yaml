@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: es-meili-growi-bridge
+  labels:
+    app: es-meili-growi-bridge
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: es-meili-growi-bridge
+  template:
+    metadata:
+      labels:
+        app: es-meili-growi-bridge
+    spec:
+      containers:
+      - name: bridge
+        image: ghcr.io/yude/es-meili-growi-bridge:f6b0147
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9200
+          protocol: TCP
+          name: http
+        envFrom:
+        - configMapRef:
+            name: es-meili-growi-bridge-config
+        - secretRef:
+            name: es-meili-growi-bridge-secret
+            optional: true
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "64Mi"
+          limits:
+            cpu: "500m"
+            memory: "256Mi"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 9200
+          initialDelaySeconds: 5
+          periodSeconds: 15
+        readinessProbe:
+          httpGet:
+            path: /_cluster/health
+            port: 9200
+          initialDelaySeconds: 3
+          periodSeconds: 10
