@@ -24,11 +24,6 @@ spec:
         - ip: 192.168.100.1
           hostnames:
             - nrt1gw1.tun.y2e.org
-        - ip: 100.93.170.11
-          hostnames:
-            - router1.pepepper.net
-            - router2.pepepper.net
-            - mf720c.pepepper.net
         - ip: 100.109.169.61
           hostnames:
             - gateway.local.kusaremkn.com
@@ -65,7 +60,7 @@ spec:
               mountPath: /work/gra
       containers:
         - name: gri
-          image: ghcr.io/yudejp/gri:master
+          image: ghcr.io/yudejp/gri:43fb9f3
           imagePullPolicy: IfNotPresent
           securityContext:
             runAsUser: 1000
