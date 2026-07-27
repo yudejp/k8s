@@ -46,7 +46,6 @@
     {
       "matchPackageNames": [
         "nwtgck/bytenode-piping-server",
-        "ghcr.io/gotify/server",
         "lovasoa/wbo",
         "yuzutech/kroki",
         "yuzutech/kroki-bpmn",
