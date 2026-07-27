@@ -24,7 +24,7 @@ spec:
             value: "2"
       containers:
         - name: miniflux
-          image: miniflux/miniflux:latest
+          image: miniflux/miniflux:2.3.3-distroless
           resources:
             requests:
               cpu: "10m"
