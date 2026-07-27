@@ -37,7 +37,7 @@
         "kennethreitz/httpbin",
         "voicevox/voicevox_engine",
         "ghcr.io/yude/kusaremkn-showt-discord-alert",
-        "ghcr.io/ao-ba/spotify_nowplaying",
+        "ghcr.io/ao-ba/spotify_nowplaying"
       ],
       "enabled": false
     },
