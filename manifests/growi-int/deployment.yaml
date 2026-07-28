@@ -44,7 +44,7 @@ spec:
               mountPath: /shared
       containers:
         - name: growi
-          image: docker.io/growilabs/growi:7.5.7
+          image: docker.io/growilabs/growi:8.0.0
           imagePullPolicy: IfNotPresent
           command:
             - node
