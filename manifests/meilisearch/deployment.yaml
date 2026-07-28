@@ -47,6 +47,8 @@ spec:
               value: "true"
             - name: MEILI_DB_PATH
               value: /meili-data/data
+            - name: MEILI_UPGRADE_DB
+              value: "true"
           volumeMounts:
             - name: meilisearch
               mountPath: /meili-data
