@@ -26,7 +26,6 @@
         "ghcr.io/yude/ytnotifier",
         "ghcr.io/yudejp/gri",
         "ghcr.io/yude/yure-docker",
-        "ghcr.io/open-webui/open-webui",
         "ghcr.io/teamecri/addchan"
       ],
       "enabled": false

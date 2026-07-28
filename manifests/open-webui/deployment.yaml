@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: open-webui
-          image: ghcr.io/open-webui/open-webui:main
+          image: ghcr.io/open-webui/open-webui:git-01f4282-slim
           resources:
             requests:
               cpu: "100m"
