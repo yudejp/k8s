@@ -25,7 +25,7 @@ spec:
             value: "2"
       containers:
         - name: spotiny
-          image: ghcr.io/hayabusa58/spotiny:v1.4.3
+          image: ghcr.io/haya58/spotiny:v1.4.5
           imagePullPolicy: IfNotPresent
           envFrom:
             - configMapRef:
