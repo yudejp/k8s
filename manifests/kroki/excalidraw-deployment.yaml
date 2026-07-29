@@ -16,7 +16,7 @@ spec:
         app: excalidraw
     spec:
       containers:
-      - image: yuzutech/kroki-excalidraw
+      - image: yuzutech/kroki-excalidraw:0.31.2
         name: excalidraw
         resources:
           requests:

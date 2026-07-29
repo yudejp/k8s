@@ -23,7 +23,7 @@ spec:
           value: excalidraw
         - name: KROKI_MERMAID_HOST
           value: mermaid
-        image: yuzutech/kroki
+        image: yuzutech/kroki:0.31.2
         name: kroki
         resources:
           requests:
