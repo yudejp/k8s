@@ -24,7 +24,7 @@ spec:
               mountPath: /cache
       containers:
         - name: spotinow
-          image: ghcr.io/ao-ba/spotify_nowplaying:latest
+          image: ghcr.io/ao-ba/spotify_nowplaying@sha256:ada502eaf2722a247733ae9dc023eb41ab72530c856d5319e555bd569d25c609 
           stdin: true
           tty: true
           ports:
