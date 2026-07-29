@@ -23,7 +23,7 @@ spec:
             value: "2"
       containers:
       - name: cyberchef
-        image: mpepping/cyberchef:latest
+        image: mpepping/cyberchef:v11.2.0
         resources:
           requests:
             cpu: "10m"
