@@ -23,7 +23,7 @@ spec:
             value: "2"
       containers:
       - name: pairdrop
-        image: linuxserver/pairdrop
+        image: linuxserver/pairdrop:1.11.2
         resources:
           requests:
             cpu: "10m"
