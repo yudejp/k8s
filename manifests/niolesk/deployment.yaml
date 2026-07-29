@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: niolesk
-          image: ghcr.io/webgiss/niolesk
+          image: ghcr.io/webgiss/niolesk:v1.7.6
           imagePullPolicy: IfNotPresent
           resources:
             requests:
