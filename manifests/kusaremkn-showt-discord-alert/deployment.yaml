@@ -23,7 +23,7 @@ spec:
           type: RuntimeDefault
       containers:
       - name: kusaremkn-showt-discord-alert
-        image: ghcr.io/yude/kusaremkn-showt-discord-alert:latest
+        image: ghcr.io/yude/kusaremkn-showt-discord-alert@sha256:3941a68e75625843973ea4d987211704121ae81a85c33280469528f7dacd363b 
         imagePullPolicy: IfNotPresent
         args:
         - -config
