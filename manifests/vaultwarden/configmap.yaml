@@ -1,0 +1,58 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vaultwarden-release
+  namespace: default
+  labels:
+    app.kubernetes.io/component: vaultwarden
+    app.kubernetes.io/instance: vaultwarden-release
+    app.kubernetes.io/name: vaultwarden
+data:
+  DOMAIN: "https://vaultwarden.yude.jp.eu.org"
+  SMTP_HOST: "yudejp.sakura.ne.jp"
+  SMTP_SECURITY: "starttls"
+  SMTP_PORT: "587"
+  SMTP_AUTH_MECHANISM: "Plain"
+  SMTP_FROM: "noreply@yude.jp"
+  SMTP_FROM_NAME: "Vaultwarden"
+  SMTP_DEBUG: "false"
+  SMTP_ACCEPT_INVALID_HOSTNAMES: "true"
+  SMTP_ACCEPT_INVALID_CERTS: "true"
+  DATA_FOLDER: "/data"
+  ROCKET_ADDRESS: "0.0.0.0"
+  ROCKET_PORT: "8080"
+  ROCKET_WORKERS: "10"
+  SHOW_PASSWORD_HINT: "false"
+  SIGNUPS_ALLOWED: "true"
+  INVITATIONS_ALLOWED: "true"
+  SIGNUPS_VERIFY: "true"
+  WEB_VAULT_ENABLED: "true"
+  DB_CONNECTION_RETRIES: "15"
+  DATABASE_MAX_CONNS: "10"
+  DATABASE_TIMEOUT: "30"
+  DATABASE_IDLE_TIMEOUT: "600"
+  DATABASE_MIN_CONNS: "2"
+  ENABLE_DB_WAL: "true"
+  INVITATION_ORG_NAME: "Vaultwarden"
+  ICON_BLACKLIST_NON_GLOBAL_IPS: "true"
+  IP_HEADER: "CF-Connecting-IP"
+  PUSH_ENABLED: "true"
+  PUSH_RELAY_URI: "https://push.bitwarden.com"
+  PUSH_IDENTITY_URI: "https://identity.bitwarden.com"
+  ORG_EVENTS_ENABLED: "false"
+  ORG_GROUPS_ENABLED: "false"
+  SENDS_ALLOWED: "true"
+  EMERGENCY_ACCESS_ALLOWED: "true"
+  EMERGENCY_NOTIFICATION_REMINDER_SCHEDULE: "0 3 * * * *"
+  EMERGENCY_REQUEST_TIMEOUT_SCHEDULE: "0 7 * * * *"
+  EXTENDED_LOGGING: "true"
+  LOG_TIMESTAMP_FORMAT: "%Y-%m-%d %H:%M:%S.%3f"
+  ICON_SERVICE: "internal"
+  ICON_REDIRECT_CODE: "302"
+  INVITATION_EXPIRATION_HOURS: "120"
+  REQUIRE_DEVICE_EMAIL: "false"
+  TRASH_AUTO_DELETE_DAYS: ""
+  TZ: "Asia/Tokyo"
+  EMAIL_CHANGE_ALLOWED: "true"
+  ADMIN_RATELIMIT_SECONDS: "300"
+  ADMIN_RATELIMIT_MAX_BURST: "3"

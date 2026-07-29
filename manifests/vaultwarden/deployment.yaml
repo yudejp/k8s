@@ -1,0 +1,95 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vaultwarden-release
+  namespace: default
+  labels:
+    app.kubernetes.io/component: vaultwarden
+    app.kubernetes.io/instance: vaultwarden-release
+    app.kubernetes.io/name: vaultwarden
+    app.kubernetes.io/version: "1.37.0"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: vaultwarden
+      app.kubernetes.io/instance: vaultwarden-release
+      app.kubernetes.io/name: vaultwarden
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: vaultwarden
+        app.kubernetes.io/instance: vaultwarden-release
+        app.kubernetes.io/name: vaultwarden
+    spec:
+      serviceAccountName: vaultwarden-svc
+      containers:
+        - name: vaultwarden
+          image: docker.io/vaultwarden/server:1.37.0
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: vaultwarden-release
+          env:
+            - name: SMTP_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: vaultwarden-release
+                  key: SMTP_USERNAME
+            - name: SMTP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: vaultwarden-release
+                  key: SMTP_PASSWORD
+            - name: ADMIN_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: vaultwarden-release
+                  key: ADMIN_TOKEN
+            - name: PUSH_INSTALLATION_ID
+              valueFrom:
+                secretKeyRef:
+                  name: vaultwarden-release
+                  key: PUSH_INSTALLATION_ID
+            - name: PUSH_INSTALLATION_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: vaultwarden-release
+                  key: PUSH_INSTALLATION_KEY
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: vaultwarden-release
+                  key: DATABASE_URL
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          volumeMounts:
+            - name: vaultwarden
+              mountPath: /data
+          resources: {}
+          livenessProbe:
+            httpGet:
+              path: /alive
+              port: http
+              scheme: HTTP
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 1
+            successThreshold: 1
+            failureThreshold: 10
+          readinessProbe:
+            httpGet:
+              path: /alive
+              port: http
+              scheme: HTTP
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 1
+            successThreshold: 1
+            failureThreshold: 3
+      volumes:
+        - name: vaultwarden
+          persistentVolumeClaim:
+            claimName: vaultwarden-vaultwarden-release-0
