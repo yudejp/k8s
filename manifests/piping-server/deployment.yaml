@@ -25,7 +25,7 @@ spec:
             value: "2"
       containers:
         - name: piping-server
-          image: nwtgck/bytenode-piping-server
+          image: nwtgck/bytenode-piping-server:v0.9.4
           imagePullPolicy: IfNotPresent
           resources:
             requests:
