@@ -23,7 +23,7 @@ spec:
             value: "2"
       containers:
       - name: httpbin
-        image: kennethreitz/httpbin:latest
+        image: ghcr.io/mccutchen/go-httpbin:2.24.0
         resources:
           requests:
             cpu: "10m"
@@ -32,4 +32,4 @@ spec:
             cpu: "200m"
             memory: "256Mi"
         ports:
-        - containerPort: 80
+        - containerPort: 8080
