@@ -25,7 +25,7 @@ spec:
             value: "2"
       containers:
         - name: engine
-          image: voicevox/voicevox_engine:cpu-latest
+          image: voicevox/voicevox_engine:cpu-0.25.2
           resources:
             requests:
               cpu: "100m"
