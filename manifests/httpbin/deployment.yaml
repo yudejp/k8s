@@ -23,7 +23,7 @@ spec:
             value: "2"
       containers:
       - name: httpbin
-        image: ghcr.io/mccutchen/go-httpbin:2.24.0
+        image: ghcr.io/mccutchen/go-httpbin:2.25.0
         resources:
           requests:
             cpu: "10m"
