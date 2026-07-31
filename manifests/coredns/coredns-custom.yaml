@@ -17,5 +17,5 @@ data:
     }
   blocking-aaaa.override: |
     template IN AAAA . {
-        rcode NXDOMAIN
+        rcode NOERROR
     }
