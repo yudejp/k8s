@@ -15,3 +15,7 @@ data:
         cache 30
         forward . 100.100.100.100
     }
+  blocking-aaaa.override: |
+    template IN AAAA . {
+        rcode NXDOMAIN
+    }
