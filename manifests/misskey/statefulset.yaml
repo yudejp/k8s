@@ -53,7 +53,7 @@ spec:
               name: misskey-config-rendered
       containers:
         - name: web
-          image: misskey/misskey:2026.6.0
+          image: misskey/misskey:2026.7.0
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - mountPath: /misskey/files
