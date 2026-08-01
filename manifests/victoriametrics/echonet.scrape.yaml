@@ -6,10 +6,6 @@ metadata:
 spec:
   staticConfigs:
     - targets:
-        - 192.168.30.241
+        - 192.168.100.8:8080
   path: /metrics
   scheme: http
-  metricRelabelConfigs:
-    - action: keep
-      sourceLabels: [__name__]
-      regex: "echonet_measured"
