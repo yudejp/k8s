@@ -16,7 +16,7 @@ spec:
         app: mermaid
     spec:
       containers:
-      - image: yuzutech/kroki-mermaid:0.32.0
+      - image: yuzutech/kroki-mermaid:0.32.1
         name: mermaid
         resources:
           requests:
