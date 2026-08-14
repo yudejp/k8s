@@ -80,8 +80,8 @@ spec:
                   echo "grapher exited" >&2
                   exit 1
                 fi
-                /usr/local/bundle/bin/gri
-                sleep "${GRI_INTERVAL:-300}"
+                /usr/local/bundle/bin/gri --duration=${GRI_INTERVAL:-300}
+                sleep "${GRI_INTERVAL:-600}"
               done
           env:
             - name: TZ
