@@ -16,7 +16,7 @@ spec:
         app: bpmn
     spec:
       containers:
-      - image: yuzutech/kroki-bpmn:0.32.0
+      - image: yuzutech/kroki-bpmn:0.32.1
         name: bpmn
         resources:
           requests:
