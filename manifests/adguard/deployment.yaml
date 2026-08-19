@@ -31,7 +31,7 @@ spec:
               topologyKey: kubernetes.io/hostname
       containers:
         - name: adguard-home
-          image: adguard/adguardhome:v0.107.78
+          image: adguard/adguardhome:v0.107.79
           resources:
             requests:
               cpu: "50m"
