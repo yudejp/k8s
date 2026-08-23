@@ -14,9 +14,10 @@ spec:
       labels:
         app: mongo-express
     spec:
+      automountServiceAccountToken: false
       containers:
         - name: mongo-express
-          image: mongo-express:latest
+          image: mongo-express:latest@sha256:1b23d7976f0210dbec74045c209e52fbb26d29b2e873d6c6fa3d3f0ae32c2a64
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
@@ -76,3 +77,20 @@ spec:
             limits:
               cpu: "500m"
               memory: "512Mi"
+          startupProbe:
+            tcpSocket:
+              port: http
+            periodSeconds: 5
+            failureThreshold: 30
+          readinessProbe:
+            tcpSocket:
+              port: http
+            periodSeconds: 10
+            timeoutSeconds: 3
+            failureThreshold: 3
+          livenessProbe:
+            tcpSocket:
+              port: http
+            periodSeconds: 30
+            timeoutSeconds: 3
+            failureThreshold: 3

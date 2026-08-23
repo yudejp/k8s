@@ -10,6 +10,8 @@ metadata:
     app.kubernetes.io/version: "1.37.0"
 spec:
   replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app.kubernetes.io/component: vaultwarden
@@ -23,6 +25,7 @@ spec:
         app.kubernetes.io/name: vaultwarden
     spec:
       serviceAccountName: vaultwarden-svc
+      automountServiceAccountToken: false
       containers:
         - name: vaultwarden
           image: docker.io/vaultwarden/server:1.37.1
@@ -68,7 +71,13 @@ spec:
           volumeMounts:
             - name: vaultwarden
               mountPath: /data
-          resources: {}
+          resources:
+            requests:
+              cpu: 10m
+              memory: 512Mi
+            limits:
+              cpu: 500m
+              memory: 2Gi
           livenessProbe:
             httpGet:
               path: /alive

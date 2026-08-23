@@ -3,7 +3,6 @@ kind: Kustomization
 namespace: mongodb
 resources:
   - configmap.yaml
-  - secret.yaml
   - deployment.yaml
   - service.yaml
   - ingress.yaml

@@ -12,6 +12,7 @@ spec:
       labels:
         app: yurecollect
     spec:
+      automountServiceAccountToken: false
       containers:
         - name: yurecollect
           image: ghcr.io/yude/yurecollect@sha256:23ccec03d0d0acce49200e2a1a3e14ee68295523a7b8c18d036c0852c15168ae 
@@ -19,7 +20,7 @@ spec:
             - "wss://unstable.kusaremkn.com/yure/"
           resources:
             requests:
-              memory: "512Mi"
+              memory: "32Mi"
               cpu: "10m"
             limits:
               memory: "1280Mi"
