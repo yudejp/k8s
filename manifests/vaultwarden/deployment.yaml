@@ -28,7 +28,7 @@ spec:
       automountServiceAccountToken: false
       containers:
         - name: vaultwarden
-          image: docker.io/vaultwarden/server:1.37.1
+          image: docker.io/vaultwarden/server:1.37.2
           imagePullPolicy: IfNotPresent
           envFrom:
             - configMapRef:
