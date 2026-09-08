@@ -27,7 +27,7 @@ spec:
             value: "2"
       containers:
         - name: meilisearch
-          image: getmeili/meilisearch:v1.53.1
+          image: getmeili/meilisearch:v1.53.2
           imagePullPolicy: IfNotPresent
           command:
             - /bin/sh
