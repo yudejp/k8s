@@ -4,6 +4,17 @@ metadata:
   name: za-pg-16
 spec:
   enableLogicalBackup: false
+  enableConnectionPooler: true
+  enableReplicaConnectionPooler: true
+  connectionPooler:
+    numberOfInstances: 2
+    resources:
+      requests:
+        cpu: 50m
+        memory: 32Mi
+      limits:
+        cpu: "1"
+        memory: 128Mi
   teamId: "acid"
   volume:
     size: 100Gi

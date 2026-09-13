@@ -701,8 +701,8 @@ spec:
             cpu: 250m
             memory: 400Mi
           requests:
-            cpu: 100m
-            memory: 200Mi
+            cpu: 25m
+            memory: 64Mi
       automountServiceAccountToken: true
       securityContext:
         runAsNonRoot: true
@@ -789,8 +789,8 @@ spec:
             cpu: 250m
             memory: 400Mi
           requests:
-            cpu: 100m
-            memory: 200Mi
+            cpu: 25m
+            memory: 64Mi
       automountServiceAccountToken: true
       securityContext:
         runAsNonRoot: true
@@ -868,8 +868,8 @@ spec:
             cpu: 250m
             memory: 400Mi
           requests:
-            cpu: 100m
-            memory: 200Mi
+            cpu: 25m
+            memory: 64Mi
         livenessProbe:
           httpGet:
             path: /
@@ -959,8 +959,8 @@ spec:
             cpu: 250m
             memory: 400Mi
           requests:
-            cpu: 100m
-            memory: 200Mi
+            cpu: 25m
+            memory: 64Mi
       automountServiceAccountToken: true
       securityContext:
         runAsNonRoot: true
