@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: wbo
-          image: lovasoa/wbo:v2.17.0
+          image: lovasoa/wbo:v2.17.1
           securityContext:
             allowPrivilegeEscalation: false
             runAsUser: 0
