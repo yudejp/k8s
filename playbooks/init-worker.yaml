@@ -102,7 +102,7 @@
         update_cache: true
 
     - name: snmpd 設定を配置する
-      ansible.builtin.copy:
+      ansible.builtin.template:
         src: snmpd.conf
         dest: /etc/snmp/snmpd.conf
         owner: root
