@@ -102,9 +102,8 @@ spec:
             - name: vip_loseleadership_timeout_seconds
               value: "10"
 
-            # Interface is intentionally omitted. The three current servers
-            # use different device names, so kube-vip must select the device
-            # whose route reaches the VIP subnet.
+            # vip_interface is injected by each node-specific overlay because
+            # the control-plane network uses a different device name per host.
             - name: vip_arpRate
               value: "3000"
             - name: prometheus_server

@@ -1,0 +1,41 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+nameSuffix: -nrt1kwo2
+
+resources:
+  - ../../base
+
+patches:
+  - target:
+      group: apps
+      version: v1
+      kind: DaemonSet
+      name: kube-vip
+    patch: |-
+      apiVersion: apps/v1
+      kind: DaemonSet
+      metadata:
+        name: kube-vip
+      spec:
+        selector:
+          matchLabels:
+            app.kubernetes.io/instance: nrt1kwo2
+        template:
+          metadata:
+            labels:
+              app.kubernetes.io/instance: nrt1kwo2
+          spec:
+            nodeSelector:
+              kubernetes.io/hostname: nrt1kwo2
+            containers:
+              - name: kube-vip
+                env:
+                  - name: vip_interface
+                    value: enp1s0.20
+                  # kube-vip v1.2.3 only accepts netlink.Device for its
+                  # vip_loseleadership link watcher. enp1s0.20 is a VLAN
+                  # interface, so enabling that watcher terminates the Pod.
+                  # Lease renewal through the local API/etcd remains active.
+                  - name: vip_loseleadership
+                    value: "false"
