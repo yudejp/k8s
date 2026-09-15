@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - frontend-ingress.yaml
   - backend-ingress.yaml
+  - vmagent-networkpolicy.yaml
