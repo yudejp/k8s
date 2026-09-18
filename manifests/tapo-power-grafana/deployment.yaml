@@ -24,7 +24,7 @@ spec:
           type: RuntimeDefault
       containers:
         - name: collector
-          image: ghcr.io/yude/tplink-tapo-power-grafana-cloud:a057a4b@sha256:59e4f77b50dc055f5e24c145753ce981edf0a12dda65767915aeeab636faca19
+          image: ghcr.io/yude/tplink-tapo-power-grafana-cloud:3b03c76@sha256:d0ec1d4133592ad8b5347012e4f79905cdf7e7c9ce8dea8bfc029e8238eade8f
           imagePullPolicy: IfNotPresent
           envFrom:
             - secretRef:
